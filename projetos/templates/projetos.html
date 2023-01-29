@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Inicio |{% endblock titulo %}
+
+{% block 'conteudo' %}
+
+<div>
+    <h1 class="mb-3">Olá, {{ user}} </h1>
+        {% comment %} {% include 'parciais/_messages.html' %} {% endcomment %}
+</div>
+<div>
+    testando 1
+</div>
+<div>
+    testando 2
+</div>
+<div>
+    testando 3
+</div>
+
+{% endblock 'conteudo' %}
