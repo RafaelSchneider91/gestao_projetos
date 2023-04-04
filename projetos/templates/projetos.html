@@ -5,17 +5,17 @@
 {% block 'conteudo' %}
 
 <div>
-    <h1 class="mb-3">Olá, {{ user}} </h1>
-        {% comment %} {% include 'parciais/_messages.html' %} {% endcomment %}
+    <h1 class="mb-3">Olá, {{user.first_name}} {{user.last_name }} </h1>
+        {% include 'parciais/_messages.html' %}
 </div>
 <div>
-    testando 1
+    projeto 1
 </div>
 <div>
-    testando 2
+    projeto 2
 </div>
 <div>
-    testando 3
+    projeto 3
 </div>
 
 {% endblock 'conteudo' %}
