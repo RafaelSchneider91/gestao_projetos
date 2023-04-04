@@ -37,10 +37,9 @@ def painel(request):
 def resultado(request):
     return render(request,'resultado.html')
 
-
-@login_required(redirect_field_name='login')
-def admin(request):
-    return render(request,'admin.html')
+# @login_required(redirect_field_name='login')
+# def admin(request):
+#     return render(request,'admin.html')
 
 @login_required(redirect_field_name='login')
 def novo_projeto(request):
