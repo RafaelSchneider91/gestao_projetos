@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     #Myapps  
     "accounts",
     "projetos",
-
+    "demandas",
+    "tarefas",
 ]
 
 MIDDLEWARE = [

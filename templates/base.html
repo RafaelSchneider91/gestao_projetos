@@ -15,22 +15,57 @@
     <div class="sidebar">
         <div class="logo-details">
             <div class="logo_name">Gestão de Projetos</div>
-            <i class='bx bx-menu' id="btn" ></i>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
           <li>
-            <a href="#">
-              <i class='bx bx-grid-alt'></i>
+            <a href="{% url 'projetos' %}">
+              <i class='bx bx bxs-home'></i>
               <span class="links_name">Página inicial</span>
             </a>
             <span class="tooltip">Página inicial</span>
           </li>
           <li>
-            <a href="#">
-              <i class='bx bx-folder' ></i>
-              <span class="links_name">Agenda</span>
+            <a href="{% url 'novo_demanda' %}">
+              <i class='bx bx-folder-plus' ></i>
+              <span class="links_name">Novo</span>
             </a>
-            <span class="tooltip">Agenda</span>
+            <span class="tooltip">Novo</span>
+          </li>
+          <li>
+            <a href="{% url 'cronograma' %}">
+              <i class='bx bx-calendar' ></i>
+              <span class="links_name">Cronograma</span>
+            </a>
+            <span class="tooltip">Cronograma</span>
+          </li>
+          <li>
+            <a href="{% url 'recurso' %}">
+              <i class='bx bx bxs-group' ></i>
+              <span class="links_name">Recursos</span>
+            </a>
+            <span class="tooltip">Recursos</span>
+          </li>
+          <li>
+            <a href="{% url 'painel' %}">
+              <i class='bx bxs-bar-chart-alt-2' ></i>
+              <span class="links_name">Dashboard</span>
+            </a>
+            <span class="tooltip">Dashboard</span>
+          </li>
+          <li>
+            <a href="{% url 'resultado' %}">
+              <i class='bx bx-money' ></i>
+              <span class="links_name">Resultados</span>
+            </a>
+            <span class="tooltip">Resultados</span>
+          </li>
+          <li>
+            <a href="{% url 'admin' %}">
+              <i class='bx bx-cog' ></i>
+              <span class="links_name">Admin</span>
+            </a>
+            <span class="tooltip">Admin</span>
           </li>
           <li>
             <a href="{% url 'logout' %}">

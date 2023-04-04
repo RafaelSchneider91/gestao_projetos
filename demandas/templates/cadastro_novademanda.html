@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Cadastro Nova Demanda |{% endblock titulo %}
+
+{% block 'conteudo' %}
+
+<h1>Cadastro Nova Demanda</h1>
+
+<body>
+    <form action="{% url 'processa_cadastro_novademanda' %}" method="POST">{% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        
+        <br>
+
+        <button type"submit">Enviar</button>
+    
+    </form>
+
+</body>
+
+{% endblock 'conteudo' %}
+
+
