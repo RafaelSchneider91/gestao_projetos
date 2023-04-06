@@ -3,8 +3,10 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-# from .forms import formularioNovaDemanda
+from projetos.forms import FormularioNovoProjeto
 from django.http import HttpResponse
+
+
 
 @login_required(redirect_field_name='login')
 def projetos (request):
@@ -37,12 +39,15 @@ def painel(request):
 def resultado(request):
     return render(request,'resultado.html')
 
-# @login_required(redirect_field_name='login')
-# def admin(request):
-#     return render(request,'admin.html')
-
 @login_required(redirect_field_name='login')
 def novo_projeto(request):
-    return render(request,'cadastro_projeto.html')
+    form = FormularioNovoProjeto()
+    return render(request,'cadastro_projeto.html', {'form':form})
 
-
+@login_required(redirect_field_name='login')
+def processa_cadastro_novoprojeto(request):
+    formularionovoprojeto = FormularioNovoProjeto(request.POST)
+    # if form.is_valid():
+    formularionovoprojeto.save()
+    return render(request,'processa_cadastro_novoprojeto.html')
+    # return HttpResponse('erro interno do sistema!')
