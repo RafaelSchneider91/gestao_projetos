@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Cadastro Projeto |{% endblock titulo %}
+{% block titulo %}Cadastro Novo Projeto |{% endblock titulo %}
 
 {% block 'conteudo' %}
 
-<h1>Cadastro Projeto</h1>
+<h1>Cadastro Novo Projeto</h1>
+
+<body>
+    <form action="{% url 'processa_cadastro_novoprojeto' %}" method="POST">{% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        
+        <br>
+
+        <button type"submit">Enviar</button>
+    
+    </form>
+
+</body>
 
 {% endblock 'conteudo' %}
 
