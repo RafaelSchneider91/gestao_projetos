@@ -1,8 +1,98 @@
 {% extends 'base.html' %}
 
+
+
 {% block titulo %}Cadastro Nova Demanda |{% endblock titulo %}
 
-{% block 'conteudo' %}
+{% block 'head' %}
+{% load static %}
+
+<link href="{% static 'demandas/css/demanda.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block 'body' %}
+
+    <div class="wrapper">
+        <div class="box">
+            <div class="header">
+                <h3 class="titulo">Novo Cadastro de Demanda</h3>
+            </div>
+
+            <div class="body-box">
+                <form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                    <div class="col-md">
+                        <label>Nome:</label>
+                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome da demanda...">
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                    </div>                    
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Descrição da demanda:</label>
+                            <textarea name="descricao" class="form-control" placeholder="Descreve o objetivo da demanda..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Categoria:</label>
+                            <select class="form-control" name="categoria">
+                                <option value="M">Melhoria</option>
+                                <option value="P">Projeto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>                    
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Retorno Financeiro:</label>
+                            <input type="number" step="0.1" name="retorno_financeiro">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Base do calculo de retorno:</label>
+                            <textarea name="base_calculo_retorno " class="form-control" placeholder="Digite como foi realizado o calculo de retorno..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Retorno qualitivo:</label>
+                            <textarea name="retorno_qualitativo" class="form-control" placeholder="Descreva o retorno que não podera ser quantificado..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Observação:</label>
+                            <textarea name="observacao" class="form-control" placeholder="Caso necessario descreva alguma observação..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+
+                    
+
+
+
+
+                    <input type="submit" value="Novo Cadastro" class="btn btn-lg btn-orange">
+                </form>
+                
+            </div>
+        </div>
+    </div>
+   
+{% endblock%}
+
+
+
+{% comment %} {% block 'conteudo' %}
 
 <h1>Cadastro Nova Demanda</h1>
 
@@ -20,6 +110,10 @@
 
 </body>
 
-{% endblock 'conteudo' %}
+{% endblock 'conteudo' %} {% endcomment %}
+
+
+
+
 
 

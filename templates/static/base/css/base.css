@@ -115,7 +115,7 @@
   padding: 0 20px 0 50px;
   width: 100%;
 }
-.sidebar .bx-search{
+.sidebar .bx1-search{
   position: absolute;
   top: 50%;
   left: 0;
@@ -124,11 +124,11 @@
   background: var(--main-color);
   color: #FFF;
 }
-.sidebar.open .bx-search:hover{
+.sidebar.open .bx1-search:hover{
   background: var(--main-color);
   color: #FFF;
 }
-.sidebar .bx-search:hover{
+.sidebar .bx1-search:hover{
   background: #FFF;
   color: var(--main-color);
 }

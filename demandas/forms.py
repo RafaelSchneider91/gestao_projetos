@@ -17,7 +17,8 @@ class formularioNovaDemanda(forms.ModelForm):
         #           'status',
         #           'usuario_criacao',
         #           )
-        exclude = ('data_cadastro',)
+        exclude = ('data_cadastro',
+                   )
 
 
         # fields = '__all__'
