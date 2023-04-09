@@ -16,11 +16,26 @@
     <div class="wrapper">
         <div class="box">
             <div class="header">
-                <h3 class="titulo">Novo Cadastro de Demanda</h3>
+                <h3 class="titulo">Cadastro de Demanda</h3>
             </div>
 
+                {% comment %} mensagem de alerta! {% endcomment %}
+                {% if messages %}
+    
+                    {% for message in messages %}
+                        <br>
+                        
+                        <section class="alert {{message.tags}}">
+                            {{message}}
+                        </section>
+                    
+                    {% endfor %}
+            
+                {% endif %}
+            {% comment %} mensagem de alerta! {% endcomment %}
+
             <div class="body-box">
-                <form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <form action="{% url 'cadastro_novademanda' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <div class="row">
                     <div class="col-md">
                         <label>Nome:</label>
@@ -36,17 +51,49 @@
                             <textarea name="descricao" class="form-control" placeholder="Descreve o objetivo da demanda..."></textarea>
                         </div>
                     </div>
-                    <br>
+                    <br> 
                     <div class="row">
                         <div class="col-md">
                             <label>Categoria:</label>
-                            <select class="form-control" name="categoria">
-                                <option value="M">Melhoria</option>
-                                <option value="P">Projeto</option>
-                            </select>
+                                <select name="categoria" class="form-select input-tarefa">
+                                    <option value="M">Melhoria</option>
+                                    <option value="P">Projeto</option>
+                                </select>
                         </div>
                     </div>
-                    <br>                    
+                    <br>   
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Status:</label>
+                                <select name="status" class="form-select input-tarefa">
+                                    <option value="P">Aguardando Priorizacao</option>
+                                    <option value="A">Em analise</option>
+                                </select>
+                        </div>
+                    </div>
+                    <br> 
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Setores:</label>
+                                <select class="form-select input-tarefa" name="setor_demanda_id">
+                                    {% for setor in setores %}
+                                    
+                                        <option value={{setor.id}}>{{setor}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                    <div class="col-md">
+                        <label>Nome Solicitante:</label>
+                        <input type="text" class="form-control" name="nome_solicitante" placeholder="Nome do solicitante...">
+                    </div>
+                    </div>
+                    <br>
+
                     <div class="row">
                         <div class="col-md">
                             <label>Retorno Financeiro:</label>
@@ -75,7 +122,15 @@
                         </div>
                     </div>
                     <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Link Analise:</label>
+                            <input type="url" name="link_analise" size="70">
+                        </div>
+                    </div>
+                    <br>
 
+                    
                     
 
 
