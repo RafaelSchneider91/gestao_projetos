@@ -16,14 +16,21 @@ class FaseProjeto(models.Model):
 
 
 class NovoProjeto(models.Model):
-    nome_projeto = models.ForeignKey(NovaDemanda, null=False, blank=False, on_delete=models.CASCADE)
-    status = models.ForeignKey(StatusProjeto, on_delete=models.PROTECT, null=True, blank=False)
-    fase = models.ForeignKey(FaseProjeto, on_delete=models.PROTECT, null=True, blank=False)
+    nome_projeto = models.ForeignKey(NovaDemanda, null=True, on_delete=models.CASCADE)
+
+
+    status = models.ForeignKey(StatusProjeto, on_delete=models.CASCADE, null=True, blank=False)
+    fase = models.ForeignKey(FaseProjeto, on_delete=models.CASCADE, null=True, blank=False)
     data_cadastro = models.DateTimeField(default = timezone.now) #TODO: esta cadastrando 3 hr a mais
     staramais = models.BooleanField(default=False)
     staralabs = models.BooleanField(default=False)
     prioridade = models.PositiveIntegerField(default=1)
     equipe = models.ManyToManyField(User)
+
+    def __str__ (self) -> str:
+        return self.nome_projeto.nome
+    
+
 
 
 

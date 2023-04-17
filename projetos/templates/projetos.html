@@ -2,20 +2,125 @@
 
 {% block titulo %}Inicio |{% endblock titulo %}
 
-{% block 'conteudo' %}
+{% load static %}
 
-<div>
-    <h1 class="mb-3">Olá, {{user.first_name}} {{user.last_name }} </h1>
-        {% include 'parciais/_messages.html' %}
-</div>
-<div>
-    projeto 1
-</div>
-<div>
-    projeto 2
-</div>
-<div>
-    projeto 3
-</div>
+{% comment %} {% load filtro %} {% endcomment %}
 
-{% endblock 'conteudo' %}
+{% block 'head' %}
+    <link href="{% static 'home/css/home.css' %}" rel="stylesheet">
+{% endblock%}
+
+{% block 'body' %}
+    <div>
+        <h1 class="mb-3">Olá, {{user.first_name}} {{user.last_name }} </h1>
+            {% include 'parciais/_messages.html' %}
+    </div>
+
+    <div class="wrapper">
+        <div class="box"> 
+            <div class="header-box">
+                {% if messages %}
+                    {% for message in messages %}
+                        <section class="alert {{message.tags}}">
+                            {{message}}
+                        </section>
+                    {% endfor %}
+                {% endif %}
+
+                
+
+                <h2 class="titulo">Gestão de Projetos</h2>
+                <a href="{% url 'novo_projeto' %}" class="btn-nova-empresa">Novo projeto</a>
+                
+                <a href="{% url 'cadastro_novademanda' %}" class="btn-nova-empresa">Nova demanda</a>
+                <br>
+            </div>
+            <div class="borda-box"></div>
+            <div class="body-box">
+            
+                <form action="#" method="GET">
+                    {% csrf_token %}
+                <div class="row">
+                    
+                        <div class="col-md-5">
+                            <input type="text" placeholder="Busque pelo nome projeto..." class="form-control" name="nome_projeto_filtro">
+                        </div>
+
+                        <div class="col-md-4">
+                            <select class="form-select" name="status_projeto_filtrar">
+                                {% for status_projetos in status_projeto %}
+                                    <option value="{{status_projetos.id}}">{{status_projetos}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    
+                    <div class="col-md-3">
+                        <input type="submit" value="Filtrar" class="btn btn-orange">
+                        <a href="{% url 'projetos' %}" value="Limpar" class="btn btn-orange">Limpar</a>
+
+                    </div>
+
+                </div>
+                </form>
+
+                <table class="tabela" cellpadding="20">
+                    <tr>
+                        <th>Nome Projeto</th>
+                        <th>Status</th>
+                        <th>Fase</th>
+                        <th>Prioridade</th>
+                        <th>Ação</th>
+                    </tr>
+
+                        {% for projetos in projeto %}
+                            
+                            <tr class="tabela-linha">
+                            {% comment %} <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} > {% endcomment %}
+
+                                <td>
+                                    <a href="#">{{projetos.nome_projeto}}</a>
+                                </td>
+                                <td>
+                                    {{projetos.status}}
+                                </td>
+                                <td>
+                                    {{projetos.fase}}
+                                </td>
+                                <td>
+                                    {{projetos.prioridade}}
+                                </td>
+                                
+                                
+                               {% comment %} <td> {% endcomment %}
+                                   
+                                    {% comment %}<select class="form-select">  
+                                        {% for tech in empresa.tecnologias.all %}     
+                                            <option>{{tech}}</option>
+                                        {% endfor %}            
+                                    </select>
+                                </td> {% endcomment %}
+                                {% comment %} <td class='td_vagas'>
+                                    {% if empresa.qtd_vagas > 0 %}
+                                        <img src="{% static 'empresa/img/flag_green.png'%} " width="15" height="15">
+                                        {{empresa.qtd_vagas}}
+                                    {% else %}
+                                        <img src="{% static 'empresa/img/flag_red.png'%}" width="15" height="15">
+                                        {{empresa.qtd_vagas}}
+                                    {% endif %}
+                                </td> {% endcomment %}
+                                {% comment %} <td>
+                                    <a href="{% url 'excluir_empresa' empresa.id %}" class="btn-excluir">Excluir empresa</a>
+                                </td> {% endcomment %}
+                            </tr>
+                        {% endfor %}
+                    
+                </table> 
+            </div>
+
+
+            
+
+        </div>
+    </div>
+
+{% endblock%}

@@ -1,5 +1,147 @@
 {% extends 'base.html' %}
 
+
+
+{% block titulo %}Cadastro Novo Projeto |{% endblock titulo %}
+
+{% block 'head' %}
+{% load static %}
+
+<link href="{% static 'projetos/css/projeto.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block 'body' %}
+
+    <div class="wrapper">
+        <div class="box">
+            <div class="header">
+                <h3 class="titulo">Cadastro de Projeto</h3>
+            </div>
+
+                {% comment %} mensagem de alerta! {% endcomment %}
+                {% if messages %}
+    
+                    {% for message in messages %}
+                        <br>
+                        
+                        <section class="alert {{message.tags}}">
+                            {{message}}
+                        </section>
+                    
+                    {% endfor %}
+            
+                {% endif %}
+            {% comment %} mensagem de alerta! {% endcomment %}
+
+            <div class="body-box">
+                <form action="{% url 'novo_projeto' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Nome do Projeto:</label>
+                                <select class="form-select input-tarefa" name="nomeprojeto">
+                                    {% for demanda in demandas %}
+                                    
+                                        <option value={{demanda.id}}>{{demanda}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>      
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Status Projeto:</label>
+                                <select class="form-select input-tarefa" name="statusprojeto">
+                                    {% for status in statusprojeto %}
+                                    
+                                        <option value={{status.id}}>{{status}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>  
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Fase Projeto:</label>
+                                <select class="form-select input-tarefa" name="faseprojeto">
+                                    {% for fase in faseprojeto %}
+                                    
+                                        <option value={{fase.id}}>{{fase}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>                  
+                    <div class="row">
+                        <div class="col-md">                            
+                            <label for="numero">Prioridade:</label>
+                            <input type="number" id="numero" name="prioridade" step="1" required>  
+                        </div>
+                    </div>
+                    <br>                  
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="checkbox">Stara Mais:</label>
+                            <input type="checkbox" id="checkbox" name="staramais" value="true" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="checkbox">Stara Labs:</label>
+                            <input type="checkbox" id="checkbox" name="staralabs" value="true">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Equipe Projeto:</label>
+                                <select class="col-md" name="equipe" multiple> #TODO: verificar para incluir novo botão direcionando para criar um novo usuario;
+                                    {% for equipe in equipes %}
+                                    
+                                        <option value={{equipe.id}}>{{equipe}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    {% comment %} <br>
+                    <div class="row">
+                        <div class="col-md">
+                            
+                            
+
+                            {% for equipe in equipes %}
+                                <input type="checkbox" name="equipe_teste" value="{{equipe.id}}">
+                                    <label>{{equipe.username}}</label><br>                            
+                                
+                            {% endfor %}   
+                        </div>
+                    </div>
+                    <br> {% endcomment %}
+                    <br>
+                    <input type="submit" value="Novo Projeto" class="btn btn-lg btn-orange">
+                </form>
+                
+            </div>
+        </div>
+    </div>
+   
+{% endblock%}
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
 {% block titulo %}Cadastro Novo Projeto |{% endblock titulo %}
 
 {% block 'conteudo' %}
@@ -14,12 +156,12 @@
         
         <br>
 
-        <button type"submit">Enviar</button>
+        <button type="submit">Enviar</button>
     
     </form>
 
 </body>
 
-{% endblock 'conteudo' %}
+{% endblock 'conteudo' %} {% endcomment %}
 
 

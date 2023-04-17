@@ -31,7 +31,7 @@ class NovaDemanda(models.Model):
     descricao = models.TextField(max_length=255, blank=False, null=False)
     categoria = models.CharField(max_length=50, choices=choices_categoria)
     data_cadastro = models.DateTimeField(default = timezone.now) #TODO: esta cadastrando 3 hr a mais
-    setor_demanda = models.ForeignKey(Setor, on_delete=models.PROTECT)
+    setor_demanda = models.ForeignKey(Setor, on_delete=models.CASCADE)
     nome_solicitante = models.CharField(max_length=255, blank=False, null=True)
     retorno_financeiro = models.DecimalField(max_digits=50, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     base_calculo_retorno = models.TextField(blank=False, null=True)
@@ -39,7 +39,7 @@ class NovaDemanda(models.Model):
     link_analise = models.URLField(blank=True, null=True)
     observacao = models.TextField(blank=False, null=True)
     status = models.CharField(max_length=50, choices=choices_statusbacklog)
-    usuario_criacao = models.ForeignKey(User, on_delete=models.PROTECT) # TODO: verificar forma de buscar o usuario logado no sistema;
+    usuario_criacao = models.ForeignKey(User, on_delete=models.CASCADE) # TODO: verificar forma de buscar o usuario logado no sistema;
     
 
     

@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-md">
                             <label>Link Analise:</label>
-                            <input type="url" name="link_analise" size="70">
+                            <input type="url" name="link_analise" size="50" >
                         </div>
                     </div>
                     <br>
@@ -145,27 +145,6 @@
    
 {% endblock%}
 
-
-
-{% comment %} {% block 'conteudo' %}
-
-<h1>Cadastro Nova Demanda</h1>
-
-<body>
-    <form action="{% url 'processa_cadastro_novademanda' %}" method="POST">{% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        
-        <br>
-
-        <button type"submit">Enviar</button>
-    
-    </form>
-
-</body>
-
-{% endblock 'conteudo' %} {% endcomment %}
 
 
 
