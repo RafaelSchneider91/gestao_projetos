@@ -13,4 +13,5 @@ urlpatterns = [
     # path('cadastro_novademanda/', views.cadastro_novademanda, name='cadastro_novademanda'),
     # path('processa_cadastro_novoprojeto/', views.processa_cadastro_novoprojeto, name='processa_cadastro_novoprojeto'),
     path('novo_projeto/', views.novo_projeto, name='novo_projeto'),
+    path('projeto/<int:id>', views.projeto_unico, name='projeto_unico'),
 ]

@@ -78,7 +78,7 @@
                             {% comment %} <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} > {% endcomment %}
 
                                 <td>
-                                    <a href="#">{{projetos.nome_projeto}}</a>
+                                    <a href="{% url 'projeto_unico' projetos.id %}">{{projetos.nome_projeto}}</a>
                                 </td>
                                 <td>
                                     {{projetos.status}}

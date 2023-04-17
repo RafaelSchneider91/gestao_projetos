@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
@@ -68,7 +68,7 @@ def novo_projeto(request):
 def projetos (request):
     nome_projeto_filtrar = request.GET.get('nome_projeto_filtro')
     status_projeto_filtrar = request.GET.get('status_projeto_filtrar')
-    
+
     projeto = NovoProjeto.objects.all()
     status_projeto = StatusProjeto.objects.all()
     
@@ -81,6 +81,17 @@ def projetos (request):
     
     return render(request, 'projetos.html', {'projeto': projeto,
                                              'status_projeto': status_projeto})
+
+
+@login_required(redirect_field_name='login')
+def projeto_unico (request, id):
+    projeto_unico = get_object_or_404(NovoProjeto, id=id)
+
+    projetos = NovoProjeto.objects.all()
+
+    return render(request, 'projeto_unico.html', {'projeto': projeto_unico,
+                                                 'projetos':projetos
+                                                 })
 
 
 
