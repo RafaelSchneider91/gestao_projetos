@@ -62,5 +62,18 @@ object {
     display: block;
     margin: 0 auto;
     
-    
+}
+
+.point-fase {
+    display: flex;
+    flex-direction: row;
+    /* margin: 5px;     */
+}
+
+.invert45 {
+    transform: rotate(-45deg);
+    display: flex;
+    flex-direction: row;
+    /* padding: 10px;     */
+    margin-top: 10px;
 }

@@ -95,8 +95,6 @@ def projeto_unico (request, id):
 
 
 
-
-
 @login_required(redirect_field_name='login')
 def index(request):
     return render(request,'index.html')
@@ -105,19 +103,17 @@ def index(request):
 def novo_demanda(request):
     return render(request,'demandas.html')
 
-
 @login_required(redirect_field_name='login')
 def cronograma(request):
     return render(request,'cronograma.html')
-
 
 @login_required(redirect_field_name='login')
 def recurso(request):
     return render(request,'recursos.html')
 
 @login_required(redirect_field_name='login')
-def painel(request):
-    return render(request,'painel.html')
+def tarefa(request):
+    return render(request,'tarefa.html')
 
 @login_required(redirect_field_name='login')
 def resultado(request):

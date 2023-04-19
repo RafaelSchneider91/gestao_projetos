@@ -6,6 +6,7 @@ modelagem do db = https://lucid.app/lucidchart/c9aa8a9a-80d7-4451-a913-e5fb7c13b
 #TODO: incluir mensagem html para comunicação do status de projeto, gatilho automatico.
 #TODO: perfil de acesso: visualizador, analista, desenvolvedor;
 #TODO: plano de testes?
+#TODO: documentacao do projeto;
 
 Criar quadro Kanban, estilo trello
 https://dev.to/lb/how-to-create-a-kanban-trello-style-view-of-your-modeladmin-data-in-wagtail-20eg
