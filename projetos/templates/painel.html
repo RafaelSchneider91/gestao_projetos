@@ -1,11 +1,78 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Dashboard |{% endblock titulo %}
+{% block titulo %}Tarefas |{% endblock titulo %}
+
+{% block 'head' %}
+{% load static %}
+
+<link href="{% static 'projetos/css/painel.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+
+{% endblock %}
+
 
 {% block 'conteudo' %}
 
-<h1>dashboard</h1>
+	{% comment %} #TODO: CRIAR UM BOTAO METHOD POST PARA GRAVAR A ALTERAÇÃO NO BD; {% endcomment %}
+
+
+<body>
+	<h1>Quadro Kanban Tarefas</h1> 
+
+	<div class="container">
+		<div class="column">
+			<div class="column-header">A fazer</div>
+			<div class="task-list" id="todo">
+				<div class="task">Tarefa 1</div>
+				<div class="task">Tarefa 2</div>
+			</div>
+		</div>
+		<div class="column">
+			<div class="column-header">Fazendo</div>
+			<div class="task-list" id="doing">
+				<div class="task">Tarefa 3</div>
+			</div>
+		</div>
+		<div class="column">
+			<div class="column-header">Pendente</div>
+			<div class="task-list" id="done">
+				<div class="task">Tarefa 4</div>
+				<div class="task">Tarefa 5</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+	<script>
+		var todoList = document.getElementById('todo');
+		var doingList = document.getElementById('doing');
+		var doneList = document.getElementById('done');
+
+		var sortable = Sortable.create(todoList, {
+			group: 'kanban',
+			animation: 150,
+			onEnd: function (evt) {
+				console.log('Tarefa movida de A fazer para ' + evt.to.id);
+			}
+		});
+
+		var sortable2 = Sortable.create(doingList, {
+			group: 'kanban',
+			animation: 150,
+			onEnd: function (evt) {
+				console.log('Tarefa movida de Fazendo para ' + evt.to.id);
+			}
+		});
+
+		var sortable3 = Sortable.create(doneList, {
+			group: 'kanban',
+			animation: 150,
+			onEnd: function (evt) {
+				console.log('Tarefa movida' + evt.to.id);
+			}
+		});
+	</script>
 
 {% endblock 'conteudo' %}
-
-

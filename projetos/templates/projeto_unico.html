@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'head' %}
-    <link href="{% static 'projetos/css/projeto.css' %}" rel="stylesheet">
+    <link href="{% static 'projetos/css/projeto_unico.css' %}" rel="stylesheet">
 {% endblock%}
 
 
@@ -20,57 +20,32 @@
             {% endfor %}
         {% endif %}    
         <div class="row">
-            <div class="col-md-3">
-                <img width="100%" src="{{empresa.logo.url}}">
-            </div>
+            
 
             <div class="col-md">
-                <h1 class="titulo">{{empresa.nome}}</h1>
-                <p class="paragrafo">{{empresa.endereco}}</p>
-            </div>
+                <h1 class="titulo">{{projeto.nome_projeto}}</h1>
+                {% comment %} <p class="paragrafo">{{empresa.endereco}}</p> {% endcomment %}
+            </div> 
 
 
 
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Nicho de mercado:</label>
-                <input disabled type="text" class="form-control" value="{{empresa.get_nicho_mercado_display}}">
-            </div>
-
-            <div class="col-md-3">
-                <label>Tecnologias usadas:</label>
-                <select class="form-select">
-                    {% for tech in empresa.tecnologias.all %}
-                    
-                        <option>{{tech}}</option>
-
-                    
-                    {% endfor %}   
-
-                </select>
-                
-            </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-7">
-                <label>Características da empresa:</label>
-                <textarea disabled class="form-control">{{empresa.caracteristica_empresa}}</textarea>
-            </div>
-
-            <div class="col-md-3">
-                
-                
-            </div>
+                <label>Status:</label>
+                <input disabled class="form-control" value="{{projeto.status}}">
+            </div> 
         </div>
+       
+        
+    
 
         <hr>
 
-        <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-lg btn-orange">Nova vaga</a>
+        {% comment %} <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-lg btn-orange">Nova vaga</a> {% endcomment %}
 
-        <div class="row">
+        {% comment %} <div class="row">
             {% for vaga in vagas %}
                 <div class="col-md">
 
@@ -100,13 +75,40 @@
                     
                 </div>
             {% endfor %}
+        </div> {% endcomment %}
+
+        <div class="img-status_svg">
+            <label>Fase Projeto:</label>
+                
+                
+                
+                <div>
+                    <object class="central1"  data="{% static 'projetos/svg/ok.svg' %}" type="image/svg+xml" width="40" height="40"></object>
+                    <object  data="{% static 'projetos/svg/linha.svg' %}" type="image/svg+xml" width="800" height="100"></object>
+                    <p class="central1" >Fase 1</p>
+                </div>
+               
+                
         </div>
 
+        <hr>
+
     </div>
+
+    
     <br>
+        
     <br>
 
-    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            
+        
+   
+
+
+
+
+    {% comment %} <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -203,6 +205,6 @@
            
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 
 {% endblock %}

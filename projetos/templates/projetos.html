@@ -43,10 +43,12 @@
                 <div class="row">
                     
                         <div class="col-md-5">
+                            <h6>Nome projeto</h6>
                             <input type="text" placeholder="Busque pelo nome projeto..." class="form-control" name="nome_projeto_filtro">
                         </div>
 
                         <div class="col-md-4">
+                            <h6>Status</h6>
                             <select class="form-select" name="status_projeto_filtrar">
                                 {% for status_projetos in status_projeto %}
                                     <option value="{{status_projetos.id}}">{{status_projetos}}</option>
@@ -62,6 +64,7 @@
 
                 </div>
                 </form>
+                <br>
 
                 <table class="tabela" cellpadding="20">
                     <tr>
