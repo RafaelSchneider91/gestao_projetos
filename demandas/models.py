@@ -32,10 +32,10 @@ class NovaDemanda(models.Model):
     categoria = models.CharField(max_length=50, choices=choices_categoria)
     data_cadastro = models.DateTimeField(default = timezone.now) #TODO: esta cadastrando 3 hr a mais
     setor_demanda = models.ForeignKey(Setor, on_delete=models.CASCADE)
-    nome_solicitante = models.CharField(max_length=255, blank=False, null=True)
+    nome_solicitante = models.CharField(max_length=255, blank=False, null=False)
     retorno_financeiro = models.DecimalField(max_digits=50, decimal_places=2, default=0, validators=[MinValueValidator(0)])
-    base_calculo_retorno = models.TextField(blank=False, null=True)
-    retorno_qualitativo = models.TextField( blank=False, null=True)
+    base_calculo_retorno = models.TextField(blank=False, null=False)
+    retorno_qualitativo = models.TextField( blank=False, null=False)
     link_analise = models.URLField(blank=True, null=True)
     observacao = models.TextField(blank=False, null=True)
     status = models.CharField(max_length=50, choices=choices_statusbacklog)

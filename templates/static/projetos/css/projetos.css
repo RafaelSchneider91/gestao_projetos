@@ -10,7 +10,7 @@
     
     width: 80vw;
     background: #fff;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 10px rgba(0,0,0,.3);
 }
 
 
@@ -41,18 +41,6 @@
     background-color: #f26e23;
 }
 
-.btn-lg:hover {
-    float: right;
-    text-decoration: none;
-    color: white;
-    background-color: #f26e23;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    margin-right: 10px;
-
-}
-
 .header-box{
 
     padding: 30px;
@@ -60,7 +48,7 @@
 }
 
 .borda-box{
-    border-top: 1px solid rgb(255, 255, 255);
+    border-top: 1px solid black;
 }
 
 .body-box{
@@ -94,4 +82,9 @@
 
 .td_vagas{
     justify-items: center;
+}
+
+.bx {
+    padding: 10px;
+
 }

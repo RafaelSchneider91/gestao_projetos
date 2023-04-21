@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static 'projetos/css/editar_projeto.css' %}" rel="stylesheet">
+{% endblock%}
+
+
+{% block 'body' %}
+
+    
+    <br>
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <br>
+                <section class="alert {{message.tags}}">
+                    {{message}}
+                </section>
+            {% endfor %}
+        {% endif %} 
+        
+        {% comment %} <form action="{% url 'editar_projeto' projeto.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %} {% endcomment %}
+        <form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+            <div class="row">         
+                <div class="col-md">
+                    <h1 class="titulo">{{projeto.nome_projeto}}</h1>
+                </div>         
+            </div>
+            <br>
+            {% comment %} <div>
+                <p>{{demandas.id.descricao}}</p>            
+                <p>Descricao projeto</p> <!-- #TODO: VER COMO INCLUIR A DESCRICAO DO PROJETO; -->
+            </div> {% endcomment %}
+
+            <div class="row">
+                <div class="col-md">
+                    <label>Descrição do projeto ou melhoria:</label>
+                    <textarea name="descricao_projeto" class="form-control" placeholder={{projeto.descricao_projeto}}></textarea>
+                </div>
+            </div> 
+            <hr>
+            <label>Status:</label>
+            <div class="col-md-4">            
+                    <select class="form-select" name="statusprojeto">                    
+                            {% for statusid in status %}                            
+                                <option value={{statusid.id}}>{{statusid.status}}</option>        
+                            {% endfor %}
+                    </select>
+            </div>
+            <br>
+            <label>Fase:</label>
+            <div class="col-md-4">            
+                    <select class="form-select" name="faseprojeto">                    
+                            {% for fase in faseprojeto %}                            
+                                <option value={{fase.id}}>{{fase}}</option>        
+                            {% endfor %}
+                    </select>
+            </div>
+            <br>                  
+            <div class="row">
+                <div class="col-md">                            
+                    <label for="numero">Prioridade:</label>
+                    <input type="number" id="numero" name="prioridade" step="1" required>  
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+
+        <input type="submit" value="Atualizar Projeto" class="btn btn-lg btn-orange">
+
+    </div>
+
+    
+
+    
+    <br>
+        
+    <br>
+
+
+            
+        
+
+{% endblock %}

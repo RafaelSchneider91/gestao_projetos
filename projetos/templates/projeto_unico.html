@@ -18,98 +18,110 @@
                     {{message}}
                 </section>
             {% endfor %}
-        {% endif %}    
-        <div class="row">
-            
-
-            <div class="col-md">
-                <h1 class="titulo">{{projeto.nome_projeto}}</h1>
-                {% comment %} <p class="paragrafo">{{empresa.endereco}}</p> {% endcomment %}
-            </div> 
-
-
-
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-7">
-                <label>Status:</label>
-                <input disabled class="form-control" value="{{projeto.status}}">
-            </div> 
-        </div>
-       
+        {% endif %} 
         
-    
-
-        <hr>
-
-        {% comment %} <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-lg btn-orange">Nova vaga</a> {% endcomment %}
-
-        {% comment %} <div class="row">
-            {% for vaga in vagas %}
+        <form action="{% url 'projeto_unico' projeto.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="row">         
                 <div class="col-md">
+                    <h1 class="titulo">{{projeto.nome_projeto}}</h1>
+                </div>         
+            </div>
+            <br>
+            <div class="row">
+                <div >
+                    <label>Descricão do projeto ou melhoria:</label>
+                    <p>{{projeto.descricao_projeto}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Status:</label>
+                    <label disabled class="form-control">{{projeto.status}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Fase:</label>
+                    <label disabled class="form-control">{{projeto.fase}}</label>
+                </div>
+            </div>
+            <br>                  
+            <hr>
+            <br>
 
-                <div class="box-vagas">
-                    <div class="header-vagas">
-                        <a href="{% url 'vaga' vaga.id %}">{{vaga.titulo}}</a>
-                    </div>
 
-                    <div class="body-vagas">
-                        <div class="row">
-                            <div class="col-md">
-                                <label class="paragrafo">Nível:</label>
-                                <br>        
-                                <label class="paragrafo paragrafo-orange">{{vaga.get_nivel_experiencia_display}}</label>                           
+                {% comment %} <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-lg btn-orange">Nova Tarefa</a> {% endcomment %}
+
+                {% comment %} <div class="row">
+                    {% for vaga in vagas %}
+                        <div class="col-md">
+
+                        <div class="box-vagas">
+                            <div class="header-vagas">
+                                <a href="{% url 'vaga' vaga.id %}">{{vaga.titulo}}</a>
                             </div>
 
-                            <div class="col-md">
-                                <label class="paragrafo">Status <img src="{% static 'empresa/img/flag_green.png' %}" width="15" height="15"></label>
-                                <br>        
-                                <label class="paragrafo paragrafo-orange">{{vaga.get_status_display}}</label>                           
-                            </div>
+                            <div class="body-vagas">
+                                <div class="row">
+                                    <div class="col-md">
+                                        <label class="paragrafo">Nível:</label>
+                                        <br>        
+                                        <label class="paragrafo paragrafo-orange">{{vaga.get_nivel_experiencia_display}}</label>                           
+                                    </div>
 
+                                    <div class="col-md">
+                                        <label class="paragrafo">Status <img src="{% static 'empresa/img/flag_green.png' %}" width="15" height="15"></label>
+                                        <br>        
+                                        <label class="paragrafo paragrafo-orange">{{vaga.get_status_display}}</label>                           
+                                    </div>
+
+                                </div>
+                            </div>
+                            
                         </div>
-                    </div>
-                    
-                </div>
-                    
-                </div>
-            {% endfor %}
-        </div> {% endcomment %}
+                            
+                        </div>
+                    {% endfor %}
+                </div> {% endcomment %}
+                
 
-        <div class="img-status_svg">
-            <label>Fase:</label>
-                
-                
-                
-                <div>
-                    <div class="point-fase">
-                        <object class="central1"  data="{% static 'projetos/svg/ok.svg' %}" type="image/svg+xml" width="40" height="40"></object>
-                        <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
-                        <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
-                        <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
-                        <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
-                    </div>
+                {% comment %} <div class="img-status_svg">                  
+                        <div>
+                            <div class="point-fase">
+                                <object class="central1"  data="{% static 'projetos/svg/ok.svg' %}" type="image/svg+xml" width="40" height="40"></object>
+                                <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
+                                <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
+                                <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
+                                <object class="central1"  data="{% static 'projetos/svg/cancel.svg' %}" type="image/svg+xml" width="40" height="40"></object>
+                            </div>
 
-                    <object  data="{% static 'projetos/svg/linha.svg' %}" type="image/svg+xml" width="100%" ></object>
-                    <div class="point-fase">
-                        <object data="" type="" ><p class="invert45">Fase 1</p></object>
-                        <object data="" type="" ><p class="invert45">Fase 2</p></object>
-                        <object data="" type="" ><p class="invert45">Fase 3</p></object>
-                        <object data="" type="" ><p class="invert45">Fase 4</p></object>
-                        <object data="" type="" ><p class="invert45">Fase 5</p></object>
-                    </div>
-                
-                    
-                    
-                </div>
-               
-                
-        </div>
+                            <object  data="{% static 'projetos/svg/linha.svg' %}" type="image/svg+xml" width="100%" ></object>
+                            <div class="point-fase">
+                                    <p class="invert45">{{faseprojeto.0}}</p>
+                                    <p class="invert45">{{faseprojeto.1}}</p>
+                                    <p class="invert45">{{faseprojeto.2}}</p>
+                                    <p class="invert45">{{faseprojeto.3}}</p>
+                                    <p class="invert45">{{faseprojeto.4}}</p>
+                            </div>
+                        </div>    
+                </div> {% endcomment %}
 
-        <hr>
+        
+
+
+        {% comment %} <input type="submit" value="Editar Projeto" class="btn btn-lg btn-orange"> {% endcomment %}
+        
+        {% comment %} <a class="btn btn-lg btn-orange" href="{% url 'editar_projeto' projeto.id %}">Editar projeto</a> {% endcomment %}
+
+
+        <!-- <input type="submit" value="Nova Tarefa" class="btn btn-lg btn-orange"> -->
+
+        {% comment %} <input type="submit" value="Nova Ata" class="btn btn-lg btn-orange"> {% endcomment %}
 
     </div>
+
+    
 
     
     <br>

@@ -9,8 +9,8 @@ from django.contrib.messages import constants
 
 
 @login_required(redirect_field_name='login')
-def novo_demanda(request):
-    return render(request,'demandas.html')
+def demandas_projeto(request):
+    return render(request,'demandas_projeto.html')
 
 ### nova demanda
 @login_required(redirect_field_name='login')
@@ -81,6 +81,10 @@ def cadastro_novademanda(request):
 
         # return HttpResponse('ok')
 
+
+@login_required(redirect_field_name='login')
+def demandas(request):
+    return render(request,'demandas.html')
 
 
 

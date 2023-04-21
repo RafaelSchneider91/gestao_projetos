@@ -29,11 +29,18 @@
             <span class="tooltip">Página inicial</span>
           </li>
           <li>
-            <a href="{% url 'novo_demanda' %}">
+            <a href="{% url 'demandas_projeto' %}">
               <i class='bx bx-folder-plus' ></i>
               <span class="links_name">Novo</span>
             </a>
             <span class="tooltip">Novo</span>
+          </li>
+          <li>
+            <a href="{% url 'demandas' %}">
+              <i class='bx bx-git-pull-request'></i>
+              <span class="links_name">Demandas</span>
+            </a>
+            <span class="tooltip">Demandas</span>
           </li>
           {% comment %} <li>
             <a href="{% url 'cronograma' %}">
@@ -43,26 +50,27 @@
             <span class="tooltip">Cronograma</span>
           </li> {% endcomment %}
           <li>
-            <a href="{% url 'recurso' %}">
+            <a href="{% url 'membros' %}">
               <i class='bx bx bxs-group' ></i>
-              <span class="links_name">Recursos</span>
+              <span class="links_name">Membros</span>
             </a>
-            <span class="tooltip">Recursos</span>
+            <span class="tooltip">Membros</span>
           </li>
-          <li>
+          {% comment %} <li>
             <a href="{% url 'tarefa' %}">
               <i class="bx bx-task" ></i>
               <span class="links_name">Tarefas</span>
             </a>
             <span class="tooltip">Tarefas</span>
-          </li> 
-          <li>
+          </li>  {% endcomment %}
+          {% comment %} <li>
             <a href="{% url 'resultado' %}">
               <i class='bx bx-money' ></i>
               <span class="links_name">Resultados</span>
             </a>
             <span class="tooltip">Resultados</span>
-          </li>
+          </li> {% endcomment %}
+          
           <li>
             <a href="{% url 'admin:index' %}">
               <i class='bx bx-cog' ></i>

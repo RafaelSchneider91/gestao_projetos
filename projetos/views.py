@@ -25,6 +25,7 @@ def novo_projeto(request):
                                                         }) 
     elif request.method == "POST":
         nome_projeto_id = request.POST.get('nomeprojeto')
+        descricao_projeto = request.POST.get('descricao_projeto')
         status_id = request.POST.get('statusprojeto')
         fase_id = request.POST.get('faseprojeto')
 
@@ -51,8 +52,14 @@ def novo_projeto(request):
                     staramais = staramais,
                     staralabs = staralabs,
                     prioridade = prioridade,
+                    descricao_projeto = descricao_projeto,
                 
                     )
+    
+
+        if NovoProjeto.objects.filter(nome_projeto_id=nome_projeto_id).exists():
+            messages.add_message(request, constants.ERROR, 'Projeto já cadastrado!')
+            return redirect('novo_projeto')
         try:
             projeto.save()
             projeto.equipe.add(*user_id)
@@ -68,15 +75,22 @@ def novo_projeto(request):
 def projetos (request):
     nome_projeto_filtrar = request.GET.get('nome_projeto_filtro')
     status_projeto_filtrar = request.GET.get('status_projeto_filtrar')
+    limpar_filtros = request.GET.get('limpar_filtros')
 
     projeto = NovoProjeto.objects.all()
     status_projeto = StatusProjeto.objects.all()
+
+    if limpar_filtros:
+        nome_projeto_filtrar = ''
+        status_projeto_filtrar = ''
     
     if status_projeto_filtrar:
         projeto = projeto.filter(status_id=status_projeto_filtrar)
 
     if nome_projeto_filtrar:
         projeto = projeto.filter(nome_projeto__nome__icontains=nome_projeto_filtrar)
+
+        
 
     
     return render(request, 'projetos.html', {'projeto': projeto,
@@ -86,34 +100,69 @@ def projetos (request):
 @login_required(redirect_field_name='login')
 def projeto_unico (request, id):
     projeto_unico = get_object_or_404(NovoProjeto, id=id)
+    # demanda_unica = get_object_or_404(NovaDemanda, id=id)
+    status = StatusProjeto.objects.all()
+    faseprojeto = FaseProjeto.objects.all()
 
     projetos = NovoProjeto.objects.all()
 
     return render(request, 'projeto_unico.html', {'projeto': projeto_unico,
-                                                 'projetos':projetos
+                                                 'projetos':projetos,
+                                                 'status': status,
+                                                 'faseprojeto':faseprojeto
                                                  })
 
-
-
 @login_required(redirect_field_name='login')
-def index(request):
-    return render(request,'index.html')
 
-@login_required(redirect_field_name='login')
-def novo_demanda(request):
-    return render(request,'demandas.html')
+def editar_projeto(request, id):
+    projeto = get_object_or_404(NovoProjeto, id=id)
+    status = StatusProjeto.objects.all()
+    faseprojeto = FaseProjeto.objects.all()
+    
+    if request.method == 'POST':
+        # processar o formulário de atualização e salvar as mudanças no banco de dados
+        # redirecionar o usuário para a página de detalhes do projeto atualizado
+        descricao_projeto = request.POST.get('descricao_projeto')
+        status_id = request.POST.get('statusprojeto')
+        fase_id = request.POST.get('faseprojeto')
+        prioridade = request.POST.get('prioridade')
 
-@login_required(redirect_field_name='login')
-def cronograma(request):
-    return render(request,'cronograma.html')
+        projeto = NovoProjeto(
+                    projeto_id = id,
+                    descricao_projeto = descricao_projeto,
+                    status_id = status_id,
+                    fase_id  = fase_id,
+                    prioridade = prioridade,                
+                    )
+        
+        projeto.save()        
+        return render(request, f'projeto_unico/{id}.html')
+        # try:
+        #     projeto.save()
+        #     messages.add_message(request, constants.SUCCESS, 'Projeto atualizado com sucesso!')
+        #     return redirect('novo_projeto')
+        # except:
+        #     messages.add_message(request, constants.ERROR, 'Projeto não atualizado! Verifique os parametros digitados!' )
+        #     return redirect('novo_projeto')
 
-@login_required(redirect_field_name='login')
-def recurso(request):
-    return render(request,'recursos.html')
+            # renderizar o formulário de atualização do projeto com os dados atuais
+    return render(request, 'editar_projeto.html', {'projeto': projeto,
+                                                   'status': status,
+                                                   'faseprojeto':faseprojeto,                                                
+                                                   
+                                                   })
 
-@login_required(redirect_field_name='login')
-def tarefa(request):
-    return render(request,'tarefa.html')
+    
+
+# @login_required(redirect_field_name='login')
+# def index(request):
+#     return render(request,'index.html')
+
+# @login_required(redirect_field_name='login')
+# def cronograma(request):
+#     return render(request,'cronograma.html')
+
+
 
 @login_required(redirect_field_name='login')
 def resultado(request):

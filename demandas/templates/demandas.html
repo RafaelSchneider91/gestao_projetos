@@ -1,27 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block titulo %}Novo Cadastro-{% endblock titulo %}
+{% block titulo %}Demandas-{% endblock titulo %}
 
 {% block 'conteudo' %}
 
     <body>
-        <ul class="ul1">
-            <div class="li1">
-                <div class="li2">
-                    <img class="img1" src="{% static 'fotos/pana.png' %}" alt="">
-                </div>
-                    <a class = "a_link" href="{% url 'cadastro_novademanda' %}">Nova Demanda</a>
-            </div>
-            <div class="li1">
-                <div class="li2">
-                    <img class="img1" src="{% static 'fotos/rafiki.png' %}" alt="">
-                </div>
-
-                    <a class = "a_link"  href="{% url 'novo_projeto' %}">Novo Projeto</a>
-
-            </div>
-        </ul>
+        <p>Demandas</p>
     </body>
 
 

@@ -3,15 +3,15 @@ from . import views
 
 urlpatterns = [
     path('', views.projetos, name='projetos'),
-    # path('index/', views.index, name='index'),
-    # path('novo_demanda/', views.novo_demanda, name='novo_demanda'),
-    path('cronograma/', views.cronograma, name='cronograma'),
-    path('recurso/', views.recurso, name='recurso'),
-    path('tarefa/', views.tarefa, name='tarefa'),
-    path('resultado/', views.resultado, name='resultado'),
-    # path('admin/', views.admin, name='admin'),
-    # path('cadastro_novademanda/', views.cadastro_novademanda, name='cadastro_novademanda'),
-    # path('processa_cadastro_novoprojeto/', views.processa_cadastro_novoprojeto, name='processa_cadastro_novoprojeto'),
     path('novo_projeto/', views.novo_projeto, name='novo_projeto'),
     path('projeto/<int:id>', views.projeto_unico, name='projeto_unico'),
+    path('editar_projeto/<int:id>/', views.editar_projeto, name='editar_projeto'),
+    
+
+
+    #VERIFICAR
+    # path('cronograma/', views.cronograma, name='cronograma'),
+    # path('membros/', views.membros, name='membros'),   
+    # path('resultado/', views.resultado, name='resultado'),
+    
 ]

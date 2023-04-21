@@ -4,15 +4,16 @@
 
 {% load static %}
 
-{% comment %} {% load filtro %} {% endcomment %}
+{% load filtro %}
+
 
 {% block 'head' %}
-    <link href="{% static 'home/css/home.css' %}" rel="stylesheet">
+    <link href="{% static 'projetos/css/projetos.css' %}" rel="stylesheet">
 {% endblock%}
 
 {% block 'body' %}
     <div>
-        <h1 class="mb-3">Olá, {{user.first_name}} {{user.last_name }} </h1>
+        <h1 class="mb-2">Olá, {{user.first_name}} {{user.last_name }} </h1>
             {% include 'parciais/_messages.html' %}
     </div>
 
@@ -47,18 +48,24 @@
                             <input type="text" placeholder="Busque pelo nome projeto..." class="form-control" name="nome_projeto_filtro">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <h6>Status</h6>
-                            <select class="form-select" name="status_projeto_filtrar">
+                            <select class="form-control" name="status_projeto_filtrar">
                                 {% for status_projetos in status_projeto %}
                                     <option value="{{status_projetos.id}}">{{status_projetos}}</option>
                                 {% endfor %}
                             </select>
                         </div>
                     
-                    <div class="col-md-3">
-                        <input type="submit" value="Filtrar" class="btn btn-orange">
-                        <a href="{% url 'projetos' %}" value="Limpar" class="btn btn-orange">Limpar</a>
+                    <div class="col-md-5">
+
+                       
+
+                        <input type="submit" value="Limpar" class="btn-filtrar_limpar" name="limpar_filtros"> 
+                        
+                        <input type="submit" value="Filtrar" class="btn-filtrar_limpar">
+
+                        
 
                     </div>
 
@@ -77,8 +84,8 @@
 
                         {% for projetos in projeto %}
                             
-                            <tr class="tabela-linha">
-                            {% comment %} <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} > {% endcomment %}
+                            
+                            <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} >
 
                                 <td>
                                     <a href="{% url 'projeto_unico' projetos.id %}">{{projetos.nome_projeto}}</a>
@@ -91,6 +98,20 @@
                                 </td>
                                 <td>
                                     {{projetos.prioridade}}
+                                </td>
+                                <td>  
+                                    <a href="{% url 'editar_projeto' projetos.id %}">
+                                        <i class='bx bxs-edit'></i>
+                                        <span class="tooltip">Editar Projeto</span>
+                                      </a>
+                                       
+                                        <a href="{% url 'tarefa' projetos.id %}">
+                                        <i class="bx bx-task" ></i>
+                                        <span class="links_name"></span>
+                                        </a>
+                                        <span class="tooltip">Tarefas</span>
+                                   
+                                      
                                 </td>
                                 
                                 
