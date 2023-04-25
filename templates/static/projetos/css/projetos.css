@@ -1,4 +1,4 @@
-/* .wrapper {
+.wrapper {
     margin-top: 3%;
     display: flex;
     flex-direction: row;
@@ -16,7 +16,14 @@
 
 .titulo {
     display: inline;
-    color: rgb(9, 51, 51);
+    color: #f26e23;
+}
+
+.mb-2{
+    color: #f26e23;
+    
+
+
 }
 
 .btn-nova-empresa{
@@ -83,46 +90,4 @@
 
 .td_vagas{
     justify-items: center;
-} */
-
-.wrapper {
-    margin-top: 3%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.box {
-    padding: 30px;
-    width: 40vw;
-    background: #fff;
-    box-shadow: 4px 4px 10px rgba(0,0,0,.3);
-} 
-
-.header{
-    border-bottom: 1px solid black;
-}
-
-.body-box{
-    margin-top: 20px;
-}
-
-.btn-orange{
-
-    background-color: #f26e23;
-    color: white;
-}
-
-.btn-orange:hover{
-
-    background-color: #f26e23;
-    color: white;
-}
-
-@media (max-width: 1000px)
-{
-    .box{
-        width: 80vw;
-    }
 }
