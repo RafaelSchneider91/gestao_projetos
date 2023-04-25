@@ -18,12 +18,6 @@ class PerfilUsuarios(models.Model):
     perfil = models.CharField(max_length=50)
     def __str__(self) -> str:
         return self.perfil
-    
-
-class UsuariosProjeto(models.Model):
-    nome = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    perfil = models.ForeignKey(PerfilUsuarios, null=True, on_delete=models.CASCADE)
-    recebe_email = models.BooleanField(default=False)
 
 class NovoProjeto(models.Model):
     choices_categoria = (
@@ -40,12 +34,29 @@ class NovoProjeto(models.Model):
     staramais = models.BooleanField(default=False)
     staralabs = models.BooleanField(default=False)
     prioridade = models.PositiveIntegerField(default=1000)
-    membros = models.ForeignKey(UsuariosProjeto, null=True, on_delete=models.CASCADE)
-    # equipe = models.ManyToManyField(UsuariosProjeto)
+    # membros = models.ManyToManyField(User, null=True, on_delete=models.CASCADE)
+    # equipe = models.ManyToManyField(User)
 
     def __str__ (self) -> str:
         return self.nome_projeto.nome
     
+class UsuariosProjeto(models.Model):
+    projeto = models.ForeignKey(NovoProjeto, null=True, on_delete=models.CASCADE)
+    nome = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    perfil = models.ForeignKey(PerfilUsuarios, null=True, on_delete=models.CASCADE)
+    recebe_email = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            # impede q o mesmo usuario tenha o mesmo conteudo mais que uma vez como favorito
+            models.UniqueConstraint(fields=['nome', 'projeto'], name='fav_user_content')
+        ]
+
+    
+
+    # def __str__(self) -> str:
+    #     return self.projeto
+
 
 
 

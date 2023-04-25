@@ -16,7 +16,7 @@ def novo_projeto(request):
         demandas = NovaDemanda.objects.all()
         statusprojeto = StatusProjeto.objects.all()
         faseprojeto = FaseProjeto.objects.all()
-        usuarios = User.objects.all()
+        usuarios = UsuariosProjeto.objects.filter(usuarios)
 
         return render(request,'cadastro_projeto.html', {'demandas':demandas, #TODO: filtrar demanda que estão em aberto.
                                                         'statusprojeto':statusprojeto,
