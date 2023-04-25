@@ -48,16 +48,25 @@
                             <input type="text" placeholder="Busque pelo nome projeto..." class="form-control" name="nome_projeto_filtro">
                         </div>
 
-                        <div class="col-md-2">
+                        {% comment %} <div class="col-md-2">
                             <h6>Status</h6>
                             <select class="form-control" name="status_projeto_filtrar">
                                 {% for status_projetos in status_projeto %}
                                     <option value="{{status_projetos.id}}">{{status_projetos}}</option>
                                 {% endfor %}
                             </select>
-                        </div>
+                        </div> {% endcomment %}
+
+                        {% comment %} <div class="col-md-2">
+                            <h6>Fase</h6>
+                            <select class="form-control" name="fase_projeto_filtrar">
+                                {% for fase_projetos in fase_projeto %}
+                                    <option value="{{fase_projetos.id}}">{{fase_projetos}}</option>
+                                {% endfor %}
+                            </select>
+                        </div> {% endcomment %}
                     
-                    <div class="col-md-5">
+                    <div class="titulo">
 
                        
 
@@ -101,12 +110,12 @@
                                 </td>
                                 <td>  
                                     <a href="{% url 'editar_projeto' projetos.id %}">
-                                        <i class='bx bxs-edit'></i>
+                                        <i class='bx bxs-edit' style="font-size: 25px; padding: 5px"></i>
                                         <span class="tooltip">Editar Projeto</span>
                                       </a>
                                        
                                         <a href="{% url 'tarefa' projetos.id %}">
-                                        <i class="bx bx-task" ></i>
+                                        <i class="bx bx-task" style="font-size: 25px;"></i>
                                         <span class="links_name"></span>
                                         </a>
                                         <span class="tooltip">Tarefas</span>

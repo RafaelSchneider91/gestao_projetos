@@ -76,25 +76,30 @@ def projetos (request):
     nome_projeto_filtrar = request.GET.get('nome_projeto_filtro')
     status_projeto_filtrar = request.GET.get('status_projeto_filtrar')
     limpar_filtros = request.GET.get('limpar_filtros')
+    fase_projeto_filtrar = request.GET.get('fase_projeto_filtrar')
 
     projeto = NovoProjeto.objects.all()
     status_projeto = StatusProjeto.objects.all()
+    fase_projeto = FaseProjeto.objects.all()
 
     if limpar_filtros:
         nome_projeto_filtrar = ''
         status_projeto_filtrar = ''
+
+    if nome_projeto_filtrar:
+        projeto = projeto.filter(nome_projeto__nome__icontains=nome_projeto_filtrar)
     
     if status_projeto_filtrar:
         projeto = projeto.filter(status_id=status_projeto_filtrar)
 
-    if nome_projeto_filtrar:
-        projeto = projeto.filter(nome_projeto__nome__icontains=nome_projeto_filtrar)
-
-        
+    if status_projeto_filtrar:
+        projeto = projeto.filter(fase_id=fase_projeto_filtrar)
 
     
+
     return render(request, 'projetos.html', {'projeto': projeto,
-                                             'status_projeto': status_projeto})
+                                             'status_projeto': status_projeto,
+                                             'fase_projeto': fase_projeto})
 
 
 @login_required(redirect_field_name='login')

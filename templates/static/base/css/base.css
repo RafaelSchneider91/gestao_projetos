@@ -5,6 +5,11 @@
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
 }
+
+a {
+  text-decoration: none !important;
+}
+
 .sidebar{
   position: fixed;
   left: 0;
@@ -115,7 +120,7 @@
   padding: 0 20px 0 50px;
   width: 100%;
 }
-.sidebar .bx1-search{
+.sidebar .bx-search{
   position: absolute;
   top: 50%;
   left: 0;
@@ -124,11 +129,11 @@
   background: var(--main-color);
   color: #FFF;
 }
-.sidebar.open .bx1-search:hover{
+.sidebar.open .bx-search:hover{
   background: var(--main-color);
   color: #FFF;
 }
-.sidebar .bx1-search:hover{
+.sidebar .bx-search:hover{
   background: #FFF;
   color: var(--main-color);
 }
@@ -301,4 +306,3 @@
   width: 150px;
   height: 150px;
 }
-

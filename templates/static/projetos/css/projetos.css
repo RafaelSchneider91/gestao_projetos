@@ -14,8 +14,9 @@
 }
 
 
-.titulo{
+.titulo {
     display: inline;
+    color: rgb(9, 51, 51);
 }
 
 .btn-nova-empresa{
@@ -82,9 +83,4 @@
 
 .td_vagas{
     justify-items: center;
-}
-
-.bx {
-    padding: 10px;
-
 }

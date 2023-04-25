@@ -1,11 +1,90 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Membros |{% endblock titulo %}
+{% block titulo %}Cadastro Novos Membros |{% endblock titulo %}
 
-{% block 'conteudo' %}
+{% block 'head' %}
+{% load static %}
 
-<P> Membros </P>
+<link href="{% static 'membros/css/membros.css' %}" rel="stylesheet">
 
-{% endblock 'conteudo' %}
+{% endblock %}
+
+{% block 'body' %}
+
+    <div class="wrapper">
+        <div class="box">
+            <div class="header">
+                <h3 class="titulo">Cadastro de Novos Membros</h3>
+            </div>
+
+                {% comment %} mensagem de alerta! {% endcomment %}
+                {% if messages %}
+    
+                    {% for message in messages %}
+                        <br>                       
+                        <section class="alert {{message.tags}}">
+                            {{message}}
+                        </section>                    
+                    {% endfor %}            
+                {% endif %}
+            
+
+            <div class="body-box">
+                <form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                    <div class="col-md">
+                        <label>Nome:</label>
+                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome da pessoa...">
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                    </div>                    
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" name="nome" placeholder="Digite o email da pessoa...">
+                        </div>
+                    </div>
+                    <br> 
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Setor:</label>
+                                <select class="form-select input-tarefa" name="setor_demanda_id">
+                                    {% for setor in setores %}
+                                    
+                                        <option value={{setor.id}}>{{setor}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Perfil:</label>
+                                <select class="form-select input-tarefa" name="setor_demanda_id">
+                                    {% for setor in setores %}                                    
+                                        <option value={{setor.id}}>{{setor}}</option>                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                
+                    <input type="submit" value="Novo Usuario" class="btn btn-lg btn-orange">
+                </form>
+                
+                <br>
+                
+            </div>
+        </div>
+    </div>
+   
+{% endblock%}
+
+
 
 
