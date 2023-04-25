@@ -31,7 +31,7 @@ def cadastro_novademanda(request):
     elif request.method == "POST":
         nome = request.POST.get('nome')
         descricao = request.POST.get('descricao')
-        categoria  = request.POST.get('categoria')
+        # categoria  = request.POST.get('categoria')
         setor = request.POST.get('setor_demanda_id')
         nome_solicitante = request.POST.get('nome_solicitante')
         retorno_financeiro = request.POST.get('retorno_financeiro')
@@ -52,7 +52,7 @@ def cadastro_novademanda(request):
 
         demandas = NovaDemanda(nome = nome,
                     descricao = descricao,
-                    categoria  = categoria,
+                    # categoria  = categoria,
                     setor_demanda_id = setor,
                     nome_solicitante = nome_solicitante,
                     retorno_financeiro = retorno_financeiro,

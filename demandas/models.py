@@ -16,10 +16,10 @@ class Setor(models.Model):
 
 class NovaDemanda(models.Model):
 
-    choices_categoria = (
-        ('M', 'Melhoria'),
-        ('P', 'Projeto')
-    )
+    # choices_categoria = (
+    #     ('M', 'Melhoria'),
+    #     ('P', 'Projeto')
+    # )
     choices_statusbacklog = (
         ('P', 'Aguardando Priorizacao'),
         ('A', 'Em analise')
@@ -27,9 +27,9 @@ class NovaDemanda(models.Model):
 
 
 
-    nome = models.CharField(max_length=255, blank=False, null=False)
+    nome = models.CharField(max_length=50, blank=False, null=False)
     descricao = models.TextField(max_length=255, blank=False, null=False)
-    categoria = models.CharField(max_length=50, choices=choices_categoria)
+    # categoria = models.CharField(max_length=50, choices=choices_categoria)
     data_cadastro = models.DateTimeField(default = timezone.now) #TODO: esta cadastrando 3 hr a mais
     setor_demanda = models.ForeignKey(Setor, on_delete=models.CASCADE)
     nome_solicitante = models.CharField(max_length=255, blank=False, null=False)

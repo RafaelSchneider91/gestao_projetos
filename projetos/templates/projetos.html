@@ -50,14 +50,14 @@
                             <input type="text" placeholder="Busque pelo nome projeto..." class="form-control" name="nome_projeto_filtro">
                         </div>
 
-                        {% comment %} <div class="col-md-2">
+                        <div class="col-md-2">
                             <h6>Status</h6>
                             <select class="form-control" name="status_projeto_filtrar">
                                 {% for status_projetos in status_projeto %}
                                     <option value="{{status_projetos.id}}">{{status_projetos}}</option>
                                 {% endfor %}
                             </select>
-                        </div> {% endcomment %}
+                        </div>
 
                         {% comment %} <div class="col-md-2">
                             <h6>Fase</h6>
@@ -69,15 +69,8 @@
                         </div> {% endcomment %}
                     
                     <div class="titulo">
-
-                       
-
-                        <input type="submit" value="Limpar" class="btn-filtrar_limpar" name="limpar_filtros"> 
-                        
                         <input type="submit" value="Filtrar" class="btn-filtrar_limpar">
-
-                        
-
+                        <input type="submit" value="Limpar" class="btn-filtrar_limpar" name="limpar_filtros">               
                     </div>
 
                 </div>
@@ -116,11 +109,11 @@
                                         <span class="tooltip">Editar Projeto</span>
                                       </a>
                                        
-                                        <a href="{% url 'tarefa' projetos.id %}">
+                                        {% comment %} <a href="{% url 'tarefas' projetos.id %}">
                                         <i class="bx bx-task" style="font-size: 25px;"></i>
                                         <span class="links_name"></span>
                                         </a>
-                                        <span class="tooltip">Tarefas</span>
+                                        <span class="tooltip">Tarefas</span> {% endcomment %}
                                    
                                       
                                 </td>

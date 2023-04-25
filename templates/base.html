@@ -1,16 +1,16 @@
 {% load static %}
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block titulo %}{% endblock titulo %}Gestão de Projetos</title>
-    {% include 'parciais/_head.html' %}
-    <link href="{% static 'base/css/base.css' %}" rel="stylesheet">
-    {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}{% endblock titulo %}Gestão de Projetos</title>
+  {% include 'parciais/_head.html' %}
+  <link href="{% static 'base/css/base.css' %}" rel="stylesheet">
+  {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
 
-    {% block 'head' %}{% endblock%}
-  </head>
+  {% block 'head' %}{% endblock%}
+</head>
 
 
   <body class="body1">
@@ -29,19 +29,20 @@
             <span class="tooltip">Página inicial</span>
           </li>
           <li>
-            <a href="{% url 'demandas_projeto' %}">
-              <i class='bx bx-folder-plus' ></i>
-              <span class="links_name">Novo</span>
-            </a>
-            <span class="tooltip">Novo</span>
-          </li>
-          <li>
             <a href="{% url 'demandas' %}">
               <i class='bx bx-git-pull-request'></i>
               <span class="links_name">Demandas</span>
             </a>
             <span class="tooltip">Demandas</span>
           </li>
+          <li>
+            <a href="{% url 'demandas_projeto' %}">
+              <i class='bx bx-folder-plus' ></i>
+              <span class="links_name">Novo</span>
+            </a>
+            <span class="tooltip">Novo</span>
+          </li>
+          
           {% comment %} <li>
             <a href="{% url 'cronograma' %}">
               <i class='bx bx-calendar' ></i>
@@ -49,20 +50,20 @@
             </a>
             <span class="tooltip">Cronograma</span>
           </li> {% endcomment %}
-          <li>
+          {% comment %} <li>
             <a href="{% url 'membros' %}">
               <i class='bx bx bxs-group' ></i>
               <span class="links_name">Membros</span>
             </a>
             <span class="tooltip">Membros</span>
-          </li>
-          {% comment %} <li>
-            <a href="{% url 'tarefa' %}">
+          </li> {% endcomment %}
+          <li>
+            <a href="{% url 'tarefas' %}">
               <i class="bx bx-task" ></i>
               <span class="links_name">Tarefas</span>
             </a>
             <span class="tooltip">Tarefas</span>
-          </li>  {% endcomment %}
+          </li>
           {% comment %} <li>
             <a href="{% url 'resultado' %}">
               <i class='bx bx-money' ></i>

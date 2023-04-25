@@ -28,12 +28,34 @@
             </div>
             <br>
             <div class="row">
-                <div >
-                    <label>Descricão do projeto ou melhoria:</label>
-                    <p>{{projeto.descricao_projeto}}</p>
+                <div class="col-md-7">
+                    <div >
+                        <label>Descricão do projeto ou melhoria:</label>
+                        <p>{{projeto.descricao_projeto}}</p>
+                    </div>
                 </div>
             </div>
             <hr>
+             <div class="col-md-7">
+                    <label>Progresso Atual: 
+                    
+                        <p>45%</p> 
+                    
+                    </label>
+                        
+                        <div style="width: 100%" class="progress">
+                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+            </div>
+            <hr>
+
+
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Categoria:</label>
+                    <label disabled class="form-control">{{projeto.get_categoria_display}}</label>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-7">
                     <label>Status:</label>
@@ -46,8 +68,68 @@
                     <label disabled class="form-control">{{projeto.fase}}</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Setor:</label>
+                    <label disabled class="form-control">{{demanda_unica.setor_demanda}}</label>
+                </div>
+            </div>
+
+            <br> 
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Retorno Financeiro:</label>
+                        <p>{{demanda_unica.retorno_financeiro}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <br> 
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Calculo retorno:</label>
+                        <p>{{demanda_unica.base_calculo_retorno}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Retorno Qualitativo:</label>
+                            <p>{{demanda_unica.retorno_qualitativo}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Link Analise:</label>
+                            <p>{{demanda_unica.link_analise}}</p>
+                    </div>
+                </div>
+            </div>
+            
             <br>                  
             <hr>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Nome solicitante:</label>
+                    <label disabled class="form-control">{{demanda_unica.nome_solicitante}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Data Cadastro:</label>
+                    <label disabled class="form-control">{{demanda_unica.data_cadastro}}</label>
+                </div>
+            </div>
+            
+
+
             <br>
 
 

@@ -16,18 +16,21 @@ def novo_projeto(request):
         demandas = NovaDemanda.objects.all()
         statusprojeto = StatusProjeto.objects.all()
         faseprojeto = FaseProjeto.objects.all()
-        equipes = User.objects.all()
+        usuarios = User.objects.all()
 
         return render(request,'cadastro_projeto.html', {'demandas':demandas, #TODO: filtrar demanda que estão em aberto.
                                                         'statusprojeto':statusprojeto,
                                                         'faseprojeto':faseprojeto,
-                                                        'equipes':equipes
-                                                        }) 
+                                                        'usuarios':usuarios
+                                                        })
+    
     elif request.method == "POST":
         nome_projeto_id = request.POST.get('nomeprojeto')
         descricao_projeto = request.POST.get('descricao_projeto')
         status_id = request.POST.get('statusprojeto')
         fase_id = request.POST.get('faseprojeto')
+        categoria  = request.POST.get('categoria')
+
 
         if request.POST.get('staramais') == None:    
             staramais = False
@@ -49,6 +52,7 @@ def novo_projeto(request):
         projeto = NovoProjeto(nome_projeto_id = nome_projeto_id,
                     status_id = status_id,
                     fase_id  = fase_id,
+                    categoria  = categoria,
                     staramais = staramais,
                     staralabs = staralabs,
                     prioridade = prioridade,
@@ -86,14 +90,16 @@ def projetos (request):
         nome_projeto_filtrar = ''
         status_projeto_filtrar = ''
 
-    if nome_projeto_filtrar:
-        projeto = projeto.filter(nome_projeto__nome__icontains=nome_projeto_filtrar)
+    
     
     if status_projeto_filtrar:
         projeto = projeto.filter(status_id=status_projeto_filtrar)
 
     if status_projeto_filtrar:
         projeto = projeto.filter(fase_id=fase_projeto_filtrar)
+
+    if nome_projeto_filtrar:
+        projeto = projeto.filter(nome_projeto__nome__icontains=nome_projeto_filtrar)
 
     
 
@@ -105,7 +111,7 @@ def projetos (request):
 @login_required(redirect_field_name='login')
 def projeto_unico (request, id):
     projeto_unico = get_object_or_404(NovoProjeto, id=id)
-    # demanda_unica = get_object_or_404(NovaDemanda, id=id)
+    demanda_unica = NovaDemanda.objects.get(id=projeto_unico.nome_projeto_id)
     status = StatusProjeto.objects.all()
     faseprojeto = FaseProjeto.objects.all()
 
@@ -114,7 +120,8 @@ def projeto_unico (request, id):
     return render(request, 'projeto_unico.html', {'projeto': projeto_unico,
                                                  'projetos':projetos,
                                                  'status': status,
-                                                 'faseprojeto':faseprojeto
+                                                 'faseprojeto':faseprojeto,
+                                                 'demanda_unica': demanda_unica
                                                  })
 
 @login_required(redirect_field_name='login')
@@ -169,9 +176,9 @@ def editar_projeto(request, id):
 
 
 
-@login_required(redirect_field_name='login')
-def resultado(request):
-    return render(request,'resultado.html')
+# @login_required(redirect_field_name='login')
+# def resultado(request):
+#     return render(request,'resultado.html')
 
 
 

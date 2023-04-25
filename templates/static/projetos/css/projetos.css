@@ -91,3 +91,23 @@
 .td_vagas{
     justify-items: center;
 }
+
+.btn-filtrar_limpar {
+    text-decoration: none;
+    color: white;
+    border-color: #f26e23;
+    background-color: #f26e23;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 10px;
+    /* font-weight: bold; */
+
+}
+
+a {
+    text-decoration: none;
+}
+
+td {
+    text-decoration: none;
+}

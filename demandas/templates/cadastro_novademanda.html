@@ -51,7 +51,7 @@
                             <textarea name="descricao" class="form-control" placeholder="Descreve o objetivo da demanda..."></textarea>
                         </div>
                     </div>
-                    <br> 
+                    {% comment %} <br> 
                     <div class="row">
                         <div class="col-md">
                             <label>Categoria:</label>
@@ -60,7 +60,7 @@
                                     <option value="P">Projeto</option>
                                 </select>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <br>   
                     <div class="row">
                         <div class="col-md">
@@ -74,7 +74,7 @@
                     <br> 
                     <div class="row">
                         <div class="col-md">
-                            <label>Setores:</label>
+                            <label>Setor:</label>
                                 <select class="form-select input-tarefa" name="setor_demanda_id">
                                     {% for setor in setores %}
                                     
