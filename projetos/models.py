@@ -42,14 +42,14 @@ class NovoProjeto(models.Model):
     
 class UsuariosProjeto(models.Model):
     projeto = models.ForeignKey(NovoProjeto, null=True, on_delete=models.CASCADE)
-    nome = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     perfil = models.ForeignKey(PerfilUsuarios, null=True, on_delete=models.CASCADE)
     recebe_email = models.BooleanField(default=False)
 
     class Meta:
         constraints = [
             # impede q o mesmo usuario tenha o mesmo conteudo mais que uma vez como favorito
-            models.UniqueConstraint(fields=['nome', 'projeto'], name='fav_user_content')
+            models.UniqueConstraint(fields=['usuario', 'projeto'], name='fav_user_content')
         ]
 
     

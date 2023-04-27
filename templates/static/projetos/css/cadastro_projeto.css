@@ -39,3 +39,19 @@
         width: 80vw;
     }
 }
+
+.btn-add-usuarios{
+
+    background-color: #f26e23;
+    color: white;
+    padding: 5px;
+    margin-top: 25px;
+    /* font-weight: bold; */
+    cursor: pointer;
+
+}
+
+.tabela{
+    width: 100%;
+    margin-top: 20px;
+}

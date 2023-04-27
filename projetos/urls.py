@@ -6,6 +6,7 @@ urlpatterns = [
     path('novo_projeto/', views.novo_projeto, name='novo_projeto'),
     path('projeto/<int:id>', views.projeto_unico, name='projeto_unico'),
     path('editar_projeto/<int:id>/', views.editar_projeto, name='editar_projeto'),
+    path('add_usuarios_projeto/', views.add_usuarios_projeto, name='add_usuarios_projeto'),
     
 
 

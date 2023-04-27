@@ -15,8 +15,7 @@ def tarefas(request):
     # projetos = NovoProjeto.objects.all()
 
 
-    # return render(request,'tarefas.html')
-    return HttpResponse('em dev')
+    return render(request,'tarefas.html')
 
 
 

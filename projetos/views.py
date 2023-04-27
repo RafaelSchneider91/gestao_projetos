@@ -5,9 +5,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import constants
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+import json
+from django.urls import reverse
 from demandas.models import NovaDemanda
-from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto
+from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto, PerfilUsuarios
 
 @login_required(redirect_field_name='login')
 def novo_projeto(request):
@@ -16,12 +19,14 @@ def novo_projeto(request):
         demandas = NovaDemanda.objects.all()
         statusprojeto = StatusProjeto.objects.all()
         faseprojeto = FaseProjeto.objects.all()
-        usuarios = UsuariosProjeto.objects.filter(usuarios)
+        usuarios = User.objects.all()
+        perfis = PerfilUsuarios.objects.all()
 
         return render(request,'cadastro_projeto.html', {'demandas':demandas, #TODO: filtrar demanda que estão em aberto.
                                                         'statusprojeto':statusprojeto,
                                                         'faseprojeto':faseprojeto,
-                                                        'usuarios':usuarios
+                                                        'usuarios':usuarios,
+                                                        'perfis': perfis
                                                         })
     
     elif request.method == "POST":
@@ -75,6 +80,18 @@ def novo_projeto(request):
             return redirect('novo_projeto')
 
 
+def add_usuarios_projeto(request):
+    usuarios = User.objects.all()
+    usuarios_json = json.loads(serializers.serialize('json', usuarios))
+    usuarios_json = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
+
+    data = {'usuarios': usuarios_json}
+
+    print(data)
+
+    return JsonResponse(data)
+
+
 @login_required(redirect_field_name='login')
 def projetos (request):
     nome_projeto_filtrar = request.GET.get('nome_projeto_filtro')
@@ -106,6 +123,9 @@ def projetos (request):
     return render(request, 'projetos.html', {'projeto': projeto,
                                              'status_projeto': status_projeto,
                                              'fase_projeto': fase_projeto})
+
+
+
 
 
 @login_required(redirect_field_name='login')

@@ -8,7 +8,7 @@ admin.site.register(PerfilUsuarios)
 
 
 class UsuariosProjetoAdmin(admin.ModelAdmin):
-    list_display = ('projeto', 'nome', 'perfil')
+    list_display = ('projeto', 'usuario', 'perfil')
 
 admin.site.register(UsuariosProjeto, UsuariosProjetoAdmin)
 

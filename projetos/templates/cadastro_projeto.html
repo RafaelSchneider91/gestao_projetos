@@ -115,21 +115,25 @@
                             <input type="checkbox" id="checkbox" name="staralabs" value="true">
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Equipe Projeto:</label>
-                                <select class="col-md" name="equipe" multiple> #TODO: verificar para incluir novo botão direcionando para criar um novo usuario;
-                                    {% for equipe in equipes %}
-                                    
-                                        <option value={{equipe.id}}>{{equipe}}</option>
-                
-                                    {% endfor %}   
-                
-                                </select>
-                        </div>
+                     <hr style="background-color:gray;">
+
+
+                    <div id="add_usuarios_projeto" class="add-usuarios">
+                        
+                        <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">Adicionar usuarios</span>
+
+                        <div class="col-md" id="form-usuario">
+                            <tr> 
+                                <th>Usuario</th> 
+                                
+                            </tr>  
+                        </div>                       
+
                     </div>
-                    {% comment %} <br>
+
+                    
+                    
+                    <br>
                     <div class="row">
                         <div class="col-md">
                             
@@ -142,46 +146,60 @@
                             {% endfor %}   
                         </div>
                     </div>
-                    <br> {% endcomment %}
+                    <br>
+                    <br>
                     <br> 
+                    <br> 
+                    <br> 
+
+                    <div> 
+                        <table class='tabela' cellpadding='20'> 
+                            <tr> 
+                                <th>Usuario</th> 
+                                <th>Perfil</th>  
+                                <th>Recebe Email?</th> 
+                            </tr>  
+                            <tr>
+                                <td>
+                                    <select class='form-select input-tarefa' name='usuarioprojeto'>
+                                        {% for usuario in usuarios %}                                    
+                                            <option value={{usuario.usuario_id}}>{{usuario}}</option>                
+                                        {% endfor %}   
+                                    </select>
+                                </td>
+                                <td> 
+                                    <select class='form-select input-tarefa' name='perfil'>
+                                        {% for perfil in perfis %}                                    
+                                            <option value={{perfil.id}}>{{perfil}}</option>                
+                                        {% endfor %}   
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type='checkbox' placeholder='recebe email' class='form-control' name='recebe_email'>
+                                </td>
+                                <td>
+                                <span type='submit' class='btn-add-usuarios' name='apagar_usuario'>
+                                    Apagar
+                                </span>
+                                    
+                                </td>
+                                     
+                            </tr> 
+                        </table>    
+                    </div>
+
+
+                    <br>
                     {% comment %} #TODO: incluir o papel do usuario no projeto {% endcomment %}
                     <input type="submit" value="Novo Projeto" class="btn btn-lg btn-orange">
                 </form>
+
+
 
                 
                 
             </div>
         </div>
     </div>
-   
+    <script src="{% static 'projetos/js/novoprojeto.js' %}"></script>
 {% endblock%}
-
-
-
-
-
-{% comment %} {% extends 'base.html' %}
-
-{% block titulo %}Cadastro Novo Projeto |{% endblock titulo %}
-
-{% block 'conteudo' %}
-
-<h1>Cadastro Novo Projeto</h1>
-
-<body>
-    <form action="{% url 'processa_cadastro_novoprojeto' %}" method="POST">{% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        
-        <br>
-
-        <button type="submit">Enviar</button>
-    
-    </form>
-
-</body>
-
-{% endblock 'conteudo' %} {% endcomment %}
-
-
