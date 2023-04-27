@@ -68,7 +68,8 @@ function add_usuarios_projeto() {
     }).then(function(result) {
         return result.json()
     }).then(function(data){
-        console.log('teste')
+        console.log(data)
+        document.getElementById('add_usuarios_projeto')
     })
 }
 

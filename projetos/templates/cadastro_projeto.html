@@ -118,23 +118,32 @@
                      <hr style="background-color:gray;">
 
 
-                    <div id="add_usuarios_projeto" class="add-usuarios">
+                    <div class="add-usuarios">
                         
                         <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">Adicionar usuarios</span>
 
-                        <div class="col-md" id="form-usuario">
+                        <div id="novo_usuario">
+                            {% comment %} <select id="nome_usuario" class='form-select input-tarefa' name='usuarioprojeto' > {% endcomment %}
+                        
+                        </div>
+
+                        {% comment %} <div class="col-md" id="form-usuario">
                             <tr> 
-                                <th>Usuario</th> 
+                                <th id="nome_usuario"></th>
+
+                                <select id="nome_usuario" class='form-select input-tarefa' name='usuarioprojeto'>
+
+                                </select> 
                                 
                             </tr>  
-                        </div>                       
+                        </div>                        {% endcomment %}
 
                     </div>
 
                     
                     
                     <br>
-                    <div class="row">
+                    {% comment %} <div class="row">
                         <div class="col-md">
                             
                             
@@ -145,14 +154,14 @@
                                 
                             {% endfor %}   
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <br>
                     <br>
                     <br> 
                     <br> 
                     <br> 
 
-                    <div> 
+                    {% comment %} <div> 
                         <table class='tabela' cellpadding='20'> 
                             <tr> 
                                 <th>Usuario</th> 
@@ -186,7 +195,7 @@
                                      
                             </tr> 
                         </table>    
-                    </div>
+                    </div> {% endcomment %}
 
 
                     <br>
