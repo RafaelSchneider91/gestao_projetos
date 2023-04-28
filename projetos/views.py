@@ -10,7 +10,7 @@ from django.core import serializers
 import json
 from django.urls import reverse
 from demandas.models import NovaDemanda
-from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto, PerfilUsuarios
+from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto, PerfilUsuarios, UsuariosProjeto
 
 @login_required(redirect_field_name='login')
 def novo_projeto(request):
@@ -81,15 +81,30 @@ def novo_projeto(request):
 
 
 def add_usuarios_projeto(request):
-    usuarios = User.objects.all()
+    id_projeto = request.POST.get('id_projeto')
+    # demanda_id = NovaDemanda.objects.filter(id=id_projeto).first()
+    projeto = NovoProjeto.objects.filter(nome_projeto_id=id_projeto)
+
+    # print(id_projeto)
+    # print(projeto)
+    usuarios = UsuariosProjeto.objects.filter(projeto=projeto[0])
+    projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
+    projeto_id = json.loads(serializers.serialize('json', usuarios))
     usuarios_json = json.loads(serializers.serialize('json', usuarios))
     usuarios_json = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
 
+    # data = {'usuarios': usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id}
     data = {'usuarios': usuarios_json}
+    # data2 = {'projetos': projeto_json}
+    # data3 = {'projeto_id': projeto_id}
 
     print(data)
+    # print(data2)
+    # print(data3)
+    
 
     return JsonResponse(data)
+    # return JsonResponse({"teste": 1})
 
 
 @login_required(redirect_field_name='login')

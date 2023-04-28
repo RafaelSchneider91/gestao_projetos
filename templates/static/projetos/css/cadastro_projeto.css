@@ -55,3 +55,7 @@
     width: 100%;
     margin-top: 20px;
 }
+
+#add_usuarios_projeto {
+    display: none;
+}

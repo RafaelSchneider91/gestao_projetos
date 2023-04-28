@@ -1,4 +1,4 @@
-function add_usuarios_projeto(){
+function add_usuarios_projeto2(){
     container = document.getElementById('form-usuario')
     const usuarios = '{% for usuario in usuarios %} <option value={{usuario.usuario_id}}>{{usuario}}</option>{% endfor %}'
 
@@ -9,67 +9,39 @@ function add_usuarios_projeto(){
 
     html = "<div> <table class='tabela' cellpadding='20'> <tr> <th>Usuario</th> <th>Perfil</th>  <th>Recebe Email?</th> </tr>  <tr>\
                 <td><select class='form-select input-tarefa' name='faseprojeto'>\
-                "+ usuarios +"</select></td>\
+                </select></td>\
                 <td> <input type='text' placeholder='perfil' class='form-control' name='perfil'> </td>\
                 <td> <input type='checkbox' placeholder='recebe email' class='form-control' name='recebe_email'></td> </tr> </table> </div>"
 
     container.innerHTML += html
 }
 
-function dados_usuarios() {
-
-    csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value
-
-    fetch("/usuarios/dados_usuarios/", {
-        method: "POST",
-        headers: {
-            'X-CSRFToken': csrf_token
-        },
-        
-
-    })
-}
-
-
-function dados_usuarios() {
-    $.ajax({
-        url: '/dados_usuarios/',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-        console.log(data)
-        },
-        error: function(xhr, status, error) {
-            console.error('Erro ao obter dados do modelo: ', error);
-        }
-    });
-}
-
-
-
-
 
 function add_usuarios_projeto() {
-    // usuario = document.getElementById('usuario-select')
+    projeto = document.getElementById('projeto_select')
     csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value
     // console.log(csrf_token)
-    // id_usuario = usuario.value
+    id_projeto = projeto.value
 
-    // data = new FormData()
-    // data.append('id_usuario', id_usuario)
+    data = new FormData()
+    data.append('id_projeto', id_projeto)
 
     fetch("/add_usuarios_projeto/", {
         method: "POST",
         headers: {
             'X-CSRFToken': csrf_token,
         },
-        // body: data
+        body: data
 
     }).then(function(result) {
         return result.json()
     }).then(function(data){
         console.log(data)
-        document.getElementById('add_usuarios_projeto')
+        document.getElementById('add_usuarios_projeto').style.display = 'block'
+
+        usuario = document.getElementById('usuario')
+        usuario.value = data['usuario']
+
     })
 }
 
