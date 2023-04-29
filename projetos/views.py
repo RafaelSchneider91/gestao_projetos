@@ -93,15 +93,26 @@ def add_usuarios_projeto(request):
     usuarios_json = json.loads(serializers.serialize('json', usuarios))
     usuarios_json = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
 
-    # data = {'usuarios': usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id}
-    data = {'usuarios': usuarios_json}
     # data2 = {'projetos': projeto_json}
     # data3 = {'projeto_id': projeto_id}
 
-    print(data)
-    # print(data2)
-    # print(data3)
-    
+    # for usuarioss in usuarios_json:
+    #     lst_usuario = usuarioss['fields']['usuario']
+
+    #     user = User.objects.filter(id=lst_usuario)
+    #     usuarios_json = json.loads(serializers.serialize('json', user))
+        # nome_usuario = user.username
+
+    lst_usuarios_json = [json.loads(serializers.serialize('json', User.objects.filter(id=usuarioss['fields']['usuario']))) for usuarioss in usuarios_json]
+
+    # usuarios_dict = {usuario_json['fields']['username']: {**usuario_json['fields'], 'id': usuario_json['pk']} for usuarioss_json in lst_usuarios_json for usuario_json in usuarioss_json}
+
+
+    # data = {'projeto_id': projeto_id}
+    # print(usuarios_dict)
+    print(usuarios_json)
+
+    data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id}
 
     return JsonResponse(data)
     # return JsonResponse({"teste": 1})

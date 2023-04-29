@@ -36,11 +36,26 @@ function add_usuarios_projeto() {
     }).then(function(result) {
         return result.json()
     }).then(function(data){
-        console.log(data)
+        // console.log(data)
         document.getElementById('add_usuarios_projeto').style.display = 'block'
 
-        usuario = document.getElementById('usuario')
-        usuario.value = data['usuario']
+        div_usuario = document.getElementById('add_usuarios_projeto')
+        div_usuario.innerHTML = ""
+        
+        for(i=0; i < data['usuario'].length; i++){
+            console.log(data['usuario'][i][0]['fields']['first_name'] + ' ' + data['usuario'][i][0]['fields']['last_name'] )
+            // console.log(data['usuario'][i][0]['fields']['first_name'])
+
+            div_usuario.innerHTML += "<form action='' method=''><div class='row'>\
+            <div class='col_md'>\
+            <input type='text' name = 'usuario' value='"+ data['usuario'][i][0]['fields']['first_name'] + ' ' + data['usuario'][i][0]['fields']['last_name'] + "'>\
+            </div></div><br>"
+
+
+
+        }
+
+
 
     })
 }

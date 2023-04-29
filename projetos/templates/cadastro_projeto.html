@@ -113,19 +113,38 @@
                             <input type="checkbox" id="checkbox" name="staralabs" value="true">
                         </div>
                     </div>
-                     <hr style="background-color:gray;">
+                    <hr style="background-color:gray;">
+                    <h3>Membros Cadastrados:</h3>
+
+                        <div>
+                            
+
+                                <div id="add_usuarios_projeto">
+                                
+                                <br>                   
+                            
+                                {% comment %} <form action='' method=''><div class='row'><div class='col_md'><input type='text' name='usuario' value=''></div> {% endcomment %}
+                                
+                                </div>
 
 
-                    <div class="add-usuarios">
+                                
+                            <br>
+
+
+
+
+
+
+
+                        
+                        </div>
+                        <div class="add-usuarios">
                         
                         <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">+Membros</span>
-
-                        <div id="add_usuarios_projeto">
+                        
                         <br>
-                            <p>Usuario:</p>
-                            <input id="usuario" type="text" class='form-control'>
-
-                        <br>
+                        <div>
                             <table class="col-md">
                                 <th>
                                     <select class="form-select input-tarefa" name="usuario">
@@ -148,82 +167,38 @@
                                     </div>
                                 </th>
                             </table>
+                        </div>
+
+
+
+
+                    <hr>
+
+
+
+
+
+
+                    
 
                         
-                        </div>
+                        
+                        
+                        
+                        
 
-                        {% comment %} <div class="col-md" id="form-usuario">
-                            <tr> 
-                                <th id="nome_usuario"></th>
 
-                                <select id="nome_usuario" class='form-select input-tarefa' name='usuarioprojeto'>
-
-                                </select> 
-                                
-                            </tr>  
-                        </div>                        {% endcomment %}
-
-                    </div>
-
-                    
-                    
-                    <br>
-                    {% comment %} <div class="row">
-                        <div class="col-md">
                             
-                            
+                        
 
-                            {% for equipe in equipes %}
-                                <input type="checkbox" name="equipe_teste" value="{{equipe.id}}">
-                                    <label>{{equipe.username}}</label><br>                            
-                                
-                            {% endfor %}   
-                        </div>
-                    </div> {% endcomment %}
-                    <br>
-                    <br>
-                    <br> 
-                    <br> 
-                    <br> 
-
-                    {% comment %} <div> 
-                        <table class='tabela' cellpadding='20'> 
-                            <tr> 
-                                <th>Usuario</th> 
-                                <th>Perfil</th>  
-                                <th>Recebe Email?</th> 
-                            </tr>  
-                            <tr>
-                                <td>
-                                    <select class='form-select input-tarefa' name='usuarioprojeto'>
-                                        {% for usuario in usuarios %}                                    
-                                            <option value={{usuario.usuario_id}}>{{usuario}}</option>                
-                                        {% endfor %}   
-                                    </select>
-                                </td>
-                                <td> 
-                                    <select class='form-select input-tarefa' name='perfil'>
-                                        {% for perfil in perfis %}                                    
-                                            <option value={{perfil.id}}>{{perfil}}</option>                
-                                        {% endfor %}   
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type='checkbox' placeholder='recebe email' class='form-control' name='recebe_email'>
-                                </td>
-                                <td>
-                                <span type='submit' class='btn-add-usuarios' name='apagar_usuario'>
-                                    Apagar
-                                </span>
-                                    
-                                </td>
-                                     
-                            </tr> 
-                        </table>    
-                    </div> {% endcomment %}
-
+                        
+                       
+                    
 
                     <br>
+                    <br>
+                    <br>
+
                     {% comment %} #TODO: incluir o papel do usuario no projeto {% endcomment %}
                     <input type="submit" value="Novo Projeto" class="btn btn-lg btn-orange">
                 </form>
