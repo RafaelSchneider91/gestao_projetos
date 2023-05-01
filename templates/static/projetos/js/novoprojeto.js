@@ -43,18 +43,37 @@ function add_usuarios_projeto() {
         div_usuario.innerHTML = ""
         
         for(i=0; i < data['usuario'].length; i++){
-            console.log(data['usuario'][i][0]['fields']['first_name'] + ' ' + data['usuario'][i][0]['fields']['last_name'] )
+            // console.log(data['usuario'][i][0]['fields']['first_name'] + ' ' + data['usuario'][i][0]['fields']['last_name'] )
             // console.log(data['usuario'][i][0]['fields']['first_name'])
 
-            div_usuario.innerHTML += "<form action='' method=''><div class='row'>\
-            <div class='col_md'>\
-            <input type='text' name = 'usuario' value='"+ data['usuario'][i][0]['fields']['first_name'] + ' ' + data['usuario'][i][0]['fields']['last_name'] + "'>\
-            </div></div><br>"
+            // div_usuario.innerHTML += "<form action='' method='' class='form_usuarios'>\
+            // <th class='th_usuarios'>\
+            //     <input type='text' name = 'usuario' value='"+ data['usuario'][i][0]['fields']['first_name'] + ' ' + data['usuario'][i][0]['fields']['last_name'] + "'>\
+            // </th><br>\
+            // <th class='th_usuarios'>\
+            //     <input type='text' name = 'usuario' value='"+ data['perfil'][i][0]['fields']['perfil'] + "'>\
+            // </th></th><br></form>"
+
+
+            div_usuario.innerHTML += "<form action='#' method='POST'>\
+                    <div class='row'>\
+                        <div class='col-md'>\
+                            <input class='form-control' name='carro' type='text' value='"+ data['usuario'][i][0]['fields']['first_name'] + ' ' + data['usuario'][i][0]['fields']['last_name'] + "'>\
+                        </div>\
+                        <div class='col-md'>\
+                            <input class='form-control' name='placa' type='text' value='"+ data['perfil'][i][0]['fields']['perfil'] + "'>\
+                        </div>\
+                        <div class='col-md'>\
+                            <input class='form-control' type='text' name='ano' value='1' >\
+                        </div>\
+                    </div>\
+                            </form><br>"
 
 
 
         }
 
+        console.log(data)
 
 
     })

@@ -84,10 +84,48 @@ def cadastro_novademanda(request):
 
 @login_required(redirect_field_name='login')
 def demandas(request):
-    return render(request,'demandas.html')
+    nome_demanda_filtrar = request.GET.get('nome_demanda_filtro')
+    # status_projeto_filtrar = request.GET.get('status_projeto_filtrar')
+    limpar_filtros = request.GET.get('limpar_filtros')
+    # fase_projeto_filtrar = request.GET.get('fase_projeto_filtrar')
+
+    demandas = NovaDemanda.objects.all()
+    # status_projeto = StatusProjeto.objects.all()
+    # fase_projeto = FaseProjeto.objects.all()
+
+    if limpar_filtros:
+        nome_projeto_filtrar = ''
+        # status_projeto_filtrar = ''
+
+    
+    
+    # if status_projeto_filtrar:
+    #     projeto = projeto.filter(status_id=status_projeto_filtrar)
+
+    # if status_projeto_filtrar:
+    #     projeto = projeto.filter(fase_id=fase_projeto_filtrar)
+
+    if nome_demanda_filtrar:
+        demandas = demandas.filter(nome__icontains=nome_demanda_filtrar)
+
+    
+
+    return render(request, 'demandas.html', {'demandas': demandas,
+                                            })
 
 
+@login_required(redirect_field_name='login')
+def demanda_unico (request, id):
+    demanda_unico = get_object_or_404(NovaDemanda, id=id)
+    # demanda_unica = NovaDemanda.objects.get(id=)
+    # status = StatusProjeto.objects.all()
+    # faseprojeto = FaseProjeto.objects.all()
 
+    demandas = NovaDemanda.objects.all()
+
+    return render(request, 'demanda_unico.html', {'demanda': demanda_unico,
+                                                 'demandas':demandas,
+                                                 })
 
         
 

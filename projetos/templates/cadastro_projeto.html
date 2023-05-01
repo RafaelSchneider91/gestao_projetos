@@ -6,6 +6,8 @@
 {% load static %}
 
 <link href="{% static 'projetos/css/cadastro_projeto.css' %}" rel="stylesheet">
+{% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> {% endcomment %}
+
 
 {% endblock %}
 
@@ -114,39 +116,16 @@
                         </div>
                     </div>
                     <hr style="background-color:gray;">
-                    <h3>Membros Cadastrados:</h3>
-
                         <div>
-                            
-
-                                <div id="add_usuarios_projeto">
-                                
-                                <br>                   
-                            
-                                {% comment %} <form action='' method=''><div class='row'><div class='col_md'><input type='text' name='usuario' value=''></div> {% endcomment %}
-                                
-                                </div>
-
-
-                                
+                       
+                            <table id = "novo_usuario" class="col-md">
+                            <h3>Cadastrar Usuarios do Projeto:</h3>
                             <br>
-
-
-
-
-
-
-
-                        
-                        </div>
-                        <div class="add-usuarios">
-                        
-                        <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">+Membros</span>
-                        
-                        <br>
-                        <div>
-                            <table class="col-md">
-                                <th>
+                                <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">+ Novo Membro</span>                            
+                            <br>
+                                <th> 
+                                {% comment %} #TODO: salvar o novo usuario e ao clicar em novo membro criar uma nova linha para cadastrar mais usuario; {% endcomment %}
+                                <br>
                                     <select class="form-select input-tarefa" name="usuario">
                                         {% for usuario in usuarios %}                                
                                             <option value={{usuario.id}}>{{usuario.first_name}} {{usuario.last_name}} </option>            
@@ -165,48 +144,16 @@
                                         <label for="checkbox">Enviar email</label>
                                         <input type="checkbox" id="checkbox" name="recebe_email" value="true">
                                     </div>
+                                    
                                 </th>
                             </table>
                         </div>
-
-
-
-
+                        {% comment %} <div id="add_usuarios_projeto">
+                          
+                        </div> {% endcomment %}
                     <hr>
-
-
-
-
-
-
-                    
-
-                        
-                        
-                        
-                        
-                        
-
-
-                            
-                        
-
-                        
-                       
-                    
-
-                    <br>
-                    <br>
-                    <br>
-
-                    {% comment %} #TODO: incluir o papel do usuario no projeto {% endcomment %}
                     <input type="submit" value="Novo Projeto" class="btn btn-lg btn-orange">
-                </form>
-
-
-
-                
-                
+                </form>   
             </div>
         </div>
     </div>

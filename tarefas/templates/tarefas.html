@@ -10,72 +10,124 @@
 
 {% endblock %}
 
-
 {% block 'conteudo' %}
 
-	{% comment %} #TODO: CRIAR UM BOTAO METHOD POST PARA GRAVAR A ALTERAÇÃO NO BD; {% endcomment %}
+{% comment %} #TODO: CRIAR UM BOTAO METHOD POST PARA GRAVAR A ALTERAÇÃO NO BD; {% endcomment %}
 
-<h1>{{projeto.nome_projeto}}</h1>
+<div class="wrapper">
+	<div class="box">
+		<div class="titulo">
+			<h2>Quadro Kanban Tarefas</h2>
+		</div>
 
+		<div class="titulo">
+			<div class="col-md">
+				<label>Projeto:</label>
+				<select id="projeto_select" class="form-select input-tarefa" name="projeto">
+					{% for projeto in projetos %}
+					<option value={{projeto.id}}>{{projeto}}</option>
+					{% endfor %}
 
-
-<body>
-	<h2>Quadro Kanban Tarefas</h2> 
-	<br>
-	<div class="container">
-		<div class="column">
-			<div class="column-header">A fazer</div>
-			<div class="task-list" id="todo">
-				<div class="task">Tarefa 1</div>
-				<div class="task">Tarefa 2</div>
+				</select>
 			</div>
 		</div>
-		<div class="column">
-			<div class="column-header">Fazendo</div>
-			<div class="task-list" id="doing">
-				<div class="task">Tarefa 3</div>
+
+		<div>
+			{% comment %} <a href="#" class="btn-nova-tarefa">Nova Tarefa</a> {% endcomment %}
+			{% comment %} <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn-nova-tarefa"></a> {% endcomment %}
+
+			<!-- Button trigger modal -->
+			<button type="button" class="btn-nova-tarefa" data-toggle="modal" data-target="#exampleModalCenter">
+			Nova Tarefa
+			</button>
+		</div>
+		<div>
+			<a href="#" class="btn-salvar-tarefa">Salvar</a>
+		</div>
+
+		
+
+		<br>
+		<div class="container">
+			<div class="column">
+				<div class="column-header">A fazer</div>
+				<div class="task-list" id="afazer">
+					<div class="task">Tarefa 1</div>
+					<div class="task">Tarefa 2</div>
+					<div class="task">Tarefa abc</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
+			</div>
+			<div class="column">
+				<div class="column-header">Fazendo</div>
+				<div class="task-list" id="fazendo">
+					<div class="task">Tarefa 3</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
+			</div>
+			<div class="column">
+				<div class="column-header">Pendente</div>
+				<div class="task-list" id="pendente">
+					<div class="task">Tarefa 4</div>
+					<div class="task">Tarefa 5</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
+			</div>
+			<div class="column">
+				<div class="column-header">Concluido</div>
+				<div class="task-list" id="concluido">
+					<div class="task">Tarefa 6</div>
+					<div class="task">Tarefa 7</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
 			</div>
 		</div>
-		<div class="column">
-			<div class="column-header">Pendente</div>
-			<div class="task-list" id="done">
-				<div class="task">Tarefa 4</div>
-				<div class="task">Tarefa 5</div>
+	
+
+		
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 style="font-size: 30px" class="modal-title titulo" id="exampleModalLabel">Nova Tarefa</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<div class="modal-body">
+				
+				<label>Nome Tarefa:</label>
+				<input type="text" name="titulo" class="form-control" placeholder="Digite o nome da tarefa...">
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+				<button type="button" class="btn-salvar-tarefa">Salvar</button>
+			</div>
+			</div>
+		</div>
 		</div>
 	</div>
-
-</body>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-	<script>
-		var todoList = document.getElementById('todo');
-		var doingList = document.getElementById('doing');
-		var doneList = document.getElementById('done');
-
-		var sortable = Sortable.create(todoList, {
-			group: 'kanban',
-			animation: 150,
-			onEnd: function (evt) {
-				console.log('Tarefa movida de A fazer para ' + evt.to.id);
-			}
-		});
-
-		var sortable2 = Sortable.create(doingList, {
-			group: 'kanban',
-			animation: 150,
-			onEnd: function (evt) {
-				console.log('Tarefa movida de Fazendo para ' + evt.to.id);
-			}
-		});
-
-		var sortable3 = Sortable.create(doneList, {
-			group: 'kanban',
-			animation: 150,
-			onEnd: function (evt) {
-				console.log('Tarefa movida' + evt.to.id);
-			}
-		});
-	</script>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script src="{% static 'tarefas/js/tarefas.js' %}"></script>
 
 {% endblock 'conteudo' %}

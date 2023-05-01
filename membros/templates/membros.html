@@ -14,7 +14,7 @@
     <div class="wrapper">
         <div class="box">
             <div class="header">
-                <h3 class="titulo">Cadastro de Novos Membros</h3>
+                <h3 class="titulo">Cadastro Membros de Equipe</h3>
             </div>
 
                 {% comment %} mensagem de alerta! {% endcomment %}
@@ -30,51 +30,53 @@
             
 
             <div class="body-box">
-                <form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <div class="row">
-                    <div class="col-md">
-                        <label>Nome:</label>
-                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome da pessoa...">
-                    </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                    </div>                    
+                <form action="{% url 'membros' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <div class="row">
                         <div class="col-md">
-                            <label>Email:</label>
-                            <input type="email" class="form-control" name="nome" placeholder="Digite o email da pessoa...">
-                        </div>
-                    </div>
-                    <br> 
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Setor:</label>
-                                <select class="form-select input-tarefa" name="setor_demanda_id">
-                                    {% for setor in setores %}
-                                    
-                                        <option value={{setor.id}}>{{setor}}</option>
-                
+                            <label>Nome do Projeto:</label>
+                                <select id="projeto_select" class="form-select input-tarefa" name="projeto_id">
+                                    {% for projeto in projetos %}                                    
+                                        <option value={{projeto.id}}>{{projeto}}</option>                
                                     {% endfor %}   
                 
                                 </select>
                         </div>
-                    </div>
+                    </div>       
                     <br>
-
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Usuario:</label>
+                                <select id="projeto_select" class="form-select input-tarefa" name="usuario_id">
+                                    {% for usuario in usuarios %}                                    
+                                        <option value={{usuario.id}}>{{usuario.first_name}} {{usuario.last_name}} </option>                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>       
+                    <br>
                     <div class="row">
                         <div class="col-md">
                             <label>Perfil:</label>
-                                <select class="form-select input-tarefa" name="setor_demanda_id">
-                                    {% for setor in setores %}                                    
-                                        <option value={{setor.id}}>{{setor}}</option>                
+                                <select class="form-select input-tarefa" name="perfil_id">
+                                    {% for perfil in perfil_usuario %}                                    
+                                        <option value={{perfil.id}}>{{perfil}}</option>                
                                     {% endfor %}   
                 
                                 </select>
                         </div>
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="checkbox">Recebe Email?:</label>
+                            <input type="checkbox" id="checkbox" name="recebe_email" value="true" >
+                        </div>
+                    </div>                    
+                    <hr>
                 
-                    <input type="submit" value="Novo Usuario" class="btn btn-lg btn-orange">
+                    <input type="submit" value="Salvar" class="btn btn-lg btn-orange">
+                    {% comment %} #TODO: salvar no banco. {% endcomment %}
                 </form>
                 
                 <br>

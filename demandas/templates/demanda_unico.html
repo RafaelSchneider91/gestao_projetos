@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'head' %}
-    <link href="{% static 'projetos/css/projeto_unico.css' %}" rel="stylesheet">
+    <link href="{% static 'demandas/css/demanda_unico.css' %}" rel="stylesheet">
 {% endblock%}
 
 
@@ -20,10 +20,10 @@
             {% endfor %}
         {% endif %} 
         
-        <form id="projeto_select" action="{% url 'projeto_unico' projeto.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <form id="projeto_select" action="{% url 'demanda_unico' demanda.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div class="row">         
                 <div class="col-md">
-                    <h1 id="id_projeto" class="titulo">{{projeto.nome_projeto}}</h1>
+                    <h1 id="id_projeto" class="titulo">{{demanda.nome}}</h1>
                 </div>         
             </div>
             <br>
@@ -31,47 +31,34 @@
                 <div class="col-md-7">
                     <div >
                         <label>Descricão do projeto ou melhoria:</label>
-                        <p>{{projeto.descricao_projeto}}</p>
+                        <p>{{demanda.descricao}}</p>
                     </div>
                 </div>
             </div>
-            <hr>
-             <div class="col-md-7">
-                    <label>Progresso Atual: 
-                    
-                        <p>45%</p> 
-                    
-                    </label>
-                        
-                        <div style="width: 100%" class="progress">
-                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-            </div>
-            <hr>
+            <hr>                  
 
-
-            <div class="row">
+            {% comment %} <div class="row">
                 <div class="col-md-7">
                     <label>Categoria:</label>
                     <label disabled class="form-control">{{projeto.get_categoria_display}}</label>
                 </div>
-            </div>
+            </div> {% endcomment %}
             <div class="row">
                 <div class="col-md-7">
                     <label>Status:</label>
-                    <label disabled class="form-control">{{projeto.status}}</label>
+                    <label disabled class="form-control">{{demanda.get_status_display}}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-7">
                     <label>Fase:</label>
-                    <label disabled class="form-control">{{projeto.fase}}</label>
+                    <label disabled class="form-control">{{demanda.fase}}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-7">
                     <label>Setor:</label>
-                    <label disabled class="form-control">{{demanda_unica.setor_demanda}}</label>
+                    <label disabled class="form-control">{{demanda.setor_demanda}}</label>
                 </div>
             </div>
 
@@ -80,7 +67,7 @@
                 <div class="col-md-7">
                     <div >
                         <label>Retorno Financeiro:</label>
-                        <p>{{demanda_unica.retorno_financeiro}}</p>
+                        <p>{{demanda.retorno_financeiro}}</p>
                     </div>
                 </div>
             </div>
@@ -90,7 +77,7 @@
                 <div class="col-md-7">
                     <div >
                         <label>Calculo retorno:</label>
-                        <p>{{demanda_unica.base_calculo_retorno}}</p>
+                        <p>{{demanda.base_calculo_retorno}}</p>
                     </div>
                 </div>
             </div>
@@ -99,7 +86,7 @@
                 <div class="col-md-7">
                     <div >
                         <label>Retorno Qualitativo:</label>
-                            <p>{{demanda_unica.retorno_qualitativo}}</p>
+                            <p>{{demanda.retorno_qualitativo}}</p>
                     </div>
                 </div>
             </div>
@@ -108,7 +95,7 @@
                 <div class="col-md-7">
                     <div >
                         <label>Link Analise:</label>
-                            <a href="{{demanda_unica.link_analise}}">{{demanda_unica.link_analise}}</a>
+                            <a href="{{demanda_unica.link_analise}}">{{demanda.link_analise}}</a>
                     </div>
                 </div>
             </div>
@@ -121,32 +108,19 @@
             <div class="row">
                 <div class="col-md-7">
                     <label>Nome solicitante:</label>
-                    <label disabled class="form-control">{{demanda_unica.nome_solicitante}}</label>
+                    <label disabled class="form-control">{{demanda.nome_solicitante}}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-7">
                     <label>Data Cadastro:</label>
-                    <label disabled class="form-control">{{demanda_unica.data_cadastro}}</label>
+                    <label disabled class="form-control">{{demanda.data_cadastro}}</label>
                 </div>
             </div>
             
             <hr>
             <br>
-            <span class="btn-add-usuarios" onclick="usuarios_projeto()">Usuarios Cadastrados</span>
-
-            <div id="usuarios_projeto">
-                                     
-                                                
-            </div>
-
-            <input type="hidden"> 
-            <br>
-            <br>
-            {% comment %} <div>
-                <span class="btn-add-usuarios" onclick="usuarios_projeto_teste()">Usuarios Cadastrados Teste</span>
-            </div> {% endcomment %}
+            
 
     </div>
-<script src="{% static 'projetos/js/projeto_unico.js' %}"></script>   
 {% endblock %}

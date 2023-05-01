@@ -1,16 +1,117 @@
 {% extends 'base.html' %}
+
+{% block titulo %}Backlog |{% endblock titulo %}
+
 {% load static %}
 
-{% block titulo %}Demandas-{% endblock titulo %}
-
-{% block 'conteudo' %}
-
-    <body>
-        <p>Demandas</p>
-    </body>
+{% load filtro %}
 
 
+{% block 'head' %}
+    <link href="{% static 'demandas/css/demandas.css' %}" rel="stylesheet">
+{% endblock%}
 
-{% endblock 'conteudo' %}
+{% block 'body' %}
+    
+
+    <div class="wrapper">
+        <div class="box"> 
+            <div class="header-box">
+                {% if messages %}
+                    {% for message in messages %}
+                        <section class="alert {{message.tags}}">
+                            {{message}}
+                        </section>
+                    {% endfor %}
+                {% endif %}
+
+                
+
+                <h2 class="titulo">Backlog</h2>
+                <a href="{% url 'novo_projeto' %}" class="btn-nova-empresa">Novo projeto</a>
+                
+                <a href="{% url 'cadastro_novademanda' %}" class="btn-nova-empresa">Nova demanda</a>
+                <br>
+            </div>
+            <div class="borda-box"></div>
+            <div class="body-box">
+            
+                <form action="#" method="GET">
+                    {% csrf_token %}
+                <div class="row">
+                    
+                        <div class="col-md-5">
+                            <h6>Nome demanda</h6>
+                            <input type="text" placeholder="Busque pelo nome da demanda..." class="form-control" name="nome_demanda_filtro">
+                        </div>
+
+                        {% comment %} <div class="col-md-2">
+                            <h6>Status</h6>
+                            <select class="form-control" name="status_projeto_filtrar">
+                                {% for status_projetos in status_projeto %}
+                                    <option value="{{status_projetos.id}}">{{status_projetos}}</option>
+                                {% endfor %}
+                            </select>
+                        </div> {% endcomment %}
+                    <div class="titulo">
+                        <input type="submit" value="Filtrar" class="btn-filtrar_limpar">
+                        <input type="submit" value="Limpar" class="btn-filtrar_limpar" name="limpar_filtros">               
+                    </div>
+
+                </div>
+                </form>
+                <br>
+
+                <table class="tabela" cellpadding="20">
+                    <tr>
+                        <th>Nome Demanda</th>
+                        <th>Status</th>
+                        <th>Data Cadastro</th>
+                        <th>Setor</th>
+                        <th>Retorno Financeiro</th>
+                        <th>Ação</th>
+                    </tr>
+
+                        {% for demanda in demandas %}
+                            
+                            
+                            <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} >
+
+                                <td>
+                                    <a href="{% url 'demanda_unico' demanda.id %}">{{demanda.nome}}</a>
+                                </td>
+                                <td>
+                                    {{demanda.get_status_display}}
+                                </td>
+                                <td>
+                                    {{demanda.data_cadastro}}
+                                </td>
+                                <td>
+                                    {{demanda.setor_demanda}}
+                                </td>
+                                <td>
+                                    {{demanda.retorno_financeiro}}
+                                </td>
+                                <td>  
+                                    <a href="#">
+                                        <i class='bx bxs-edit' style="font-size: 25px; padding: 5px"></i>
+                                        <span class="tooltip">Editar Projeto</span>
+                                      </a>
+                                   
+                                      
+                                </td>
+                                
+                         
+                            </tr>
+                        {% endfor %}
+                    
+                </table> 
+            </div>
 
 
+            
+
+        </div>
+    </div>
+
+{% endblock%}

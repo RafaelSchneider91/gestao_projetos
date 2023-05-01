@@ -59,3 +59,12 @@
 #add_usuarios_projeto {
     display: none;
 }
+
+.form_usuarios {
+    display: flex;
+  }
+
+.th_usuarios {
+    width: 50%;
+  }
+  

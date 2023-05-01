@@ -80,42 +80,64 @@ def novo_projeto(request):
             return redirect('novo_projeto')
 
 
+def usuarios_projeto(request, id):
+    corpo = request.body
+    print(corpo)
+    return JsonResponse({'teste': 'teste'})
+
+
+
+
+
+    # projeto = NovoProjeto.objects.filter(nome_projeto_id=id)
+
+    # projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
+    # projeto_id = json.loads(serializers.serialize('json', projeto_json))
+
+    # print(projeto_id)
+
+    # body = json.loads(request.body)
+    # id_projeto = get_object_or_404(NovoProjeto, id=id)
+    # projeto = NovoProjeto.objects.filter(nome_projeto_id=id_projeto)
+    # usuarios = UsuariosProjeto.objects.filter(projeto=projeto[0])
+    # projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
+    # projeto_id = json.loads(serializers.serialize('json', usuarios))
+    # usuarios_json = json.loads(serializers.serialize('json', usuarios))
+    # usuarios_json_f = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
+    # lst_usuarios_json = [json.loads(serializers.serialize('json', User.objects.filter(id=usuarioss['fields']['usuario']))) for usuarioss in usuarios_json_f]
+    # perfil_usuarios_json = [{'fields': i['fields'], 'perfil': i['pk']} for i in usuarios_json]
+    # perfis = [elemento['fields']['perfil'] for elemento in usuarios_json]
+    # perfil_usuario_projeto = [json.loads(serializers.serialize('json', PerfilUsuarios.objects.filter(id=perfils['fields']['perfil']))) for perfils in perfil_usuarios_json] 
+    # data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id, 'perfil':perfil_usuario_projeto}
+
+
+
 def add_usuarios_projeto(request):
     id_projeto = request.POST.get('id_projeto')
-    # demanda_id = NovaDemanda.objects.filter(id=id_projeto).first()
     projeto = NovoProjeto.objects.filter(nome_projeto_id=id_projeto)
-
-    # print(id_projeto)
-    # print(projeto)
     usuarios = UsuariosProjeto.objects.filter(projeto=projeto[0])
     projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
     projeto_id = json.loads(serializers.serialize('json', usuarios))
     usuarios_json = json.loads(serializers.serialize('json', usuarios))
-    usuarios_json = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
-
-    # data2 = {'projetos': projeto_json}
-    # data3 = {'projeto_id': projeto_id}
-
-    # for usuarioss in usuarios_json:
-    #     lst_usuario = usuarioss['fields']['usuario']
-
-    #     user = User.objects.filter(id=lst_usuario)
-    #     usuarios_json = json.loads(serializers.serialize('json', user))
-        # nome_usuario = user.username
-
-    lst_usuarios_json = [json.loads(serializers.serialize('json', User.objects.filter(id=usuarioss['fields']['usuario']))) for usuarioss in usuarios_json]
-
-    # usuarios_dict = {usuario_json['fields']['username']: {**usuario_json['fields'], 'id': usuario_json['pk']} for usuarioss_json in lst_usuarios_json for usuario_json in usuarioss_json}
-
-
-    # data = {'projeto_id': projeto_id}
-    # print(usuarios_dict)
-    print(usuarios_json)
-
-    data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id}
-
+    usuarios_json_f = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
+    lst_usuarios_json = [json.loads(serializers.serialize('json', User.objects.filter(id=usuarioss['fields']['usuario']))) for usuarioss in usuarios_json_f]
+    perfil_usuarios_json = [{'fields': i['fields'], 'perfil': i['pk']} for i in usuarios_json]
+    perfil_usuario_projeto = [json.loads(serializers.serialize('json', PerfilUsuarios.objects.filter(id=perfils['fields']['perfil']))) for perfils in perfil_usuarios_json] 
+    data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id, 'perfil':perfil_usuario_projeto}
     return JsonResponse(data)
     # return JsonResponse({"teste": 1})
+
+
+
+
+
+
+    print(id_projeto)
+    # return JsonResponse({'data': 1})
+    return JsonResponse(data)
+
+
+
 
 
 @login_required(redirect_field_name='login')
@@ -211,32 +233,3 @@ def editar_projeto(request, id):
                                                    })
 
     
-
-# @login_required(redirect_field_name='login')
-# def index(request):
-#     return render(request,'index.html')
-
-# @login_required(redirect_field_name='login')
-# def cronograma(request):
-#     return render(request,'cronograma.html')
-
-
-
-# @login_required(redirect_field_name='login')
-# def resultado(request):
-#     return render(request,'resultado.html')
-
-
-
-
-
-
-
-
-# @login_required(redirect_field_name='login')
-# def processa_cadastro_novoprojeto(request):
-#     formularionovoprojeto = FormularioNovoProjeto(request.POST)
-#     # if form.is_valid():
-#     formularionovoprojeto.save()
-#     return render(request,'processa_cadastro_novoprojeto.html')
-#     # return HttpResponse('erro interno do sistema!')

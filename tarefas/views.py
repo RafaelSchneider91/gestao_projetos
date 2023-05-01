@@ -9,13 +9,14 @@ def novatarefa(request):
 
 @login_required(redirect_field_name='login')
 def tarefas(request):
+    if request.method == "GET":
     # projeto_unico = get_object_or_404(NovoProjeto, id=id)
 
 
-    # projetos = NovoProjeto.objects.all()
+        projetos = NovoProjeto.objects.all()
 
 
-    return render(request,'tarefas.html')
+        return render(request,'tarefas.html', {'projetos': projetos})
 
 
 
