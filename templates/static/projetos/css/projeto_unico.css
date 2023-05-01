@@ -1,0 +1,79 @@
+h3 {
+    color: white;
+
+}
+
+.titulo{
+
+    color: #f26e23;
+    font-weight: bold;
+
+}
+
+.container {
+
+    background-color: rgb(255, 255, 255);
+    padding: 60px;
+    width: 80vw;
+    background: #ffffff;
+    box-shadow: 4px 4px 10px rgba(0,0,0,.3);
+}
+
+.paragrafo{
+    font-size: 25px;
+}
+
+.btn-orange{
+
+    background-color: #ED8554;
+    color: white;
+}
+
+label{
+    font-weight: bold;
+    
+    
+}
+
+.paragrafo-orange{
+    color: #ED8554;
+}
+
+object {
+    display: flex;
+    margin: 0 auto;
+    
+}
+
+.point-fase {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 5px;    
+}
+
+.invert45 {
+    transform: rotate(-45deg);
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 5px; 
+    /* background-color: #7D2948; */
+    /* padding: 10px;     */
+    /* margin-top: 10px; */
+}
+
+.btn-add-usuarios{
+
+    background-color: #f26e23;
+    color: white;
+    padding: 5px;
+    margin-top: 25px;
+    /* font-weight: bold; */
+    cursor: pointer;
+
+}
+
+#usuarios_projeto {
+    display: none;
+}

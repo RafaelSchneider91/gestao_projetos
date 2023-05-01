@@ -1,0 +1,113 @@
+.wrapper {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    
+    width: 80vw;
+    background: #fff;
+    box-shadow: 4px 4px 10px rgba(0,0,0,.3);
+}
+
+
+.titulo {
+    display: inline;
+    color: #f26e23;
+}
+
+.mb-2{
+    color: #f26e23;
+    
+
+
+}
+
+.btn-nova-empresa{
+    float: right;
+    text-decoration: none;
+    color: white;
+    background-color: #f26e23;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.btn-nova-empresa:hover{
+    color: white;
+    text-decoration: none;
+    background-color: #f26e23;
+}
+
+.btn-excluir:hover{
+    color: white;
+    text-decoration: none;
+    background-color: #f26e23;
+}
+
+.header-box{
+
+    padding: 30px;
+
+}
+
+.borda-box{
+    border-top: 1px solid black;
+}
+
+.body-box{
+    padding: 30px;
+}
+
+.btn-orange{
+
+    background-color: #f26e23;
+    color: white;
+}
+
+
+.tabela{
+    width: 100%;
+    margin-top: 20px;
+}
+
+.tabela-linha{
+    background-color: #EDE6E6;
+}
+
+.btn-excluir{
+    text-decoration: none;
+    color: white;
+    background-color: #f26e23;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.td_vagas{
+    justify-items: center;
+}
+
+.btn-filtrar_limpar {
+    text-decoration: none;
+    color: white;
+    border-color: #f26e23;
+    background-color: #f26e23;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 10px;
+    /* font-weight: bold; */
+
+}
+
+a {
+    text-decoration: none;
+}
+
+td {
+    text-decoration: none;
+}

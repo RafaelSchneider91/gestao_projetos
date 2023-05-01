@@ -1,25 +1,153 @@
 {% extends 'base.html' %}
 
+
+
 {% block titulo %}Cadastro Nova Demanda |{% endblock titulo %}
 
-{% block 'conteudo' %}
+{% block 'head' %}
+{% load static %}
 
-<h1>Cadastro Nova Demanda</h1>
+<link href="{% static 'demandas/css/demanda.css' %}" rel="stylesheet">
 
-<body>
-    <form action="{% url 'processa_cadastro_novademanda' %}" method="POST">{% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        
-        <br>
+{% endblock %}
 
-        <button type"submit">Enviar</button>
+{% block 'body' %}
+
+    <div class="wrapper">
+        <div class="box">
+            <div class="header">
+                <h3 class="titulo">Cadastro de Demanda</h3>
+            </div>
+
+                {% comment %} mensagem de alerta! {% endcomment %}
+                {% if messages %}
     
-    </form>
+                    {% for message in messages %}
+                        <br>
+                        
+                        <section class="alert {{message.tags}}">
+                            {{message}}
+                        </section>
+                    
+                    {% endfor %}
+            
+                {% endif %}
+            {% comment %} mensagem de alerta! {% endcomment %}
 
-</body>
+            <div class="body-box">
+                <form action="{% url 'cadastro_novademanda' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                    <div class="col-md">
+                        <label>Nome:</label>
+                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome da demanda...">
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                    </div>                    
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Descrição da demanda:</label>
+                            <textarea name="descricao" class="form-control" placeholder="Descreve o objetivo da demanda..."></textarea>
+                        </div>
+                    </div>
+                    {% comment %} <br> 
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Categoria:</label>
+                                <select name="categoria" class="form-select input-tarefa">
+                                    <option value="M">Melhoria</option>
+                                    <option value="P">Projeto</option>
+                                </select>
+                        </div>
+                    </div> {% endcomment %}
+                    <br>   
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Status:</label>
+                                <select name="status" class="form-select input-tarefa">
+                                    <option value="P">Aguardando Priorizacao</option>
+                                    <option value="A">Em analise</option>
+                                </select>
+                        </div>
+                    </div>
+                    <br> 
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Setor:</label>
+                                <select class="form-select input-tarefa" name="setor_demanda_id">
+                                    {% for setor in setores %}
+                                    
+                                        <option value={{setor.id}}>{{setor}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                    <div class="col-md">
+                        <label>Nome Solicitante:</label>
+                        <input type="text" class="form-control" name="nome_solicitante" placeholder="Nome do solicitante...">
+                    </div>
+                    </div>
+                    <br>
 
-{% endblock 'conteudo' %}
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Retorno Financeiro:</label>
+                            <input type="number" step="0.1" name="retorno_financeiro">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Base do calculo de retorno:</label>
+                            <textarea name="base_calculo_retorno " class="form-control" placeholder="Digite como foi realizado o calculo de retorno..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Retorno qualitivo:</label>
+                            <textarea name="retorno_qualitativo" class="form-control" placeholder="Descreva o retorno que não podera ser quantificado..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Observação:</label>
+                            <textarea name="observacao" class="form-control" placeholder="Caso necessario descreva alguma observação..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Link Analise:</label>
+                            <input type="url" name="link_analise" size="50" >
+                        </div>
+                    </div>
+                    <br>
+
+                    
+                    
+
+
+
+
+                    <input type="submit" value="Novo Cadastro" class="btn btn-lg btn-orange">
+                </form>
+                
+            </div>
+        </div>
+    </div>
+   
+{% endblock%}
+
+
+
+
+
 
 

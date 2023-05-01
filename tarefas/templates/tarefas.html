@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Tarefas |{% endblock titulo %}
+
+{% block 'head' %}
+{% load static %}
+
+<link href="{% static 'tarefas/css/tarefas.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+
+{% endblock %}
+
+{% block 'conteudo' %}
+
+{% comment %} #TODO: CRIAR UM BOTAO METHOD POST PARA GRAVAR A ALTERAÇÃO NO BD; {% endcomment %}
+
+<div class="wrapper">
+	<div class="box">
+		<div class="titulo">
+			<h2>Quadro Kanban Tarefas</h2>
+		</div>
+
+		<div class="titulo">
+			<div class="col-md">
+				<label>Projeto:</label>
+				<select id="projeto_select" class="form-select input-tarefa" name="projeto">
+					{% for projeto in projetos %}
+					<option value={{projeto.id}}>{{projeto}}</option>
+					{% endfor %}
+
+				</select>
+			</div>
+		</div>
+
+		<div>
+			{% comment %} <a href="#" class="btn-nova-tarefa">Nova Tarefa</a> {% endcomment %}
+			{% comment %} <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn-nova-tarefa"></a> {% endcomment %}
+
+			<!-- Button trigger modal -->
+			<button type="button" class="btn-nova-tarefa" data-toggle="modal" data-target="#exampleModalCenter">
+			Nova Tarefa
+			</button>
+		</div>
+		<div>
+			<a href="#" class="btn-salvar-tarefa">Salvar</a>
+		</div>
+
+		
+
+		<br>
+		<div class="container">
+			<div class="column">
+				<div class="column-header">A fazer</div>
+				<div class="task-list" id="afazer">
+					<div class="task">Tarefa 1</div>
+					<div class="task">Tarefa 2</div>
+					<div class="task">Tarefa abc</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
+			</div>
+			<div class="column">
+				<div class="column-header">Fazendo</div>
+				<div class="task-list" id="fazendo">
+					<div class="task">Tarefa 3</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
+			</div>
+			<div class="column">
+				<div class="column-header">Pendente</div>
+				<div class="task-list" id="pendente">
+					<div class="task">Tarefa 4</div>
+					<div class="task">Tarefa 5</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
+			</div>
+			<div class="column">
+				<div class="column-header">Concluido</div>
+				<div class="task-list" id="concluido">
+					<div class="task">Tarefa 6</div>
+					<div class="task">Tarefa 7</div>
+				</div>
+				<div>
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+						Nova Tarefa
+					</button>
+				</div>
+			</div>
+		</div>
+	
+
+		
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 style="font-size: 30px" class="modal-title titulo" id="exampleModalLabel">Nova Tarefa</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				
+				<label>Nome Tarefa:</label>
+				<input type="text" name="titulo" class="form-control" placeholder="Digite o nome da tarefa...">
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+				<button type="button" class="btn-salvar-tarefa">Salvar</button>
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script src="{% static 'tarefas/js/tarefas.js' %}"></script>
+
+{% endblock 'conteudo' %}

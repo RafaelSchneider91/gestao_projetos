@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static 'demandas/css/demanda_unico.css' %}" rel="stylesheet">
+{% endblock%}
+
+
+{% block 'body' %}
+
+    
+    <br>
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <br>
+                <section class="alert {{message.tags}}">
+                    {{message}}
+                </section>
+            {% endfor %}
+        {% endif %} 
+        
+        <form id="projeto_select" action="{% url 'demanda_unico' demanda.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="row">         
+                <div class="col-md">
+                    <h1 id="id_projeto" class="titulo">{{demanda.nome}}</h1>
+                </div>         
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Descricão do projeto ou melhoria:</label>
+                        <p>{{demanda.descricao}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>                  
+
+            {% comment %} <div class="row">
+                <div class="col-md-7">
+                    <label>Categoria:</label>
+                    <label disabled class="form-control">{{projeto.get_categoria_display}}</label>
+                </div>
+            </div> {% endcomment %}
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Status:</label>
+                    <label disabled class="form-control">{{demanda.get_status_display}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Fase:</label>
+                    <label disabled class="form-control">{{demanda.fase}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Setor:</label>
+                    <label disabled class="form-control">{{demanda.setor_demanda}}</label>
+                </div>
+            </div>
+
+            <br> 
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Retorno Financeiro:</label>
+                        <p>{{demanda.retorno_financeiro}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <br> 
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Calculo retorno:</label>
+                        <p>{{demanda.base_calculo_retorno}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Retorno Qualitativo:</label>
+                            <p>{{demanda.retorno_qualitativo}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div >
+                        <label>Link Analise:</label>
+                            <a href="{{demanda_unica.link_analise}}">{{demanda.link_analise}}</a>
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+            
+
+
+            <hr>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Nome solicitante:</label>
+                    <label disabled class="form-control">{{demanda.nome_solicitante}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Data Cadastro:</label>
+                    <label disabled class="form-control">{{demanda.data_cadastro}}</label>
+                </div>
+            </div>
+            
+            <hr>
+            <br>
+            
+
+    </div>
+{% endblock %}

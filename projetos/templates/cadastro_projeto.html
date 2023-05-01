@@ -2,24 +2,160 @@
 
 {% block titulo %}Cadastro Novo Projeto |{% endblock titulo %}
 
-{% block 'conteudo' %}
+{% block 'head' %}
+{% load static %}
 
-<h1>Cadastro Novo Projeto</h1>
+<link href="{% static 'projetos/css/cadastro_projeto.css' %}" rel="stylesheet">
+{% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> {% endcomment %}
 
-<body>
-    <form action="{% url 'processa_cadastro_novoprojeto' %}" method="POST">{% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        
-        <br>
 
-        <button type"submit">Enviar</button>
+{% endblock %}
+
+{% block 'body' %}
+
+    <div class="wrapper">
+        <div class="box">
+            <div class="header">
+                <h3 class="titulo">Cadastro de Projeto</h3>
+            </div>
+
+                {% comment %} mensagem de alerta! {% endcomment %}
+                {% if messages %}
     
-    </form>
+                    {% for message in messages %}
+                        <br>
+                        
+                        <section class="alert {{message.tags}}">
+                            {{message}}
+                        </section>
+                    
+                    {% endfor %}
+            
+                {% endif %}
+            {% comment %} mensagem de alerta! {% endcomment %}
 
-</body>
-
-{% endblock 'conteudo' %}
-
-
+            <div class="body-box">
+                <form id="id_projeto" action="{% url 'novo_projeto' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Nome do Projeto:</label>
+                                <select id="projeto_select" class="form-select input-tarefa" name="nomeprojeto">
+                                    {% for demanda in demandas %}                                    
+                                        <option value={{demanda.id}}>{{demanda}}</option>                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Descrição do projeto ou melhoria:</label>
+                            <textarea name="descricao_projeto" class="form-control" placeholder="Descreve o objetivo do projeto ou melhoria..."></textarea>
+                        </div>
+                    </div>
+                    <br> 
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Categoria:</label>
+                                <select name="categoria" class="form-select input-tarefa">
+                                    <option value="M">Melhoria</option>
+                                    <option value="P">Projeto</option>
+                                </select>
+                        </div>
+                    </div> 
+                    <br>  
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Status Projeto:</label>
+                                <select class="form-select input-tarefa" name="statusprojeto">
+                                    {% for status in statusprojeto %}
+                                    
+                                        <option value={{status.id}}>{{status}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    
+                    
+                    <br> 
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Fase Projeto:</label>
+                                <select class="form-select input-tarefa" name="faseprojeto">
+                                    {% for fase in faseprojeto %}
+                                    
+                                        <option value={{fase.id}}>{{fase}}</option>
+                
+                                    {% endfor %}   
+                
+                                </select>
+                        </div>
+                    </div>
+                    <br>                  
+                    <div class="row">
+                        <div class="col-md">                            
+                            <label for="numero">Prioridade:</label>
+                            <input type="number" id="numero" name="prioridade" step="1" required>  
+                        </div>
+                    </div>
+                    <br>                  
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="checkbox">Stara Mais:</label>
+                            <input type="checkbox" id="checkbox" name="staramais" value="true" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="checkbox">Stara Labs:</label>
+                            <input type="checkbox" id="checkbox" name="staralabs" value="true">
+                        </div>
+                    </div>
+                    <hr style="background-color:gray;">
+                        <div>
+                       
+                            <table id = "novo_usuario" class="col-md">
+                            <h3>Cadastrar Usuarios do Projeto:</h3>
+                            <br>
+                                <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">+ Novo Membro</span>                            
+                            <br>
+                                <th> 
+                                {% comment %} #TODO: salvar o novo usuario e ao clicar em novo membro criar uma nova linha para cadastrar mais usuario; {% endcomment %}
+                                <br>
+                                    <select class="form-select input-tarefa" name="usuario">
+                                        {% for usuario in usuarios %}                                
+                                            <option value={{usuario.id}}>{{usuario.first_name}} {{usuario.last_name}} </option>            
+                                        {% endfor %} 
+                                    </select>
+                                </th>
+                                <th>
+                                    <select class="form-select input-tarefa" name="perfil">
+                                        {% for perfil in perfis %}                                
+                                            <option value={{perfil.id}}>{{perfil}}</option>            
+                                        {% endfor %} 
+                                    </select>
+                                </th>
+                                <th>
+                                    <div class="form-select input-tarefa">
+                                        <label for="checkbox">Enviar email</label>
+                                        <input type="checkbox" id="checkbox" name="recebe_email" value="true">
+                                    </div>
+                                    
+                                </th>
+                            </table>
+                        </div>
+                        {% comment %} <div id="add_usuarios_projeto">
+                          
+                        </div> {% endcomment %}
+                    <hr>
+                    <input type="submit" value="Novo Projeto" class="btn btn-lg btn-orange">
+                </form>   
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'projetos/js/novoprojeto.js' %}"></script>
+{% endblock%}
