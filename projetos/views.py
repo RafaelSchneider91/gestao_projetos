@@ -182,6 +182,7 @@ def projeto_unico (request, id):
     demanda_unica = NovaDemanda.objects.get(id=projeto_unico.nome_projeto_id)
     status = StatusProjeto.objects.all()
     faseprojeto = FaseProjeto.objects.all()
+    usuarios_projeto = UsuariosProjeto.objects.filter(projeto_id = id)
 
     projetos = NovoProjeto.objects.all()
 
@@ -189,11 +190,11 @@ def projeto_unico (request, id):
                                                  'projetos':projetos,
                                                  'status': status,
                                                  'faseprojeto':faseprojeto,
-                                                 'demanda_unica': demanda_unica
+                                                 'demanda_unica': demanda_unica,
+                                                 'usuarios_projeto': usuarios_projeto
                                                  })
 
 @login_required(redirect_field_name='login')
-
 def editar_projeto(request, id):
     projeto = get_object_or_404(NovoProjeto, id=id)
     status = StatusProjeto.objects.all()

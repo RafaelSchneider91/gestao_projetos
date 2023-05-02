@@ -43,5 +43,5 @@ def membros(request):
             messages.add_message(request, constants.SUCCESS, 'Usuario cadastrado com sucesso!')
             return redirect('membros')
         except:
-            messages.add_message(request, constants.ERROR, 'Usuario não cadastrado! Verifique os parametros digitados!' )
+            messages.add_message(request, constants.ERROR, 'Usuario não cadastrado! Usuario ja cadastrado!' )
             return redirect('membros')

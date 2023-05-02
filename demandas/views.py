@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 # from .forms import formularioNovaDemanda
 from django.http import HttpResponse
 from demandas.models import NovaDemanda, Setor
+from projetos.models import NovoProjeto
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages import constants
@@ -85,25 +86,14 @@ def cadastro_novademanda(request):
 @login_required(redirect_field_name='login')
 def demandas(request):
     nome_demanda_filtrar = request.GET.get('nome_demanda_filtro')
-    # status_projeto_filtrar = request.GET.get('status_projeto_filtrar')
     limpar_filtros = request.GET.get('limpar_filtros')
-    # fase_projeto_filtrar = request.GET.get('fase_projeto_filtrar')
-
     demandas = NovaDemanda.objects.all()
-    # status_projeto = StatusProjeto.objects.all()
-    # fase_projeto = FaseProjeto.objects.all()
+    projetos = NovoProjeto.objects.all()
+    print(projetos)
 
     if limpar_filtros:
-        nome_projeto_filtrar = ''
-        # status_projeto_filtrar = ''
+        nome_demanda_filtrar = ''
 
-    
-    
-    # if status_projeto_filtrar:
-    #     projeto = projeto.filter(status_id=status_projeto_filtrar)
-
-    # if status_projeto_filtrar:
-    #     projeto = projeto.filter(fase_id=fase_projeto_filtrar)
 
     if nome_demanda_filtrar:
         demandas = demandas.filter(nome__icontains=nome_demanda_filtrar)
@@ -111,6 +101,7 @@ def demandas(request):
     
 
     return render(request, 'demandas.html', {'demandas': demandas,
+                                             'projetos': projetos
                                             })
 
 

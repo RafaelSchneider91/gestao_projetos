@@ -129,19 +129,58 @@
                     <label>Data Cadastro:</label>
                     <label disabled class="form-control">{{demanda_unica.data_cadastro}}</label>
                 </div>
-            </div>
+            </div>            
+            <hr>          
             
-            <hr>
-            <br>
-            <span class="btn-add-usuarios" onclick="usuarios_projeto()">Usuarios Cadastrados</span>
+            <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalusuariocadastrados">Usuarios Cadastrados</button>            
 
-            <div id="usuarios_projeto">
-                                     
-                                                
+            <div class="modal fade" id="modalusuariocadastrados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title titulo" id="myModalLabel">Usuarios Cadastrados no Projeto</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Perfil</th>
+                                <th>Recebe Email?</th>
+                            </tr>   
+                        </thead>
+                        <tbody>                    
+                            <td>
+                                {% for usuario_projeto in usuarios_projeto %}
+                                    <p>{{usuario_projeto.usuario}}</p>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for usuario_projeto in usuarios_projeto %}
+                                    <p>{{usuario_projeto.perfil}}</p>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for usuario_projeto in usuarios_projeto %}
+                                    {% if usuario_projeto.recebe_email == 1 %}
+                                        <p>Sim</p>
+                                    {% else %}
+                                        <p>Não</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tbody>
+                    </table>
+
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                    </div>
+                </div>
+                </div>
+            </div>
             </div>
 
-            <input type="hidden"> 
-            <br>
             <br>
             {% comment %} <div>
                 <span class="btn-add-usuarios" onclick="usuarios_projeto_teste()">Usuarios Cadastrados Teste</span>

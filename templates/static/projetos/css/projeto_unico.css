@@ -69,6 +69,7 @@ object {
     color: white;
     padding: 5px;
     margin-top: 25px;
+    border-radius: 10px;
     /* font-weight: bold; */
     cursor: pointer;
 

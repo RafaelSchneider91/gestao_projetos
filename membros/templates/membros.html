@@ -35,6 +35,7 @@
                         <div class="col-md">
                             <label>Nome do Projeto:</label>
                                 <select id="projeto_select" class="form-select input-tarefa" name="projeto_id">
+                                <option value="" disabled selected>----</option>
                                     {% for projeto in projetos %}                                    
                                         <option value={{projeto.id}}>{{projeto}}</option>                
                                     {% endfor %}   
@@ -47,6 +48,7 @@
                         <div class="col-md">
                             <label>Usuario:</label>
                                 <select id="projeto_select" class="form-select input-tarefa" name="usuario_id">
+                                <option value="" disabled selected>----</option>
                                     {% for usuario in usuarios %}                                    
                                         <option value={{usuario.id}}>{{usuario.first_name}} {{usuario.last_name}} </option>                
                                     {% endfor %}   
@@ -59,7 +61,8 @@
                         <div class="col-md">
                             <label>Perfil:</label>
                                 <select class="form-select input-tarefa" name="perfil_id">
-                                    {% for perfil in perfil_usuario %}                                    
+                                    <option value="" disabled selected>----</option>
+                                    {% for perfil in perfil_usuario %}                              
                                         <option value={{perfil.id}}>{{perfil}}</option>                
                                     {% endfor %}   
                 

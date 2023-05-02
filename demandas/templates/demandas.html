@@ -69,6 +69,7 @@
                         <th>Data Cadastro</th>
                         <th>Setor</th>
                         <th>Retorno Financeiro</th>
+                        <th>Criado Projeto?</th>
                         <th>Ação</th>
                     </tr>
 
@@ -92,6 +93,15 @@
                                 <td>
                                     {{demanda.retorno_financeiro}}
                                 </td>
+                                <th>      
+                                    {% if demandas.id == projetos.nome_projeto_id %}
+                                        <p>ok</p>
+                                    {% else %}
+                                        <p>nok</p>
+                                    {% endif %}
+                                    {% comment %} #TODO: ajustar a consulta. {% endcomment %}
+                                
+                                </th>
                                 <td>  
                                     <a href="#">
                                         <i class='bx bxs-edit' style="font-size: 25px; padding: 5px"></i>
