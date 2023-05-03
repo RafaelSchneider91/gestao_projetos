@@ -54,8 +54,8 @@ class UsuariosProjeto(models.Model):
 
     
 
-    # def __str__(self) -> str:
-    #     return self.projeto
+    def __int__(self) -> int:
+        return self.projeto
 
 
 
