@@ -93,14 +93,12 @@
                                 <td>
                                     {{demanda.retorno_financeiro}}
                                 </td>
-                                <th>      
-                                    {% if demandas.id == projetos.nome_projeto_id %}
-                                        <p>ok</p>
+                                <th>
+                                    {% if demanda in demandas_sem_projeto %}
+                                        <p>Não</p>
                                     {% else %}
-                                        <p>nok</p>
+                                        <p>Sim</p>
                                     {% endif %}
-                                    {% comment %} #TODO: ajustar a consulta. {% endcomment %}
-                                
                                 </th>
                                 <td>  
                                     <a href="#">

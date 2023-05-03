@@ -7,6 +7,8 @@ from projetos.models import NovoProjeto
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.db.models import Q
+
 
 
 @login_required(redirect_field_name='login')
@@ -89,7 +91,14 @@ def demandas(request):
     limpar_filtros = request.GET.get('limpar_filtros')
     demandas = NovaDemanda.objects.all()
     projetos = NovoProjeto.objects.all()
-    print(projetos)
+    # print(projetos)
+
+
+    demandas_sem_projeto = NovaDemanda.objects.exclude(novoprojeto__isnull=False)
+    
+    print(demandas_sem_projeto)
+
+
 
     if limpar_filtros:
         nome_demanda_filtrar = ''
@@ -101,7 +110,8 @@ def demandas(request):
     
 
     return render(request, 'demandas.html', {'demandas': demandas,
-                                             'projetos': projetos
+                                             'projetos': projetos,
+                                             'demandas_sem_projeto':demandas_sem_projeto
                                             })
 
 
