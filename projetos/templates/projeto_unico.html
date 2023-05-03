@@ -32,6 +32,7 @@
                     <div >
                         <label>Descricão do projeto ou melhoria:</label>
                         <p>{{projeto.descricao_projeto}}</p>
+                        {% comment %} #TODO: verificar para quebrar a linha; {% endcomment %}
                     </div>
                 </div>
             </div>
@@ -132,7 +133,8 @@
             </div>            
             <hr>          
             
-            <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalusuariocadastrados">Usuarios Cadastrados</button>            
+            <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalusuariocadastrados">Usuarios Cadastrados</button>
+            <button type="button" class="btn-add-usuarios">Ata de Reunião</button>           
 
             <div class="modal fade" id="modalusuariocadastrados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -163,11 +165,13 @@
                             </td>
                             <td>
                                 {% for usuario_projeto in usuarios_projeto %}
-                                    {% if usuario_projeto.recebe_email == 1 %}
-                                        <p>Sim</p>
+                                
+                                    {% if usuario_projeto.recebe_email == 1 %}                                        
+                                        <img src="{% static 'projetos/svg/ok.svg' %}" alt="">                                        
                                     {% else %}
-                                        <p>Não</p>
+                                        <img src="{% static 'projetos/svg/cancel.svg' %}" alt="">                                  
                                     {% endif %}
+                                    <br>
                                 {% endfor %}
                             </td>
                         </tbody>

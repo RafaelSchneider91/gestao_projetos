@@ -87,32 +87,41 @@ def cadastro_novademanda(request):
 
 @login_required(redirect_field_name='login')
 def demandas(request):
-    nome_demanda_filtrar = request.GET.get('nome_demanda_filtro')
-    limpar_filtros = request.GET.get('limpar_filtros')
-    demandas = NovaDemanda.objects.all()
-    projetos = NovoProjeto.objects.all()
-    # print(projetos)
+    if request.method == "GET":
+        nome_demanda_filtrar = request.GET.get('nome_demanda_filtro')
+        limpar_filtros = request.GET.get('limpar_filtros')
+        demandas = NovaDemanda.objects.all()
+        projetos = NovoProjeto.objects.all()
+        # print(projetos)
 
 
-    demandas_sem_projeto = NovaDemanda.objects.exclude(novoprojeto__isnull=False)
-    
-    print(demandas_sem_projeto)
+        demandas_sem_projeto = NovaDemanda.objects.exclude(novoprojeto__isnull=False)
+        
+        # print(demandas_sem_projeto)
 
 
 
-    if limpar_filtros:
-        nome_demanda_filtrar = ''
+        if limpar_filtros:
+            nome_demanda_filtrar = ''
 
 
-    if nome_demanda_filtrar:
-        demandas = demandas.filter(nome__icontains=nome_demanda_filtrar)
+        if nome_demanda_filtrar:
+            demandas = demandas.filter(nome__icontains=nome_demanda_filtrar)
 
-    
+        
 
-    return render(request, 'demandas.html', {'demandas': demandas,
-                                             'projetos': projetos,
-                                             'demandas_sem_projeto':demandas_sem_projeto
-                                            })
+        return render(request, 'demandas.html', {'demandas': demandas,
+                                                'projetos': projetos,
+                                                'demandas_sem_projeto':demandas_sem_projeto
+                                                })
+    elif request.method == "POST":
+        status_modal = request.POST.get('status_modal')
+        print(status_modal)
+
+        demandas = NovaDemanda(status = status_modal) #TODO: verificar como salvar a alteração;
+           
+        demandas.save()
+        return redirect('demandas')
 
 
 @login_required(redirect_field_name='login')

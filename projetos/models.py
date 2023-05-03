@@ -30,7 +30,7 @@ class NovoProjeto(models.Model):
     status = models.ForeignKey(StatusProjeto, on_delete=models.CASCADE, null=True, blank=False)
     categoria = models.CharField(max_length=50, choices=choices_categoria, default='M')
     fase = models.ForeignKey(FaseProjeto, on_delete=models.CASCADE, null=True, blank=False)
-    data_cadastro = models.DateTimeField(default = timezone.now) #TODO: esta cadastrando 3 hr a mais
+    data_cadastro = models.DateTimeField(default = timezone.now)
     staramais = models.BooleanField(default=False)
     staralabs = models.BooleanField(default=False)
     prioridade = models.PositiveIntegerField(default=1000)

@@ -155,16 +155,14 @@ def projetos (request):
         nome_projeto_filtrar = ''
         status_projeto_filtrar = ''
 
-    
+    if nome_projeto_filtrar:
+        projeto = projeto.filter(nome_projeto__nome__icontains=nome_projeto_filtrar)
     
     if status_projeto_filtrar:
         projeto = projeto.filter(status_id=status_projeto_filtrar)
 
-    if status_projeto_filtrar:
-        projeto = projeto.filter(fase_id=fase_projeto_filtrar)
-
-    if nome_projeto_filtrar:
-        projeto = projeto.filter(nome_projeto__nome__icontains=nome_projeto_filtrar)
+    # if status_projeto_filtrar:
+    #     projeto = projeto.filter(fase_id=fase_projeto_filtrar)
 
     
 

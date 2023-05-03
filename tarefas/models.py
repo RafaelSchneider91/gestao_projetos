@@ -6,7 +6,6 @@ from datetime import timedelta
 
 class UsuarioTarefa(models.Model):
     usuario_equipe = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE)
-    # projeto = models.ForeignKey(NovoProjeto, on_delete=models.CASCADE)
 
     def __str__ (self) -> str:
         return self.usuario_equipe
