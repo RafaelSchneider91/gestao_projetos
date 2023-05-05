@@ -73,3 +73,55 @@ $(document).ready(function() {
     });
   });
   
+
+
+// alterar projeto em tarefas
+function alteraprojeto() {
+    // console.log('teste')
+    var selectElement = document.getElementById("projeto_select");
+    // var selectedValue = selectElement.value;
+    var selectedValue = parseInt(selectElement.value);
+
+    // console.log(selectedValue)
+
+    var data = new FormData();
+    data.append('id_projeto', selectedValue);
+
+    console.log([...data.entries()]);
+
+
+    var csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+    // console.log(csrf_token)
+
+    // define a URL do endpoint do Django que receberá o valor
+    var url = 'tarefas/alteraprojeto/';
+
+    var options = {
+        method: 'POST',
+        body: data,
+        headers: {
+          'X-CSRFToken': csrf_token // adiciona o token CSRF, se necessário
+        }
+      };
+
+    console.log(selectedValue)
+
+    // envia a requisição com fetch
+    fetch(url, options)
+    .then(function(result) {
+        return result.json()
+    })
+    .then(function(data){
+        console.log(data)
+        
+        tarefa = document.getElementById('nome_tarefa')
+        tarefa.value = data['nome']
+
+        descricao = document.getElementById('descricao_tarefa')
+        descricao.value = data['descricao']
+
+
+
+    })
+}

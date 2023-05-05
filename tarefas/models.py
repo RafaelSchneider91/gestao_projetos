@@ -23,12 +23,12 @@ class NovaTarefa(models.Model):
     projeto = models.ForeignKey(NovoProjeto, on_delete=models.CASCADE)
     nome = models.CharField(max_length=255, blank=False, null=False)
     descricao = models.TextField(max_length=255, blank=False, null=False)
-    membros = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE)
+    # membros = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE)
     status_tarefa = models.CharField(max_length=50, choices=choices_status_tarefa)
     data_criacao = models.DateTimeField(default = timezone.now)
     data_inicio_planejado = models.DateField(default = timezone.now)
-    data_fim_planejado = models.DateField(default = timezone.now() + timedelta(days=10))
-    data_fim_realizado = models.DateTimeField(null=False, blank=True)
+    data_fim_planejado = models.DateField(default = timezone.now() + timedelta(days=10)) #add mais 10 dias caso o campo nao for preenchido;
+    data_fim_realizado = models.DateTimeField(null=True, blank=True)
 
     def __str__ (self) -> str:
         return self.nome

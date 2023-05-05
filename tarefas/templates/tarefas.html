@@ -22,10 +22,10 @@
 
 		<div class="titulo">
 			<div class="col-md">
-				<label>Projeto:</label>
-				<select id="projeto_select" class="form-select input-tarefa" name="projeto">
+				<label>Projeto:</label>{% csrf_token %}
+				<select id="projeto_select" class="form-select input-tarefa" name="projeto" onchange="alteraprojeto()">
 					{% for projeto in projetos %}
-					<option value={{projeto.id}}>{{projeto}}</option>
+						<option value={{projeto.id}}>{{projeto}}</option>
 					{% endfor %}
 
 				</select>
@@ -97,6 +97,14 @@
 				</div>
 			</div>
 		</div>
+
+		<div id="form_tarefas">
+			<p>Tarefa</p>
+			<input id="nome_tarefa" type="text" class="form-control">
+			<p>Descricao</p>
+			<input id="descricao_tarefa" type="text" class="form-control">	
+		
+		</div>
 	
 
 		
@@ -111,49 +119,64 @@
 				<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">				
-				<label>Nome Tarefa:</label>
-				<input type="text" name="titulo" class="form-control" placeholder="Digite o nome da tarefa...">				
-			</div>
-			<div class="modal-body">				
-				<label>Descrição:</label>
-				{% comment %} <input type="text" name="descricao" class="form-control" placeholder="Digite uma descricao da tarefa..."> {% endcomment %}
-				<textarea name="descricao_tarefa" class="form-control" placeholder="Descrever a ação da tarefa..."></textarea>
-				
-			</div>
-			<div class="col-md">
-				<label>Status Tarefa:</label>
-					<select name="status_tarefa" class="form-select input-tarefa">
-						<option value="N">Não Iniciado</option>
-						<option value="E">Em andamento</option>
-						<option value="P">Pendente</option>
-						<option value="C">Concluido</option>
+			<form id="nova_tarefa" action="{% url 'tarefas' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+				<div>
+					<div class="modal-body">
+						<label>Projeto:</label>{% csrf_token %}
+						<select id="projeto_select" class="form-select input-tarefa" name="projeto" onchange="alteraprojeto()">
+							{% for projeto in projetos %}
+								<option value={{projeto.id}}>{{projeto}}</option>
+							{% endfor %}
 
-					</select>
-			</div>
-			{% comment %} <div class="row">
+						</select>
+					</div>
+				</div>			
+				
 				<div class="modal-body">				
-					<label>Inicio Planejado:</label>
-					<input type="date" name="data_inicio_plan" class="form-control">	
+					<label>Nome Tarefa:</label>
+					<input type="text" name="titulo" class="form-control" placeholder="Digite o nome da tarefa...">				
 				</div>
-			</div> {% endcomment %}
-			<div>
 				<div class="modal-body">				
-					<label>Inicio Planejado:</label>
-					<input type="date" name="data_inicio_plan" class="form-control">
+					<label>Descrição:</label>
+					{% comment %} <input type="text" name="descricao" class="form-control" placeholder="Digite uma descricao da tarefa..."> {% endcomment %}
+					<textarea name="descricao_tarefa" class="form-control" placeholder="Descrever a ação da tarefa..."></textarea>
+					
 				</div>
-			</div>
-			<div>
-				<div class="modal-body">				
-					<label>Fim Planejado:</label>
-					<input type="date" name="data_fim_plan" class="form-control">
+				<div class="col-md">
+					<label>Status Tarefa:</label>
+						<select name="status_tarefa" class="form-select input-tarefa">
+							<option value="N">Não Iniciado</option>
+							<option value="E">Em andamento</option>
+							<option value="P">Pendente</option>
+							<option value="C">Concluido</option>
+
+						</select>
 				</div>
-			</div>
-			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-				<button type="button" class="btn-salvar-tarefa">Salvar</button>
-			</div>
+				{% comment %} <div class="row">
+					<div class="modal-body">				
+						<label>Inicio Planejado:</label>
+						<input type="date" name="data_inicio_plan" class="form-control">	
+					</div>
+				</div> {% endcomment %}
+				<div>
+					<div class="modal-body">				
+						<label>Inicio Planejado:</label>
+						<input type="date" name="data_inicio_plan" class="form-control">
+					</div>
+				</div>
+				<div>
+					<div class="modal-body">				
+						<label>Fim Planejado:</label>
+						<input type="date" name="data_fim_plan" class="form-control">
+					</div>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+					{% comment %} <button type="button" class="btn-salvar-tarefa">Salvar</button> {% endcomment %}
+					<input type="submit" value="Salvar Tarefa" class="btn-nova-tarefa">
+				</div>
+			</form>
 			
 	
 		</div>
