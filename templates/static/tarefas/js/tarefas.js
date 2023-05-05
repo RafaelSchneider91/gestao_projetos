@@ -116,10 +116,22 @@ function alteraprojeto() {
         console.log(data)
         
         tarefa = document.getElementById('nome_tarefa')
-        tarefa.value = data['nome']
-
+        tarefa.value = data['tarefas'][0]['nome']
         descricao = document.getElementById('descricao_tarefa')
-        descricao.value = data['descricao']
+        descricao.value = data['tarefas'][0]['descricao']
+
+        div_tarefas_afazer = document.getElementById('afazer')
+
+        for (i=0; i<data['tarefas'].lenght; i++){
+            console.log(data['tarefas'][i])
+
+            div_tarefas_afazer.innerHTML += "<div class='task'>"+ 'teste' +"</div>"
+
+
+
+        }
+
+
 
 
 

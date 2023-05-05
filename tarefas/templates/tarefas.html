@@ -33,9 +33,9 @@
 		</div>
 
 		<div>
-			<div class="col-md">
+			{% comment %} <div class="col-md">
 				<button type="button" class="btn-nova-tarefa" data-toggle="modal" data-target="#exampleModalCenter">Nova Tarefa	</button>
-			</div>
+			</div> {% endcomment %}
 			<div>
 				<a href="#" class="btn-salvar-tarefa">Salvar</a>
 			</div>
@@ -48,12 +48,13 @@
 		<br>
 
 		<div class="container">
-			<div class="column">
+			<div id="tarefas_afazer" class="column">
 				<div class="column-header">A fazer</div>
 				<div class="task-list" id="afazer">
-					<div class="task">Tarefa 1</div>
-					<div class="task">Tarefa 2</div>
-					<div class="task">Tarefa abc</div>
+					{% comment %} <div class="task">
+						<p>Tarefa 1</p>					
+					</div>
+					<div class="task">Tarefa 2</div> {% endcomment %}
 				</div>
 				<div>
 					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
@@ -61,10 +62,14 @@
 					</button>
 				</div>
 			</div>
-			<div class="column">
+			{% comment %} <div class="column">
 				<div class="column-header">Fazendo</div>
 				<div class="task-list" id="fazendo">
 					<div class="task">Tarefa 3</div>
+					<div id="form_tarefas">					
+						<input id="nome_tarefa" type="text"  class="task">	
+					</div>
+					
 				</div>
 				<div>
 					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
@@ -95,16 +100,19 @@
 						Nova Tarefa
 					</button>
 				</div>
-			</div>
+			</div> {% endcomment %}
 		</div>
+		<br>
+		<br>
+		<br>
 
-		<div id="form_tarefas">
+		{% comment %} <div id="form_tarefas">
 			<p>Tarefa</p>
 			<input id="nome_tarefa" type="text" class="form-control">
 			<p>Descricao</p>
 			<input id="descricao_tarefa" type="text" class="form-control">	
 		
-		</div>
+		</div> {% endcomment %}
 	
 
 		
