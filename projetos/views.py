@@ -10,6 +10,7 @@ from django.core import serializers
 import json
 from django.urls import reverse
 from demandas.models import NovaDemanda
+from tarefas.models import NovaTarefa
 from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto, PerfilUsuarios, UsuariosProjeto
 
 @login_required(redirect_field_name='login')
@@ -170,16 +171,20 @@ def projetos (request):
                                              'status_projeto': status_projeto,
                                              'fase_projeto': fase_projeto})
 
-
-
-
-
 @login_required(redirect_field_name='login')
 def projeto_unico (request, id):
     projeto_unico = get_object_or_404(NovoProjeto, id=id)
     demanda_unica = NovaDemanda.objects.get(id=projeto_unico.nome_projeto_id)
     status = StatusProjeto.objects.all()
     faseprojeto = FaseProjeto.objects.all()
+    total_tarefas = NovaTarefa.objects.filter(projeto_id = id).count()
+    total_tarefas_nao_concluidas = NovaTarefa.objects.filter(projeto_id = id, status_tarefa='C').count()
+
+    percentual_projeto = round(((total_tarefas_nao_concluidas/total_tarefas)*100))
+    
+
+    # print(percentual_projeto)
+    
     usuarios_projeto = UsuariosProjeto.objects.filter(projeto_id = id)
 
     projetos = NovoProjeto.objects.all()
@@ -190,6 +195,7 @@ def projeto_unico (request, id):
                                                  'faseprojeto':faseprojeto,
                                                  'demanda_unica': demanda_unica,
                                                  'usuarios_projeto': usuarios_projeto
+                                                 ,'percentual_projeto': percentual_projeto
                                                  })
 
 @login_required(redirect_field_name='login')

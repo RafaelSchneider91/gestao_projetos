@@ -57,13 +57,14 @@
 
 .btn-salvar-tarefa{
     float: right;
+    
     text-decoration: none;
     color: white;
     background-color: #30732f;
     padding: 10px;
     border-radius: 10px;
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 50px;
 }
 
 .btn-salvar-tarefa:hover{

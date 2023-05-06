@@ -14,7 +14,10 @@ import json
 def tarefas(request):
     if request.method == "GET":
 
+
         projetos = NovoProjeto.objects.all()
+        # tarefas = NovaTarefa.objects.filter(id=id)
+        # print(tarefas)
         
         return render(request, 'tarefas.html', {'projetos': projetos})
 
@@ -41,12 +44,22 @@ def tarefas(request):
     
     try:
         tarefa.save()
-        messages.add_message(request, constants.SUCCESS, 'Tarefa cadastrada com sucesso!')
+        # messages.add_message(request, constants.SUCCESS, 'Tarefa cadastrada com sucesso!')
         return redirect('tarefas')
 
     except:
-        messages.add_message(request, constants.ERROR, 'Tarefa não cadastrada! Verifique os parametros digitados!' )
+        # messages.add_message(request, constants.ERROR, 'Tarefa não cadastrada! Verifique os parametros digitados!' )
         return redirect('tarefas')
+
+@login_required(redirect_field_name='login')
+def tarefa_unica(request, id):
+    tarefa_unica = get_object_or_404(NovaTarefa, id=id)
+    print(tarefa_unica)
+
+
+
+
+    return render(request, 'modal_tarefa_unica.html', {'tarefa': tarefa_unica})
 
 
 @login_required(redirect_field_name='login')
@@ -59,21 +72,23 @@ def alteraprojeto(request):
         tarefas_json_json = json.loads(tarefas_json)
 
         # print(type(tarefas_json))
-        # print(type(tarefas_json_json))
+        # print(tarefas_json_json)
 
-        tarefas_data = []
-        for tarefa_data in tarefas_json_json:
-            tarefa_fields = tarefa_data['fields']
-            tarefas_data.append(tarefa_fields)
+        # tarefas_data = []
+        # for tarefa_data in tarefas_json_json:
+        #     tarefa_fields = tarefa_data['fields']
+        #     tarefas_data.append(tarefa_fields)
 
+    tarefas_json_f = [{'fields': tarefa['fields'], 'id_tarefa':tarefa['pk']} for tarefa in tarefas_json_json]
             # print(tarefa_fields['nome'])
             # print(tarefa_fields['descricao'])
             # print(tarefa_fields['data_de_criacao'])
 
-        print(tarefas_data)
+        # print(tarefas_data)
+    # print(tarefas_json_f)
 
     # return JsonResponse(tarefa_data)
-    return JsonResponse({'tarefas': tarefas_data})
+    return JsonResponse({'tarefas': tarefas_json_f})
     # return JsonResponse({'teste':1})  
 
 

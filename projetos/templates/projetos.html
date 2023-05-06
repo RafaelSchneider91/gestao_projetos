@@ -81,8 +81,9 @@
                     <tr>
                         <th>Nome Projeto</th>
                         <th>Status</th>
+                        <th>Progresso</th>
                         <th>Fase</th>
-                        <th>Prioridade</th>
+                        {% comment %} <th>Prioridade</th> {% endcomment %}
                         <th>Ação</th>
                     </tr>
 
@@ -98,11 +99,14 @@
                                     {{projetos.status}}
                                 </td>
                                 <td>
-                                    {{projetos.fase}}
+                                    10%
                                 </td>
                                 <td>
-                                    {{projetos.prioridade}}
+                                    {{projetos.fase}}
                                 </td>
+                                {% comment %} <td>
+                                    {{projetos.prioridade}}
+                                </td> {% endcomment %}
                                 <td>  
                                     <a href="{% url 'editar_projeto' projetos.id %}">
                                         <i class='bx bxs-edit' style="font-size: 25px; padding: 5px"></i>

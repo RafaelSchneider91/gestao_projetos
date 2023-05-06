@@ -14,6 +14,7 @@
 
 {% comment %} #TODO: CRIAR UM BOTAO METHOD POST PARA GRAVAR A ALTERAÇÃO NO BD; {% endcomment %}
 
+
 <div class="wrapper">
 	<div class="box">
 		<div class="titulo">
@@ -24,7 +25,9 @@
 			<div class="col-md">
 				<label>Projeto:</label>{% csrf_token %}
 				<select id="projeto_select" class="form-select input-tarefa" name="projeto" onchange="alteraprojeto()">
+					<option >Selecione um projeto...</option>
 					{% for projeto in projetos %}
+						
 						<option value={{projeto.id}}>{{projeto}}</option>
 					{% endfor %}
 
@@ -48,31 +51,32 @@
 		<br>
 
 		<div class="container">
-			<div id="tarefas_afazer" class="column">
-				<div class="column-header">A fazer</div>
+			<div class="column">
+				<div class="column-header">Não Iniciado</div>
 				<div class="task-list" id="afazer">
-					{% comment %} <div class="task">
-						<p>Tarefa 1</p>					
-					</div>
-					<div class="task">Tarefa 2</div> {% endcomment %}
+					{% comment %} Funcao do JS vai incluir as tarefas com status N, E, P, C {% endcomment %}
+					<div>
+
+						<div class="task" id="ModalEditarTarefa" onclick="openModal()">Editar a Tarefa Teste</div>
+
+						<!-- Modal Exibe/Editar Tarefa -->
+						{% comment %} {% include "modal_tarefa_unica.html" %}	 {% endcomment %}
+					</div>					
+
 				</div>
 				<div>
-					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#ModalNovaTarefa">
 						Nova Tarefa
 					</button>
 				</div>
 			</div>
-			{% comment %} <div class="column">
-				<div class="column-header">Fazendo</div>
-				<div class="task-list" id="fazendo">
-					<div class="task">Tarefa 3</div>
-					<div id="form_tarefas">					
-						<input id="nome_tarefa" type="text"  class="task">	
-					</div>
-					
+			<div class="column">
+				<div class="column-header">Em andamento</div>
+				<div class="task-list" id="EmAndamento">
+					{% comment %} Funcao do JS vai incluir as tarefas com status N, E, P, C {% endcomment %}
 				</div>
 				<div>
-					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#ModalNovaTarefa">
 						Nova Tarefa
 					</button>
 				</div>
@@ -80,118 +84,49 @@
 			<div class="column">
 				<div class="column-header">Pendente</div>
 				<div class="task-list" id="pendente">
-					<div class="task">Tarefa 4</div>
-					<div class="task">Tarefa 5</div>
+					{% comment %} Funcao do JS vai incluir as tarefas com status N, E, P, C  {% endcomment %}
 				</div>
 				<div>
-					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#ModalNovaTarefa">
 						Nova Tarefa
 					</button>
 				</div>
 			</div>
 			<div class="column">
-				<div class="column-header">Concluido</div>
+				<div class="column-header">Concluído</div>
 				<div class="task-list" id="concluido">
-					<div class="task">Tarefa 6</div>
-					<div class="task">Tarefa 7</div>
+					{% comment %} Funcao do JS vai incluir as tarefas com status N, E, P, C  {% endcomment %}
 				</div>
 				<div>
-					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#exampleModalCenter">
+					<button type="button" class="nova-tarefa-task" data-toggle="modal" data-target="#ModalNovaTarefa">
 						Nova Tarefa
 					</button>
 				</div>
-			</div> {% endcomment %}
-		</div>
-		<br>
-		<br>
-		<br>
-
-		{% comment %} <div id="form_tarefas">
-			<p>Tarefa</p>
-			<input id="nome_tarefa" type="text" class="form-control">
-			<p>Descricao</p>
-			<input id="descricao_tarefa" type="text" class="form-control">	
-		
-		</div> {% endcomment %}
-	
-
-		
-
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-			<div class="modal-header">
-				<h5 style="font-size: 30px" class="modal-title titulo" id="exampleModalLabel">Nova Tarefa</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
 			</div>
-			<form id="nova_tarefa" action="{% url 'tarefas' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-				<div>
-					<div class="modal-body">
-						<label>Projeto:</label>{% csrf_token %}
-						<select id="projeto_select" class="form-select input-tarefa" name="projeto" onchange="alteraprojeto()">
-							{% for projeto in projetos %}
-								<option value={{projeto.id}}>{{projeto}}</option>
-							{% endfor %}
-
-						</select>
-					</div>
-				</div>			
-				
-				<div class="modal-body">				
-					<label>Nome Tarefa:</label>
-					<input type="text" name="titulo" class="form-control" placeholder="Digite o nome da tarefa...">				
-				</div>
-				<div class="modal-body">				
-					<label>Descrição:</label>
-					{% comment %} <input type="text" name="descricao" class="form-control" placeholder="Digite uma descricao da tarefa..."> {% endcomment %}
-					<textarea name="descricao_tarefa" class="form-control" placeholder="Descrever a ação da tarefa..."></textarea>
-					
-				</div>
-				<div class="col-md">
-					<label>Status Tarefa:</label>
-						<select name="status_tarefa" class="form-select input-tarefa">
-							<option value="N">Não Iniciado</option>
-							<option value="E">Em andamento</option>
-							<option value="P">Pendente</option>
-							<option value="C">Concluido</option>
-
-						</select>
-				</div>
-				{% comment %} <div class="row">
-					<div class="modal-body">				
-						<label>Inicio Planejado:</label>
-						<input type="date" name="data_inicio_plan" class="form-control">	
-					</div>
-				</div> {% endcomment %}
-				<div>
-					<div class="modal-body">				
-						<label>Inicio Planejado:</label>
-						<input type="date" name="data_inicio_plan" class="form-control">
-					</div>
-				</div>
-				<div>
-					<div class="modal-body">				
-						<label>Fim Planejado:</label>
-						<input type="date" name="data_fim_plan" class="form-control">
-					</div>
-				</div>
-				
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-					{% comment %} <button type="button" class="btn-salvar-tarefa">Salvar</button> {% endcomment %}
-					<input type="submit" value="Salvar Tarefa" class="btn-nova-tarefa">
-				</div>
-			</form>
-			
-	
 		</div>
-		</div>
+		<br>
+		<br>
+		<br>
+		
 	</div>
+
+
+
 </div>
+
+<!-- Modal Nova Tarefa = templates -->
+{% include "modal_nova_tarefa.html" %}
+
+<!-- Modal Exibe/Editar Tarefa -->
+{% comment %} {% include "modal_tarefa_unica.html" %}	 {% endcomment %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 <script src="{% static 'tarefas/js/tarefas.js' %}"></script>
 
+
+
+
+
 {% endblock 'conteudo' %}
+
+
