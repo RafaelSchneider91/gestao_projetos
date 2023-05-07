@@ -46,8 +46,8 @@ class NovaDemanda(models.Model):
     def __str__(self) -> str:
         return self.nome
     
-
-    
+    class Meta:
+        verbose_name = 'Demanda'
 
 
 

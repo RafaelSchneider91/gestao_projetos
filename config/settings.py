@@ -152,3 +152,28 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'alert-success',
     constants.INFO: 'alert-info',
 }
+
+#Configuracoes de email
+# Email
+
+'''
+*** para add em producao utilizar
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+* acrestando novo parametros
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'meuemail@gmail.com' # conta gmail remetente
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+'''
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST_USER = "seu_email@email.com.br"
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'rafaelschneider.ap@gmail.com' # conta gmail remetente
+EMAIL_HOST_PASSWORD = 'oghjzjclnxijnxfl'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587

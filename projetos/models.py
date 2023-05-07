@@ -40,6 +40,9 @@ class NovoProjeto(models.Model):
     def __str__ (self) -> str:
         return self.nome_projeto.nome
     
+    class Meta:
+        verbose_name = 'Projeto'
+    
 class UsuariosProjeto(models.Model):
     projeto = models.ForeignKey(NovoProjeto, null=True, on_delete=models.CASCADE)
     usuario = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
@@ -56,6 +59,19 @@ class UsuariosProjeto(models.Model):
 
     def __int__(self) -> int:
         return self.projeto
+    
+
+class Emails(models.Model):
+    projeto = models.ForeignKey(NovoProjeto, on_delete=models.DO_NOTHING)
+    assunto = models.CharField(max_length=100)
+    corpo = models.TextField()
+    enviado = models.BooleanField()
+
+    def __str__(self):
+        return self.assunto
+    
+    class Meta:
+        verbose_name = 'Emails Enviado'
 
 
 

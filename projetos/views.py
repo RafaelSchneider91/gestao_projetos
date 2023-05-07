@@ -9,9 +9,16 @@ from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 import json
 from django.urls import reverse
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
+from django.conf import settings
+
+
+
 from demandas.models import NovaDemanda
 from tarefas.models import NovaTarefa
-from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto, PerfilUsuarios, UsuariosProjeto
+from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto, PerfilUsuarios, UsuariosProjeto, Emails
 
 @login_required(redirect_field_name='login')
 def novo_projeto(request):
@@ -70,47 +77,113 @@ def novo_projeto(request):
         if NovoProjeto.objects.filter(nome_projeto_id=nome_projeto_id).exists():
             messages.add_message(request, constants.ERROR, 'Projeto já cadastrado!')
             return redirect('novo_projeto')
-        try:
-            projeto.save()
-            projeto.equipe.add(*user_id)
-            projeto.save()
-            messages.add_message(request, constants.SUCCESS, 'Projeto cadastrado com sucesso!')
-            return redirect('novo_projeto')
-        except:
-            messages.add_message(request, constants.ERROR, 'Projeto não cadastrado! Verifique os parametros digitados!' )
-            return redirect('novo_projeto')
+        
+        
+    try:
+        projeto.save()
+        projeto.equipe.add(*user_id)
+        projeto.save()
+        messages.add_message(request, constants.ERROR, 'Projeto não cadastrado! Verifique os parametros digitados!' )
+        return redirect('novo_projeto')
+                        
+    
+    except:
+        
+        messages.add_message(request, constants.SUCCESS, 'Projeto cadastrado com sucesso!')
+        return redirect('novo_projeto')  
+
+
+@login_required(redirect_field_name='login')
+def envia_email(request, id_projeto):
+    if request.method == 'POST':
+        projeto_unico = NovoProjeto.objects.get(id=id_projeto)
+        usuarios_projeto = UsuariosProjeto.objects.filter(recebe_email=1, projeto_id=id_projeto)
+        # usuarios = User.objects.filter(id=4)
+
+        ids_usuarios_projeto = usuarios_projeto.values_list('usuario_id', flat=True)
+
+        usuarios = User.objects.filter(id__in=ids_usuarios_projeto)
+
+
+
+        # print(usuarios)
+        #TODO: fazer validacao se o projeto selecionado possui algum usuario que recebe email;
+
+        # for usuarioa in usuarios_projeto:
+        #     print(usuarioa.usuario_id)
+
+        email_usuarios = [usuario.email for usuario in usuarios]
+        usuario = [usuario.first_name for usuario in usuarios]
+
+
+        # if email_usuarios == '':
+        #     messages.add_message(request, constants.ERROR, 'Projeto não possui usuarios que recebem email!')
+        #     return redirect(f'/projeto/{id_projeto}')
+
+             
+        
+
+        
+        assunto = request.POST.get('assunto')
+        corpo = request.POST.get('corpo')
+
+        contexto = {'usuario': usuario, 
+                    'projeto_unico': projeto_unico,
+                    'corpo': corpo
+                    }
+        
+
+        html_content = render_to_string('emails/report_projeto.html',
+                                        contexto
+                                        )
+        
+        text_content = strip_tags(html_content)
+
+        email = EmailMultiAlternatives(assunto, 
+                                    text_content, 
+                                    settings.EMAIL_HOST_USER,
+                                    email_usuarios,
+                                    )
+        
+        email.attach_alternative(html_content, "text/html")
+
+        email.send()
+
+
+
+        if len(email_usuarios) == 0:
+            messages.add_message(request, constants.ERROR, 'Projeto não possui usuarios que recebem email!')
+            return redirect(f'/projeto/{id_projeto}') 
+
+        elif email.send():
+            mail = Emails(
+                projeto=projeto_unico,
+                assunto=assunto,
+                corpo=corpo,
+                enviado=True
+            )
+            mail.save()
+            messages.add_message(request, constants.SUCCESS, 'Email enviado com sucesso.')
+            return redirect(f'/projeto/{id_projeto}')    
+                
+        
+        else:
+            mail = Emails(
+                projeto=projeto_unico,
+                assunto=assunto,
+                corpo=corpo,
+                enviado=False
+            )
+            mail.save()
+            messages.add_message(request, constants.ERROR, 'Erro interno do sistema!')
+            return redirect(f'/projeto/{id_projeto}') 
+                
 
 
 def usuarios_projeto(request, id):
     corpo = request.body
     print(corpo)
     return JsonResponse({'teste': 'teste'})
-
-
-
-
-
-    # projeto = NovoProjeto.objects.filter(nome_projeto_id=id)
-
-    # projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
-    # projeto_id = json.loads(serializers.serialize('json', projeto_json))
-
-    # print(projeto_id)
-
-    # body = json.loads(request.body)
-    # id_projeto = get_object_or_404(NovoProjeto, id=id)
-    # projeto = NovoProjeto.objects.filter(nome_projeto_id=id_projeto)
-    # usuarios = UsuariosProjeto.objects.filter(projeto=projeto[0])
-    # projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
-    # projeto_id = json.loads(serializers.serialize('json', usuarios))
-    # usuarios_json = json.loads(serializers.serialize('json', usuarios))
-    # usuarios_json_f = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
-    # lst_usuarios_json = [json.loads(serializers.serialize('json', User.objects.filter(id=usuarioss['fields']['usuario']))) for usuarioss in usuarios_json_f]
-    # perfil_usuarios_json = [{'fields': i['fields'], 'perfil': i['pk']} for i in usuarios_json]
-    # perfis = [elemento['fields']['perfil'] for elemento in usuarios_json]
-    # perfil_usuario_projeto = [json.loads(serializers.serialize('json', PerfilUsuarios.objects.filter(id=perfils['fields']['perfil']))) for perfils in perfil_usuarios_json] 
-    # data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id, 'perfil':perfil_usuario_projeto}
-
 
 
 def add_usuarios_projeto(request):
@@ -136,9 +209,6 @@ def add_usuarios_projeto(request):
     print(id_projeto)
     # return JsonResponse({'data': 1})
     return JsonResponse(data)
-
-
-
 
 
 @login_required(redirect_field_name='login')
@@ -180,7 +250,10 @@ def projeto_unico (request, id):
     total_tarefas = NovaTarefa.objects.filter(projeto_id = id).count()
     total_tarefas_nao_concluidas = NovaTarefa.objects.filter(projeto_id = id, status_tarefa='C').count()
 
-    percentual_projeto = round(((total_tarefas_nao_concluidas/total_tarefas)*100))
+    if total_tarefas_nao_concluidas != 0:
+        percentual_projeto = round(((total_tarefas_nao_concluidas/total_tarefas)*100))
+    else:
+        percentual_projeto = 0
     
 
     # print(percentual_projeto)
@@ -189,14 +262,16 @@ def projeto_unico (request, id):
 
     projetos = NovoProjeto.objects.all()
 
-    return render(request, 'projeto_unico.html', {'projeto': projeto_unico,
-                                                 'projetos':projetos,
-                                                 'status': status,
-                                                 'faseprojeto':faseprojeto,
-                                                 'demanda_unica': demanda_unica,
-                                                 'usuarios_projeto': usuarios_projeto
-                                                 ,'percentual_projeto': percentual_projeto
-                                                 })
+    contexto = {'projeto': projeto_unico,
+                'projetos':projetos,
+                'status': status,
+                'faseprojeto':faseprojeto,
+                'demanda_unica': demanda_unica,
+                'usuarios_projeto': usuarios_projeto,
+                'percentual_projeto': percentual_projeto
+                }
+
+    return render(request, 'projeto_unico.html', contexto)
 
 @login_required(redirect_field_name='login')
 def editar_projeto(request, id):

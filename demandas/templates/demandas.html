@@ -17,13 +17,7 @@
     <div class="wrapper">
         <div class="box"> 
             <div class="header-box">
-                {% if messages %}
-                    {% for message in messages %}
-                        <section class="alert {{message.tags}}">
-                            {{message}}
-                        </section>
-                    {% endfor %}
-                {% endif %}
+                {% include "parciais/_messages.html" %}
 
                 
 

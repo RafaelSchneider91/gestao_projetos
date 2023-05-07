@@ -4,12 +4,22 @@
     </head>
 
     <body>
-        {{Projeto ABC}}
+        <h1>Ola, Equipe,</h1> 
+        {% comment %} #TODO: verificar se vai ser enviado o email para a equipe inteira, ou para casas usuario, 
+        ver para criar um loop, enviando um email por vez; {% endcomment %}
+        <h2>segue o Status Report do</h2>
+        <h3>Projeto: {{projeto_unico}}</h3>
 
+
+        <p>Informações Adicionais:</p>
         {{corpo}}
         
+        
+        <br>
+        <br>
+                
         <footer>
-            E-mail enviado por SELETIVE.
+            E-mail enviado por Equipe SM.
         </footer>
     </body>
 

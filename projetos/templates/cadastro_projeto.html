@@ -20,19 +20,8 @@
             </div>
 
                 {% comment %} mensagem de alerta! {% endcomment %}
-                {% if messages %}
-    
-                    {% for message in messages %}
-                        <br>
-                        
-                        <section class="alert {{message.tags}}">
-                            {{message}}
-                        </section>
-                    
-                    {% endfor %}
-            
-                {% endif %}
-            {% comment %} mensagem de alerta! {% endcomment %}
+                {% include "parciais/_messages.html" %}
+                {% comment %} mensagem de alerta! {% endcomment %}
 
             <div class="body-box">
                 <form id="id_projeto" action="{% url 'novo_projeto' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
