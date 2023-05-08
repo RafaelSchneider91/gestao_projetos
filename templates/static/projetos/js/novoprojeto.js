@@ -17,6 +17,8 @@ function add_usuarios_projeto2(){
 }
 
 
+
+
 function add_usuarios_projeto() {
     projeto = document.getElementById('projeto_select')
     csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value
@@ -78,4 +80,37 @@ function add_usuarios_projeto() {
 
     })
 }
+
+
+(async function novo_projeto_addusuario (){
+    try {
+
+        projeto = document.getElementById('projeto_select')
+        
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'testando': 'teste',
+        };
+
+        const init = {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify ( {
+                title: 'testando'
+            }),
+        };
+
+        const response = await fetch('/add_usuarios_projeto/', init, );
+        const jsonData = await response.json();
+        console.log(jsonData);
+    } 
+    catch(erro){
+        console.log('deu erro', erro);
+    }
+    
+})();
+
+
+
 

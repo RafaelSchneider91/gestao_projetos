@@ -15,7 +15,8 @@ class NovoProjetoAdmin(admin.ModelAdmin):
     list_filter = (['nome_projeto', 'data_cadastro'])
 
 class EmailsAdmin(admin.ModelAdmin):
-    list_display = ('projeto','assunto')
+    list_display = ('projeto','assunto','enviado')
+    list_filter = (['projeto', 'data_cadastro'])
 
 
 

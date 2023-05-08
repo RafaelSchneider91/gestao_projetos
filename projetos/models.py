@@ -66,6 +66,7 @@ class Emails(models.Model):
     assunto = models.CharField(max_length=100)
     corpo = models.TextField()
     enviado = models.BooleanField()
+    data_cadastro = models.DateTimeField(default = timezone.now)
 
     def __str__(self):
         return self.assunto
