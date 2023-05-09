@@ -13,12 +13,10 @@ from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.conf import settings
-
-
-
 from demandas.models import NovaDemanda
 from tarefas.models import NovaTarefa
 from projetos.models import StatusProjeto, FaseProjeto, NovoProjeto, PerfilUsuarios, UsuariosProjeto, Emails
+
 
 @login_required(redirect_field_name='login')
 def novo_projeto(request):
@@ -179,38 +177,43 @@ def envia_email(request, id_projeto):
             return redirect(f'/projeto/{id_projeto}') 
                 
 
-
-# def usuarios_projeto(request):
-#     corpo = request.body
-#     print(corpo)
-#     return JsonResponse({'teste': 'teste'})
-
-
+@login_required(redirect_field_name='login')
 def add_usuarios_projeto(request):
-    id_projeto = request.POST.get('id_projeto')
-    projeto = NovoProjeto.objects.filter(nome_projeto_id=id_projeto)
-    usuarios = UsuariosProjeto.objects.filter(projeto=projeto[0])
-    projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
-    projeto_id = json.loads(serializers.serialize('json', usuarios))
-    usuarios_json = json.loads(serializers.serialize('json', usuarios))
-    usuarios_json_f = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
-    lst_usuarios_json = [json.loads(serializers.serialize('json', User.objects.filter(id=usuarioss['fields']['usuario']))) for usuarioss in usuarios_json_f]
-    perfil_usuarios_json = [{'fields': i['fields'], 'perfil': i['pk']} for i in usuarios_json]
-    perfil_usuario_projeto = [json.loads(serializers.serialize('json', PerfilUsuarios.objects.filter(id=perfils['fields']['perfil']))) for perfils in perfil_usuarios_json] 
-    data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id, 'perfil':perfil_usuario_projeto}
+    if request.method == 'GET':
+        usuarios = User.objects.all()
+        perfil = PerfilUsuarios.objects.all()
+        usuarios_json = json.loads(serializers.serialize('json', usuarios))
+        perfil_json = json.loads(serializers.serialize('json', perfil))
+        usuarios_json_f = [{'user': i['fields']} for i in usuarios_json]
+        perfil_json_f = [{'perfil': i['fields']} for i in perfil_json]
+
+
+        # for a in usuarios:
+        #     print(a.id)
+
+        # print(usuarios_json_f)
+      
+        return JsonResponse({'usuarios': usuarios_json_f,
+                             'perfil': perfil_json_f
+                             })
+
+
+#     id_projeto = request.POST.get('id_projeto')
+#     projeto = NovoProjeto.objects.filter(nome_projeto_id=id_projeto)
+#     usuarios = UsuariosProjeto.objects.filter(projeto=projeto[0])
+#     projeto_json = json.loads(serializers.serialize('json', projeto))[0]['fields']
+#     projeto_id = json.loads(serializers.serialize('json', usuarios))
+#     usuarios_json = json.loads(serializers.serialize('json', usuarios))
+#     usuarios_json_f = [{'fields': i['fields'], 'id': i['pk']} for i in usuarios_json]
+#     lst_usuarios_json = [json.loads(serializers.serialize('json', User.objects.filter(id=usuarioss['fields']['usuario']))) for usuarioss in usuarios_json_f]
+#     perfil_usuarios_json = [{'fields': i['fields'], 'perfil': i['pk']} for i in usuarios_json]
+#     perfil_usuario_projeto = [json.loads(serializers.serialize('json', PerfilUsuarios.objects.filter(id=perfils['fields']['perfil']))) for perfils in perfil_usuarios_json] 
+#     data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id, 'perfil':perfil_usuario_projeto}
     
+    elif request.method == "POST":
     
-    return JsonResponse(data)
-    # return JsonResponse({"teste": 1})
+        pass
 
-
-
-
-
-
-    print(id_projeto)
-    # return JsonResponse({'data': 1})
-    return JsonResponse(data)
 
 
 @login_required(redirect_field_name='login')

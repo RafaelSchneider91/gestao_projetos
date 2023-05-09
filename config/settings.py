@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -172,8 +173,19 @@ EMAIL_PORT = 587
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_USER = "seu_email@email.com.br"
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'rafaelschneider.ap@gmail.com' # conta gmail remetente
-EMAIL_HOST_PASSWORD = 'oghjzjclnxijnxfl'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'rafaelschneider.ap@gmail.com' # conta gmail remetente
+# EMAIL_HOST_PASSWORD = 'oghjzjclnxijnxfl'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+
+# Local p/ Conexao do Login
+current_user = os.getlogin()
+dotenv_path = Path(f'C:\\Users\\{current_user}\\.env')
+env = load_dotenv(dotenv_path=dotenv_path)
+
+EMAIL_HOST = 'mail.stara.com.br'
+EMAIL_HOST_USER = 'rschneider@stara.com.br' 
+EMAIL_HOST_PASSWORD = os.environ['PASSWORD'] #TODO: ver se não é melhor buscar do LDAP ou https://jobu.com.br/2021/06/26/como-esconder-uma-senha-em-um-script-python/ criar um usuario para envio do email;
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_PORT = 25
