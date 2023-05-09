@@ -104,47 +104,52 @@
                             <input type="checkbox" id="checkbox" name="staralabs" value="true">
                         </div>
                     </div>
-                    <hr style="background-color:gray;">
-                        <div>
-                       
-                            <table id = "novo_usuario" class="col-md">
-                                <h3>Cadastrar Usuarios do Projeto:</h3>
+                    <hr>
+                    <h3>Cadastrar Usuarios do Projeto:</h3>
+                    <br>
+                        <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">+ Novo Membro</span>                            
+                    <br>
+
+                    <div id="form-usuarios">                    
+
+                    
+                    </div>
+
+
+                    {% comment %} <div>                    
+                        <br>  
+                        <div class='row'> 
+                            <div class='col-md'>
+                            <label>Usuario:</label>
+                                <select class="form-control" name="usuario">
+                                    <option value="a">aaaaaaaaaaaa</option>
+                                    <option value="b">bbbbbbbbbbbb</option>                                
+                                </select> 
+                            </div>
+                            <div class='col-md'>
+                                <label>Perfil:</label>
+                                <select class="form-control" name="perfil">
+                                    <option value="a">aaaaaaaaaaaa</option>
+                                    <option value="b">bbbbbbbbbbbb</option>                                
+                                </select>
+                            </div> 
+                            <div class='col-md'>                                 
+                                <label>Recebe_email:</label>
                                 <br>
-                                    <span class="btn-add-usuarios" onclick="add_usuarios_projeto()">+ Novo Membro</span>                            
-                                <br>
-                                    <th> 
-                                    {% comment %} #TODO: salvar o novo usuario e ao clicar em novo membro criar uma nova linha para cadastrar mais usuario; {% endcomment %}
-                                    <br>
-                                        <select class="form-select input-tarefa" name="usuario">
-                                            {% for usuario in usuarios %}                                
-                                                <option value={{usuario.id}}>{{usuario.first_name}} {{usuario.last_name}} </option>            
-                                            {% endfor %} 
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <select class="form-select input-tarefa" name="perfil">
-                                            {% for perfil in perfis %}                                
-                                                <option value={{perfil.id}}>{{perfil}}</option>            
-                                            {% endfor %} 
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <div class="form-select input-tarefa">
-                                            <label for="checkbox">Enviar email</label>
-                                            <input type="checkbox" id="checkbox" name="recebe_email" value="true">
-                                        </div>
-                                        
-                                    </th>
-                            </table>
-                        </div>
-                        {% comment %} <div id="add_usuarios_projeto">
-                          
-                        </div> {% endcomment %}
+                                <input type="checkbox" name="recebe_email" value="true">
+                            </div> 
+                        </div>                    
+                    </div> {% endcomment %}
+    
                     <hr>
                     <input type="submit" value="Novo Projeto" class="btn btn-lg btn-orange">
                 </form>   
             </div>
         </div>
     </div>
-    <script src="{% static 'projetos/js/novoprojeto.js' %}"></script>
+
+<script src="{% static 'projetos/js/novoprojeto.js' %}"></script>
+
+    
 {% endblock%}
+

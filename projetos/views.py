@@ -180,10 +180,10 @@ def envia_email(request, id_projeto):
                 
 
 
-def usuarios_projeto(request, id):
-    corpo = request.body
-    print(corpo)
-    return JsonResponse({'teste': 'teste'})
+# def usuarios_projeto(request):
+#     corpo = request.body
+#     print(corpo)
+#     return JsonResponse({'teste': 'teste'})
 
 
 def add_usuarios_projeto(request):
@@ -198,6 +198,8 @@ def add_usuarios_projeto(request):
     perfil_usuarios_json = [{'fields': i['fields'], 'perfil': i['pk']} for i in usuarios_json]
     perfil_usuario_projeto = [json.loads(serializers.serialize('json', PerfilUsuarios.objects.filter(id=perfils['fields']['perfil']))) for perfils in perfil_usuarios_json] 
     data = {'usuario': lst_usuarios_json, 'projetos': projeto_json, 'projeto_id': projeto_id, 'perfil':perfil_usuario_projeto}
+    
+    
     return JsonResponse(data)
     # return JsonResponse({"teste": 1})
 
