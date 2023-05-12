@@ -186,6 +186,7 @@ env = load_dotenv(dotenv_path=dotenv_path)
 
 EMAIL_HOST = 'mail.stara.com.br'
 EMAIL_HOST_USER = 'rschneider@stara.com.br' 
-EMAIL_HOST_PASSWORD = os.environ['PASSWORD'] #TODO: ver se não é melhor buscar do LDAP ou https://jobu.com.br/2021/06/26/como-esconder-uma-senha-em-um-script-python/ criar um usuario para envio do email;
+# EMAIL_HOST_PASSWORD = os.environ['PASSWORD'] #TODO: ver se não é melhor buscar do LDAP ou https://jobu.com.br/2021/06/26/como-esconder-uma-senha-em-um-script-python/ criar um usuario para envio do email;
+EMAIL_HOST_PASSWORD = 'a'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 25

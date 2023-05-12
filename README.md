@@ -9,6 +9,8 @@ https://drive.google.com/file/d/1oowAj_0-wqSeZILn5znYn1BdTqhz4sDk/view?usp=shari
 #TODO: incluir registro de ata;
 #TODO: incluir mensagem html para comunicação do status de projeto, gatilho automatico.
 #TODO: perfil de acesso: visualizador, analista, desenvolvedor;
+#TODO: ver como incluir notificações - https://www.youtube.com/watch?v=_LsuQtcGkxI&t=846s&ab_channel=pythonando
+
 #TODO: plano de testes?
 #TODO: documentacao do projeto(analise negocio, sistema)
 
