@@ -184,14 +184,16 @@ def add_usuarios_projeto(request):
         perfil = PerfilUsuarios.objects.all()
         usuarios_json = json.loads(serializers.serialize('json', usuarios))
         perfil_json = json.loads(serializers.serialize('json', perfil))
-        usuarios_json_f = [{'user': i['fields']} for i in usuarios_json]
-        perfil_json_f = [{'perfil': i['fields']} for i in perfil_json]
+        usuarios_json_f = [{'user': i['fields'], 'id': i['pk']} for i in usuarios_json]
+        perfil_json_f = [{'perfil': i['fields'], 'id': i['pk']} for i in perfil_json]
+
+
 
 
         # for a in usuarios:
         #     print(a.id)
 
-        # print(usuarios_json_f)
+        # print(perfil_json)
       
         return JsonResponse({'usuarios': usuarios_json_f,
                              'perfil': perfil_json_f

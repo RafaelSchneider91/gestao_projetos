@@ -71,20 +71,20 @@ function add_usuarios_projeto() {
       
         for (let i = 0; i < data['usuarios'].length; i++) {
         const usuario = data['usuarios'][i]['user']['first_name']+ " " +  data['usuarios'][i]['user']['last_name'] ;
-        //const idusuario = data['']
+        const idusuario = data['usuarios'][i]['id']
         const option = document.createElement('option');
         option.text = usuario;
-        option.value = usuario;
+        option.value = idusuario;
         selectUsuario.add(option);
       }
 
 
       for (let i = 0; i < data['perfil'].length; i++) {
         const perfil = data['perfil'][i]['perfil']['perfil'];
-        //const idusuario = data['']
+        const idusuario = data['perfil'][i]['id']
         const option = document.createElement('option');
         option.text = perfil;
-        option.value = perfil;
+        option.value = idusuario;
         selectPerfil.add(option);
       }
 
