@@ -10,12 +10,10 @@ from django.contrib.messages import constants
 from django.db.models import Q
 
 
-
 @login_required(redirect_field_name='login')
 def demandas_projeto(request):
     return render(request,'demandas_projeto.html')
 
-### nova demanda
 @login_required(redirect_field_name='login')
 def cadastro_novademanda(request):
     if request.method == "GET":
@@ -114,14 +112,14 @@ def demandas(request):
                                                 'projetos': projetos,
                                                 'demandas_sem_projeto':demandas_sem_projeto
                                                 })
-    elif request.method == "POST":
-        status_modal = request.POST.get('status_modal')
-        print(status_modal)
+    # elif request.method == "POST":
+    #     status_modal = request.POST.get('status_modal')
+    #     print(status_modal)
 
-        demandas = NovaDemanda(status = status_modal) #TODO: verificar como salvar a alteração;
+    #     demandas = NovaDemanda(status = status_modal) #TODO: verificar como salvar a alteração;
            
-        demandas.save()
-        return redirect('demandas')
+    #     demandas.save()
+    #     return redirect('demandas')
 
 
 @login_required(redirect_field_name='login')
@@ -137,6 +135,11 @@ def demanda_unico (request, id):
                                                  'demandas':demandas,
                                                  })
 
-        
+@login_required(redirect_field_name='login')
+def alterastatus(request, id):
+    if request.method == 'POST':
+        demanda_unico = get_object_or_404(NovaDemanda, id=id)
+        status_novo = request.POST.get('status_modal')
 
+    return HttpResponse('ola')
 

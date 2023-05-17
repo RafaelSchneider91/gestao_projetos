@@ -38,15 +38,6 @@
                             <h6>Nome demanda</h6>
                             <input type="text" placeholder="Busque pelo nome da demanda..." class="form-control" name="nome_demanda_filtro">
                         </div>
-
-                        {% comment %} <div class="col-md-2">
-                            <h6>Status</h6>
-                            <select class="form-control" name="status_projeto_filtrar">
-                                {% for status_projetos in status_projeto %}
-                                    <option value="{{status_projetos.id}}">{{status_projetos}}</option>
-                                {% endfor %}
-                            </select>
-                        </div> {% endcomment %}
                     <div class="titulo">
                         <input type="submit" value="Filtrar" class="btn-filtrar_limpar">
                         <input type="submit" value="Limpar" class="btn-filtrar_limpar" name="limpar_filtros">               

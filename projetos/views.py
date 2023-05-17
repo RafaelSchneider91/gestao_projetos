@@ -267,6 +267,15 @@ def projeto_unico (request, id):
     
     usuarios_projeto = UsuariosProjeto.objects.filter(projeto_id = id)
 
+    for usuario_projeto in usuarios_projeto:
+   
+        user = usuario_projeto.usuario
+
+        username = user.username
+        email = user.email
+        print(username, email)
+
+            
     projetos = NovoProjeto.objects.all()
 
     contexto = {'projeto': projeto_unico,

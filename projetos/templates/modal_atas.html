@@ -4,21 +4,96 @@
 
 
 <div class="modal fade" id="modalata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title titulo" id="myModalLabel">Cadastro/Envio de Ata</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-            <div>
-            
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title titulo" id="myModalLabel">Cadastro de Ata</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
             </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td>Data/hora:</td>
+                            <th class="col-md"><input type="datetime-local"></th>
+                            
 
+                        </tr>
+                        <tr>
+                            <td>Assunto:</td>
+                            <th class="col-md"><input type="text"></th>
+                        </tr>
+                        
+                        <tr>
+                            <td>Local:</td>
+                            <th class="col-md"><input type="text"></th>
+                        </tr>
+            
+                        
+
+
+                    </table>
+            </div>
+            <div>
+                    <hr>
+                    <table>
+                        <tr>
+                            <td>Participantes:</td>
+                            <th>
+                                <td>
+                                    <select class="form-select input-tarefa" name="usuario_id" multiple>
+                                        <option value="" disabled selected>Selecione o usuario...</option>
+                                            {% for usuario in usuarios_projeto %}                                    
+                                                <option value={{usuario.id}}>{{usuario.usuario.first_name}} {{usuario.usuario.last_name}}</option>                
+                                            {% endfor %} 
+                                    </select>
+                                </td>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Distribuído:</td>
+                             <th>
+                                <td>
+                                    <select class="form-select input-tarefa" name="usuario_id" multiple>
+                                        <option value="" disabled selected>Selecione o usuario...</option>
+                                            {% for usuario in usuarios_projeto %}                                    
+                                                <option value={{usuario.id}}>{{usuario.usuario.first_name}} {{usuario.usuario.last_name}}</option>                
+                                            {% endfor %} 
+                                    </select>
+                                </td>
+                            </th>
+                        </tr>
+                        <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item/ID</th>
+                                <th>Atividade/Assunto</th>
+                                <th>Quem?</th>
+                                <th>Quando?</th>
+                            </tr>   
+                        </thead>
+                                <tbody>                    
+                                    <td>
+                                  
+                                    </td>
+                                    <td>
+                  
+                                    </td>
+                                    <td>
+                    
+                                    </td>
+                                </tbody>
+                        </table>
+                    
+                    
+                    </table>
+                    <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalata">+Novo Atividade/Assunto</button>
+                </div>
+            </div>
             <div class="modal-footer">
+            
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
             </div>
         </div>
     </div>
-</div>
 </div>

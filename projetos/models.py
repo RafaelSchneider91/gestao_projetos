@@ -74,7 +74,27 @@ class Emails(models.Model):
     class Meta:
         verbose_name = 'Emails Enviado'
 
+class Ata(models.Model):
 
+    choices_categoria = (
+        ('I', 'Informação'),
+        ('P', 'Pendência'),
+        ('O', 'Outros')
+    )
+
+    projeto = models.ForeignKey(NovoProjeto, on_delete=models.CASCADE)
+    data_hora_reunião = models.DateTimeField(default = timezone.now)
+    assunto = models.CharField(max_length=100)
+    categoria = models.CharField(max_length=50, choices=choices_categoria, default='M')
+    local = models.CharField(max_length=100)
+    participantes = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE)
+    distribuido = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE, related_name='distribuido')
+    atividadeouassunto = models.TextField()
+    quem = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE, related_name='quem')
+    quando = models.DateField(null=True, blank=True)
+    data_cadastro = models.DateTimeField(default = timezone.now)
+
+    
 
 
 

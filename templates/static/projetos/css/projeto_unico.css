@@ -78,3 +78,12 @@ object {
 #usuarios_projeto {
     display: none;
 }
+
+.modal-content {
+    display: flex;
+    /* width: 60vw; */
+    justify-content: center;
+
+
+}
+
