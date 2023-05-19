@@ -225,6 +225,14 @@ def projetos (request):
     limpar_filtros = request.GET.get('limpar_filtros')
     fase_projeto_filtrar = request.GET.get('fase_projeto_filtrar')
 
+    tarefas = NovaTarefa.objects.all()
+    
+    for projeto in projetos:
+        projeto.total_tarefas_nao_concluidas = projeto.novatarefa_set.exclude(status_tarefa='Concluido').count()
+
+
+
+
     projeto = NovoProjeto.objects.all()
     status_projeto = StatusProjeto.objects.all()
     fase_projeto = FaseProjeto.objects.all()
@@ -246,7 +254,11 @@ def projetos (request):
 
     return render(request, 'projetos.html', {'projeto': projeto,
                                              'status_projeto': status_projeto,
-                                             'fase_projeto': fase_projeto})
+                                             'fase_projeto': fase_projeto,
+                                             'projetos': projetos
+                                            #  'tarefas': tarefas,
+                                            #  'total_tarefas_nao_concluidas': total_tarefas_nao_concluidas
+                                             })
 
 @login_required(redirect_field_name='login')
 def projeto_unico (request, id):

@@ -81,14 +81,14 @@
                     <tr>
                         <th>Nome Projeto</th>
                         <th>Status</th>
-                        <th>Progresso</th>
+                        <th>Total Tarefas</th>
+                        <th>Total Nao Concluidas</th>
                         <th>Fase</th>
                         {% comment %} <th>Prioridade</th> {% endcomment %}
                         <th>Ação</th>
                     </tr>
 
                         {% for projetos in projeto %}
-                            
                             
                             <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} >
 
@@ -99,51 +99,31 @@
                                     {{projetos.status}}
                                 </td>
                                 <td>
-                                    10%
+                                    {{ projetos.novatarefa_set.count }}
+                                </td>
+                                <td>
+                                    1
                                 </td>
                                 <td>
                                     {{projetos.fase}}
                                 </td>
-                                {% comment %} <td>
-                                    {{projetos.prioridade}}
-                                </td> {% endcomment %}
+
                                 <td>  
                                     <a href="{% url 'editar_projeto' projetos.id %}">
                                         <i class='bx bxs-edit' style="font-size: 25px; padding: 5px"></i>
                                         <span class="tooltip">Editar Projeto</span>
                                       </a>
-                                       
-                                        {% comment %} <a href="{% url 'tarefas' projetos.id %}">
-                                        <i class="bx bx-task" style="font-size: 25px;"></i>
-                                        <span class="links_name"></span>
-                                        </a>
-                                        <span class="tooltip">Tarefas</span> {% endcomment %}
-                                   
-                                      
                                 </td>
-                                
-                                
-                               {% comment %} <td> {% endcomment %}
-                                   
-                                    {% comment %}<select class="form-select">  
-                                        {% for tech in empresa.tecnologias.all %}     
-                                            <option>{{tech}}</option>
-                                        {% endfor %}            
-                                    </select>
-                                </td> {% endcomment %}
-                                {% comment %} <td class='td_vagas'>
-                                    {% if empresa.qtd_vagas > 0 %}
-                                        <img src="{% static 'empresa/img/flag_green.png'%} " width="15" height="15">
-                                        {{empresa.qtd_vagas}}
-                                    {% else %}
-                                        <img src="{% static 'empresa/img/flag_red.png'%}" width="15" height="15">
-                                        {{empresa.qtd_vagas}}
-                                    {% endif %}
-                                </td> {% endcomment %}
-                                {% comment %} <td>
-                                    <a href="{% url 'excluir_empresa' empresa.id %}" class="btn-excluir">Excluir empresa</a>
-                                </td> {% endcomment %}
                             </tr>
+                            {% comment %} {% for tarefa in projeto.tarefas_set.all %}
+                                <!-- Aqui você pode exibir informações adicionais sobre cada tarefa -->
+                                <tr>
+                                    <td colspan="5">
+                                        {{ tarefas.nome }} - {{ tarefas.status }}
+                                    </td>
+                                </tr>
+                            {% endfor %} {% endcomment %}
+
                         {% endfor %}
                     
                 </table> 
