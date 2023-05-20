@@ -1,9 +1,8 @@
 {% if messages %}
-    <br>
-    <br>
-        {% for message in messages %}
-            <div class="alert {{message.tags}}" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-{% endif %}
+    {% for message in messages %}
+        <br>
+        <section class="alert {{message.tags}}">
+            {{message}}
+        </section>
+    {% endfor %}
+{% endif %} 

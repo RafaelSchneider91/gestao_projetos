@@ -20,19 +20,8 @@
             </div>
 
                 {% comment %} mensagem de alerta! {% endcomment %}
-                {% if messages %}
-    
-                    {% for message in messages %}
-                        <br>
-                        
-                        <section class="alert {{message.tags}}">
-                            {{message}}
-                        </section>
-                    
-                    {% endfor %}
-            
-                {% endif %}
-            {% comment %} mensagem de alerta! {% endcomment %}
+                {% include "parciais/_messages.html" %}
+                {% comment %} mensagem de alerta! {% endcomment %}
 
             <div class="body-box">
                 <form action="{% url 'cadastro_novademanda' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
@@ -51,16 +40,6 @@
                             <textarea name="descricao" class="form-control" placeholder="Descreve o objetivo da demanda..."></textarea>
                         </div>
                     </div>
-                    {% comment %} <br> 
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Categoria:</label>
-                                <select name="categoria" class="form-select input-tarefa">
-                                    <option value="M">Melhoria</option>
-                                    <option value="P">Projeto</option>
-                                </select>
-                        </div>
-                    </div> {% endcomment %}
                     <br>   
                     <div class="row">
                         <div class="col-md">

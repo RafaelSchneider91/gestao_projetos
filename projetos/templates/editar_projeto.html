@@ -11,14 +11,7 @@
     
     <br>
     <div class="container">
-        {% if messages %}
-            {% for message in messages %}
-                <br>
-                <section class="alert {{message.tags}}">
-                    {{message}}
-                </section>
-            {% endfor %}
-        {% endif %} 
+        {% include "parciais/_messages.html" %}
         
         {% comment %} <form action="{% url 'editar_projeto' projeto.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %} {% endcomment %}
         <form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}

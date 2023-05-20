@@ -68,3 +68,31 @@ function usuarios_projeto_teste() {
   });
 
 }
+
+function novaatividade() {
+  
+  container = document.getElementById('atividade')
+
+  html = "<br>  <div class='row'> <div class='col-md'> <input type='text' placeholder='carro' class='form-control' name='carro' > </div> <div class='col-md'><input type='text' placeholder='Placa' class='form-control' name='placa' ></div> <div class='col-md'> <input type='number' placeholder='ano' class='form-control' name='ano'> </div> </div>"
+
+html2 = "<tbody>\
+<td>\
+<p>1</p>\
+</td>\
+<td>\
+<p>Informação</p>\
+</td>\
+<td>\
+<textarea type='text' placeholder='assunto' class='form-control' name='assunto' > </textarea>\
+</td>\
+<td>\
+<p>Rafael</p>\
+</td>\
+<td>\
+<input type='date' placeholder='dataentrega' class='form-control' name='dataentrega' >\
+</td>\
+</tbody>"
+
+
+  container.innerHTML += html2
+}

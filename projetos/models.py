@@ -30,7 +30,7 @@ class NovoProjeto(models.Model):
     status = models.ForeignKey(StatusProjeto, on_delete=models.CASCADE, null=True, blank=False)
     categoria = models.CharField(max_length=50, choices=choices_categoria, default='M')
     fase = models.ForeignKey(FaseProjeto, on_delete=models.CASCADE, null=True, blank=False)
-    data_cadastro = models.DateTimeField(default = timezone.now) #TODO: esta cadastrando 3 hr a mais
+    data_cadastro = models.DateTimeField(default = timezone.now)
     staramais = models.BooleanField(default=False)
     staralabs = models.BooleanField(default=False)
     prioridade = models.PositiveIntegerField(default=1000)
@@ -39,6 +39,9 @@ class NovoProjeto(models.Model):
 
     def __str__ (self) -> str:
         return self.nome_projeto.nome
+    
+    class Meta:
+        verbose_name = 'Projeto'
     
 class UsuariosProjeto(models.Model):
     projeto = models.ForeignKey(NovoProjeto, null=True, on_delete=models.CASCADE)
@@ -54,10 +57,44 @@ class UsuariosProjeto(models.Model):
 
     
 
-    # def __str__(self) -> str:
-    #     return self.projeto
+    def __int__(self) -> int:
+        return self.projeto
+    
 
+class Emails(models.Model):
+    projeto = models.ForeignKey(NovoProjeto, on_delete=models.DO_NOTHING)
+    assunto = models.CharField(max_length=100)
+    corpo = models.TextField()
+    enviado = models.BooleanField()
+    data_cadastro = models.DateTimeField(default = timezone.now)
 
+    def __str__(self):
+        return self.assunto
+    
+    class Meta:
+        verbose_name = 'Emails Enviado'
+
+class Ata(models.Model):
+
+    choices_categoria = (
+        ('I', 'Informação'),
+        ('P', 'Pendência'),
+        ('O', 'Outros')
+    )
+
+    projeto = models.ForeignKey(NovoProjeto, on_delete=models.CASCADE)
+    data_hora_reunião = models.DateTimeField(default = timezone.now)
+    assunto = models.CharField(max_length=100)
+    categoria = models.CharField(max_length=50, choices=choices_categoria, default='M')
+    local = models.CharField(max_length=100)
+    participantes = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE)
+    distribuido = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE, related_name='distribuido')
+    atividadeouassunto = models.TextField()
+    quem = models.ForeignKey(UsuariosProjeto, on_delete=models.CASCADE, related_name='quem')
+    quando = models.DateField(null=True, blank=True)
+    data_cadastro = models.DateTimeField(default = timezone.now)
+
+    
 
 
 
