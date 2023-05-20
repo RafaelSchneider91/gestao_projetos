@@ -15,19 +15,21 @@
                     <table>
                         <tr>
                             <td>Data/hora:</td>
-                            <th class="col-md"><input type="datetime-local"></th>
+                            <th ><input class='form-control' type="datetime-local"></th>
                             
 
                         </tr>
+                        <br>
                         <tr>
                             <td>Assunto:</td>
-                            <th class="col-md"><input type="text"></th>
+                            <th ><input class='form-control' type="text"></th>
                         </tr>
-                        
+                        <br>
                         <tr>
                             <td>Local:</td>
-                            <th class="col-md"><input type="text"></th>
+                            <th ><input class='form-control' type="text"></th>
                         </tr>
+                        <br>
             
                         
 
@@ -53,6 +55,7 @@
                         <tr>
                             <td>Distribuído:</td>
                              <th>
+                                <br>
                                 <td>
                                     <select class="form-select input-tarefa" name="usuario_id" multiple>
                                         <option value="" disabled selected>Selecione o usuario...</option>
@@ -63,31 +66,26 @@
                                 </td>
                             </th>
                         </tr>
+                        
                         <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item/ID</th>
-                                <th>Atividade/Assunto</th>
-                                <th>Quem?</th>
-                                <th>Quando?</th>
-                            </tr>   
-                        </thead>
-                                <tbody>                    
-                                    <td>
-                                  
-                                    </td>
-                                    <td>
-                  
-                                    </td>
-                                    <td>
-                    
-                                    </td>
+                        <br>
+                            <thead>
+                                <tr>
+                                    <th>Item/ID</th>
+                                    <th>Tipo</th>
+                                    <th>Atividade/Assunto</th>
+                                    <th>Quem?</th>
+                                    <th>Quando?</th>
+                                </tr>   
+                            </thead>
+                                <tbody id="atividade">                    
+                                    
                                 </tbody>
                         </table>
                     
                     
                     </table>
-                    <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalata">+Novo Atividade/Assunto</button>
+                    <button type="button" class="btn-add-usuarios"  onclick="novaatividade()">+Novo Atividade/Assunto</button>
                 </div>
             </div>
             <div class="modal-footer">

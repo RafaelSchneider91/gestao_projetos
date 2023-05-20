@@ -23,6 +23,7 @@
                 <h1 id="id_projeto" class="titulo">{{projeto.nome_projeto}}</h1>
             </div>         
         </div>
+        
         <br>
         <div class="row">
             <div class="col-md">
@@ -33,6 +34,9 @@
                 </div>
             </div>
         </div>
+        <br>
+        <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalusuariocadastrados">Usuarios Cadastrados</button>
+        <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalata">Cadastro Ata</button>
         <hr>
         <div class="col-md-7">
                 <label>Progresso Atual:</label>                        
@@ -124,8 +128,7 @@
     </form>            
                  
         
-        <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalusuariocadastrados">Usuarios Cadastrados</button>
-        <button type="button" class="btn-add-usuarios" data-toggle="modal" data-target="#modalata">Cadastro Ata</button>
+        
 
         {% comment %} Modal dos usuarios {% endcomment %}
         {% include "modal_usuarios_cadastrados.html" %}
