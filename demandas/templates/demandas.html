@@ -99,57 +99,23 @@
                                         </svg>
                                     {% endif %}
                                 </td>
-                                <td>                                
-                                    
-                                        
-                                        
-                                    {% comment %} <i class='bx bxs-edit' style="font-size: 25px; padding: 5px" type="button" data-toggle="modal" data-target="#alterarstatusdemanda"> {% endcomment %}
-                                        <form class='bx bxs-edit' style="font-size: 25px; padding: 5px" type="button" data-toggle="modal" data-target="#alterarstatusdemanda" action="{% url 'alterastatus' parametro=demanda.id %}" method="POST" > {% csrf_token %}
+                                <td>
 
-
-                                           
-                                        </form>        
+                                    <a href="#alterarstatusdemanda-{{forloop.counter}}" class='bx bxs-edit' style="font-size: 25px; padding: 5px" data-toggle="modal">
+                                        <i data-toggle="tooltip" title="Edit">
+                                        
+                                        </i>
+                                    </a>
+                                     
+                                     
+                                     {% comment %} <i class='bx bxs-edit' style="font-size: 25px; padding: 5px" data-toggle="modal" data-target="#alterarstatusdemanda-{{forloop.counter}}">     {% endcomment %}
+                                        <form action="{% url 'alterastatus' parametro=demanda.id %}" method="POST" > {% csrf_token %}    
                                         
                                         
-
-                                            {% comment %} Modal {% endcomment %}
-                                            <div class="modal fade" id="alterarstatusdemanda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md">
-                                                            <label>Status:</label>
-                                                                <select class="form-select input-tarefa" name="status_backlog">
-                                                                    {% for status in status_backlog %}
-                                                                        <option value={{status.id}}>{{status.status}}</option>
-                                                                    {% endfor %}   
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="submit" value="Salvar" class="btn btn-orange">
-                                                    {% comment %} <input type="hidden" name="demanda_id" value=parametro> {% endcomment %}
-                                                </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                       
-                                            {% comment %} <input type="submit" value="Salvar" class="btn btn-orange"> {% endcomment %}
-                                         
-                                        
-                                    
-                                    {% comment %} {% include "modal_alterar_status.html" %} {% endcomment %}
-                                    
-
-                                  {% comment %} </i>  {% endcomment %}
+                                            
+                                        </form>
+                                    </i>  
+                                  {% include "modal_alterar_status.html" %} 
                                 </td> 
                             </tr>
 

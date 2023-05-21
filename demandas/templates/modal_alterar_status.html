@@ -1,34 +1,38 @@
 {% load static %}
 
+{% comment %} thanks https://www.youtube.com/watch?v=P78-ltyeuVg {% endcomment %}
 
 <!-- Modal = Alterar Status Demanda -->
-{% comment %} <form action="{% url 'alterastatus' demanda.id %}" enctype="multipart/form-data">{% csrf_token %} {% endcomment %}
-{% comment %} <form action=""> {% endcomment %}
-    <div class="modal fade" id="alterarstatusdemanda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md">
-                    <label>Status:</label>
-                        <select class="form-select input-tarefa" name="status_backlog">
-                            {% for status in status_backlog %}
-                                <option value={{status.id}}>{{status.status}}</option>
-                            {% endfor %}   
-                        </select>
+{% for demanda in demandas %}
+    <form action="{% url 'alterastatus' demanda.id %}" method='POST' enctype="multipart/form-data">{% csrf_token %}
+
+        <div class="modal fade" id="alterarstatusdemanda-{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md">
+                        <label>Status:</label>
+                            <select class="form-select input-tarefa" name="status_backlog">
+                                {% for status in status_backlog %}                                
+                                    <option value={{status.id}}>{{status.status}}</option>
+                                {% endfor %}   
+                            </select>
+                    </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <input type="submit" value="Salvar" class="btn btn-orange">
+            </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <input type="submit" value="Salvar" class="btn btn-orange">
         </div>
-        </div>
-    </div>
-    </div>
-{% comment %} </form> {% endcomment %}
+
+    </form>
+{% endfor %}

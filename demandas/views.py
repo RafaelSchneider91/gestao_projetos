@@ -140,30 +140,9 @@ def demanda_unico (request, iddemanda):
 @login_required(redirect_field_name='login')
 def alterastatus(request, parametro):
     if request.method == "POST":
-        print(parametro)
-        demanda_id = request.POST.get('demanda_id')
-        print(demanda_id)
-    # if request.method == "GET":
-    #     demanda = get_object_or_404(NovaDemanda, id=parametro)
-    #     print(demanda)
-    #     return render (request, 'demandas.html')
-    
-    # if request.method == "POST":
-
-    #     # print(parametro)
-    #     demanda_id = request.POST.get('demanda_id') 
-
-        
-        status_backlog = request.POST.get('status_backlog')
-        print(status_backlog)
-        
-        # id_demanda = get_object_or_404(NovaDemanda, id=parametro)
-
-        # print(id_demanda)
-
-        # id_demanda.status_backlog_id = status_backlog        
-        # id_demanda.save()
+        status_backlog = request.POST.get('status_backlog')       
+        id_demanda = get_object_or_404(NovaDemanda, id=parametro)
+        id_demanda.status_backlog_id = status_backlog        
+        id_demanda.save()
         return redirect('demandas')
-
-    # elif request.method == "POST":
-    #     pass
+    
