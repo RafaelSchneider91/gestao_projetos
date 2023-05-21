@@ -22,7 +22,7 @@
                         <br>
                         <tr>
                             <td>Assunto:</td>
-                            <th ><input class='form-control' type="text"></th>
+                            <th ><input class='form-control' type="textarea"></th>
                         </tr>
                         <br>
                         <tr>
@@ -79,13 +79,14 @@
                                 </tr>   
                             </thead>
                                 <tbody id="atividade">                    
-                                    
+                                    {% comment %} #TODO: criar os tipos de assuntos das atas; {% endcomment %}
+                                    {% comment %} #TODO: salvar a model; {% endcomment %}
                                 </tbody>
                         </table>
                     
                     
                     </table>
-                    <button type="button" class="btn-add-usuarios"  onclick="novaatividade()">+Novo Atividade/Assunto</button>
+                    <button type="button" class="btn-add-usuarios"  onclick="novaatividade()">Atividade/Assunto</button>
                 </div>
             </div>
             <div class="modal-footer">

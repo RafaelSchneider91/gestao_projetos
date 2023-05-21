@@ -13,7 +13,7 @@
     <div class="container">
         {% include "parciais/_messages.html" %}
         
-        <form id="projeto_select" action="{% url 'demanda_unico' demanda.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        {% comment %} <form id="projeto_select" action="{% url 'demanda_unico' demanda.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %} {% endcomment %}
             <div class="row">         
                 <div class="col-md">
                     <h1 id="id_projeto" class="titulo">{{demanda.nome}}</h1>
@@ -21,14 +21,20 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md">
                     <div >
                         <label>Descricão do projeto ou melhoria:</label>
                         <p>{{demanda.descricao}}</p>
                     </div>
                 </div>
             </div>
-            <hr>                  
+            <hr>
+
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalata">Requisitos</button> 
+            {% comment %} #TODO: criar tela para cadastro de requisitos; {% endcomment %}
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalata">Tests Cases</button> 
+            {% comment %} #TODO: criar tela para cadastro dos testes; {% endcomment %}
+            <hr>               
 
             {% comment %} <div class="row">
                 <div class="col-md-7">
@@ -39,15 +45,10 @@
             <div class="row">
                 <div class="col-md-7">
                     <label>Status:</label>
-                    <label disabled class="form-control">{{demanda.get_status_display}}</label>
+                    <label disabled class="form-control">{{demanda.status_backlog}}</label>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-7">
-                    <label>Fase:</label>
-                    <label disabled class="form-control">{{demanda.fase}}</label>
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col-md-7">
                     <label>Setor:</label>
@@ -85,7 +86,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md">
                     <div >
                         <label>Link Analise:</label>
                             <a href="{{demanda_unica.link_analise}}">{{demanda.link_analise}}</a>

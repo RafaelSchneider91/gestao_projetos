@@ -81,7 +81,7 @@
                     <tr>
                         <th>Nome Projeto</th>
                         <th>Status</th>
-                        <th>Progresso</th>
+                        <th>Total Tarefas</th>
                         <th>Fase</th>
                         {% comment %} <th>Prioridade</th> {% endcomment %}
                         <th>Ação</th>
@@ -99,8 +99,9 @@
                                     {{projetos.status}}
                                 </td>
                                 <td>
-                                    10%
+                                    {{ projetos.novatarefa_set.count }}
                                 </td>
+                                {% comment %} #TODO: incluir as tarefas não concluidas. {% endcomment %}
                                 <td>
                                     {{projetos.fase}}
                                 </td>

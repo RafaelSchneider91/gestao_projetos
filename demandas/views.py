@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 # from .forms import formularioNovaDemanda
 from django.http import HttpResponse
-from demandas.models import NovaDemanda, Setor
+from demandas.models import NovaDemanda, Setor, StatusBacklog
 from projetos.models import NovoProjeto
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -18,14 +18,15 @@ def demandas_projeto(request):
 def cadastro_novademanda(request):
     if request.method == "GET":
         # form = formularioNovaDemanda()
-        # status_backlog = StatusBacklog.objects.all()
+        status_backlog = StatusBacklog.objects.all()
         setores = Setor.objects.all()
         # user_id = request.user.id
         # # usuario_criacao = User.get_username()
         # # categoria_backlog = Categoria.objects.all()
         # print(user_id)
         
-        return render(request,'cadastro_novademanda.html', {'setores': setores}) 
+        return render(request,'cadastro_novademanda.html', {'setores': setores,
+                                                            'status_backlog': status_backlog}) 
     
         
     
@@ -46,8 +47,8 @@ def cadastro_novademanda(request):
         usuario_criacao = User.objects.get(id = user_id)
         # usuario_criacao = usuario_criacao
 
-        print(user_id)
-        print(usuario_criacao)
+        # print(user_id)
+        # print(usuario_criacao)
         
         
 
@@ -90,6 +91,7 @@ def demandas(request):
         limpar_filtros = request.GET.get('limpar_filtros')
         demandas = NovaDemanda.objects.all()
         projetos = NovoProjeto.objects.all()
+        status_backlog =  StatusBacklog.objects.all()
         # print(projetos)
 
 
@@ -110,7 +112,8 @@ def demandas(request):
 
         return render(request, 'demandas.html', {'demandas': demandas,
                                                 'projetos': projetos,
-                                                'demandas_sem_projeto':demandas_sem_projeto
+                                                'demandas_sem_projeto':demandas_sem_projeto,
+                                                'status_backlog': status_backlog
                                                 })
     # elif request.method == "POST":
     #     status_modal = request.POST.get('status_modal')
@@ -123,23 +126,44 @@ def demandas(request):
 
 
 @login_required(redirect_field_name='login')
-def demanda_unico (request, id):
-    demanda_unico = get_object_or_404(NovaDemanda, id=id)
+def demanda_unico (request, iddemanda):
+    demanda_unico = get_object_or_404(NovaDemanda, id=iddemanda)
     # demanda_unica = NovaDemanda.objects.get(id=)
-    # status = StatusProjeto.objects.all()
+    status_backlog = StatusBacklog.objects.all()
     # faseprojeto = FaseProjeto.objects.all()
-
-    demandas = NovaDemanda.objects.all()
 
     return render(request, 'demanda_unico.html', {'demanda': demanda_unico,
                                                  'demandas':demandas,
+                                                 
                                                  })
 
 @login_required(redirect_field_name='login')
-def alterastatus(request, id):
-    if request.method == 'POST':
-        demanda_unico = get_object_or_404(NovaDemanda, id=id)
-        status_novo = request.POST.get('status_modal')
+def alterastatus(request, parametro):
+    if request.method == "POST":
+        print(parametro)
+        demanda_id = request.POST.get('demanda_id')
+        print(demanda_id)
+    # if request.method == "GET":
+    #     demanda = get_object_or_404(NovaDemanda, id=parametro)
+    #     print(demanda)
+    #     return render (request, 'demandas.html')
+    
+    # if request.method == "POST":
 
-    return HttpResponse('ola')
+    #     # print(parametro)
+    #     demanda_id = request.POST.get('demanda_id') 
 
+        
+        status_backlog = request.POST.get('status_backlog')
+        print(status_backlog)
+        
+        # id_demanda = get_object_or_404(NovaDemanda, id=parametro)
+
+        # print(id_demanda)
+
+        # id_demanda.status_backlog_id = status_backlog        
+        # id_demanda.save()
+        return redirect('demandas')
+
+    # elif request.method == "POST":
+    #     pass

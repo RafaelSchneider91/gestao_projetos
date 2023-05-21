@@ -28,23 +28,21 @@
                 <br>
             </div>
             <div class="borda-box"></div>
-            <div class="body-box">
-            
-                <form action="#" method="GET">
-                    {% csrf_token %}
-                <div class="row">
-                    
-                        <div class="col-md-5">
-                            <h6>Nome demanda</h6>
-                            <input type="text" placeholder="Busque pelo nome da demanda..." class="form-control" name="nome_demanda_filtro">
+                <div class="body-box">
+                    <div class="row">
+                        
+                            <div class="col-md-5">
+                                <h6>Nome demanda</h6>
+                                <input type="text" placeholder="Busque pelo nome da demanda..." class="form-control" name="nome_demanda_filtro">
+                            </div>
+                        <div class="titulo">
+                            <input type="submit" value="Filtrar" class="btn-filtrar_limpar"> 
+                            {% comment %} #TODO: verificar o botao não esta funcionando. {% endcomment %}
+                            <input type="submit" value="Limpar" class="btn-filtrar_limpar" name="limpar_filtros">               
                         </div>
-                    <div class="titulo">
-                        <input type="submit" value="Filtrar" class="btn-filtrar_limpar">
-                        <input type="submit" value="Limpar" class="btn-filtrar_limpar" name="limpar_filtros">               
-                    </div>
 
-                </div>
-                </form>
+                    </div>
+                
                 <br>
 
                 <table class="tabela" cellpadding="20">
@@ -64,10 +62,10 @@
                             <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} >
 
                                 <td>
-                                    <a href="{% url 'demanda_unico' demanda.id %}">{{demanda.nome}}</a>
+                                    <a href="{% url 'demanda_unico' iddemanda=demanda.id %}">{{demanda.nome}}</a>
                                 </td>
                                 <td>
-                                    {{demanda.get_status_display}}
+                                    {{demanda.status_backlog}}
                                 </td>
                                 <td>
                                     {{demanda.data_cadastro}}
@@ -78,7 +76,7 @@
                                 <td>
                                     {{demanda.retorno_financeiro}}
                                 </td>
-                                <th>
+                                <td>
                                     {% if demanda in demandas_sem_projeto %}
                                         <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <rect width="100" height="100" fill="url(#pattern1)"/>
@@ -100,18 +98,65 @@
                                             </defs>
                                         </svg>
                                     {% endif %}
-                                </th>
-                                <td>  
-                                    <a href="#">
-                                        <i class='bx bxs-edit' style="font-size: 25px; padding: 5px"  type="button"data-toggle="modal" data-target="#modalExemplo"></i>
-                                        {% comment %} <button type="button"data-toggle="modal" data-target="#modalExemplo"> {% endcomment %}
-                                    </a>
+                                </td>
+                                <td>                                
+                                    
+                                        
+                                        
+                                    {% comment %} <i class='bx bxs-edit' style="font-size: 25px; padding: 5px" type="button" data-toggle="modal" data-target="#alterarstatusdemanda"> {% endcomment %}
+                                        <form class='bx bxs-edit' style="font-size: 25px; padding: 5px" type="button" data-toggle="modal" data-target="#alterarstatusdemanda" action="{% url 'alterastatus' parametro=demanda.id %}" method="POST" > {% csrf_token %}
+
+
+                                           
+                                        </form>        
+                                        
+                                        
+
+                                            {% comment %} Modal {% endcomment %}
+                                            <div class="modal fade" id="alterarstatusdemanda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md">
+                                                            <label>Status:</label>
+                                                                <select class="form-select input-tarefa" name="status_backlog">
+                                                                    {% for status in status_backlog %}
+                                                                        <option value={{status.id}}>{{status.status}}</option>
+                                                                    {% endfor %}   
+                                                                </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="submit" value="Salvar" class="btn btn-orange">
+                                                    {% comment %} <input type="hidden" name="demanda_id" value=parametro> {% endcomment %}
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                       
+                                            {% comment %} <input type="submit" value="Salvar" class="btn btn-orange"> {% endcomment %}
+                                         
+                                        
+                                    
+                                    {% comment %} {% include "modal_alterar_status.html" %} {% endcomment %}
+                                    
+
+                                  {% comment %} </i>  {% endcomment %}
                                 </td> 
                             </tr>
 
-                            {% include "modal_alterar_status.html" %}
+                            
+                            {% comment %} #TODO: ajustar para salvar a mudança do status. {% endcomment %}
 
-
+                             
                         
                         {% endfor %}
                     

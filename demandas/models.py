@@ -12,24 +12,20 @@ class Setor(models.Model):
     class Meta:
         verbose_name = 'Setor'
         verbose_name_plural = 'Setores'
+
+
+class StatusBacklog(models.Model):
+    status = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.status
+
     
 
 class NovaDemanda(models.Model):
 
-    # choices_categoria = (
-    #     ('M', 'Melhoria'),
-    #     ('P', 'Projeto')
-    # )
-    choices_statusbacklog = (
-        ('P', 'Aguardando Priorizacao'),
-        ('A', 'Em analise')
-    )
-
-
-
     nome = models.CharField(max_length=50, blank=False, null=False)
     descricao = models.TextField(max_length=255, blank=False, null=False)
-    # categoria = models.CharField(max_length=50, choices=choices_categoria)
     data_cadastro = models.DateTimeField(default = timezone.now)
     setor_demanda = models.ForeignKey(Setor, on_delete=models.CASCADE)
     nome_solicitante = models.CharField(max_length=255, blank=False, null=False)
@@ -38,7 +34,7 @@ class NovaDemanda(models.Model):
     retorno_qualitativo = models.TextField( blank=False, null=False)
     link_analise = models.URLField(blank=True, null=True)
     observacao = models.TextField(blank=False, null=True)
-    status = models.CharField(max_length=50, choices=choices_statusbacklog)
+    status_backlog = models.ForeignKey(StatusBacklog, on_delete=models.CASCADE)
     usuario_criacao = models.ForeignKey(User, on_delete=models.CASCADE) # TODO: verificar forma de buscar o usuario logado no sistema;
     
 

@@ -2,8 +2,9 @@
 
 
 <!-- Modal = Alterar Status Demanda -->
-<form action="{% url 'alterastatus' demanda.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% comment %} <form action="{% url 'alterastatus' demanda.id %}" enctype="multipart/form-data">{% csrf_token %} {% endcomment %}
+{% comment %} <form action=""> {% endcomment %}
+    <div class="modal fade" id="alterarstatusdemanda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -16,19 +17,18 @@
             <div class="row">
                 <div class="col-md">
                     <label>Status:</label>
-                        <select name="status_modal" class="form-select input-tarefa">
-                            <option value="P">Aguardando Priorizacao</option>
-                            <option value="A">Em analise</option>
+                        <select class="form-select input-tarefa" name="status_backlog">
+                            {% for status in status_backlog %}
+                                <option value={{status.id}}>{{status.status}}</option>
+                            {% endfor %}   
                         </select>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            {% comment %} <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> {% endcomment %}
-            {% comment %} <button type="button" class="btn btn-lg btn-orange" action="{% url 'demandas'%}" method="POST">Salvar</button> {% endcomment %}
-            <input type="submit" value="Salvar" class="btn btn-lg btn-orange">
+            <input type="submit" value="Salvar" class="btn btn-orange">
         </div>
         </div>
     </div>
     </div>
-</form>
+{% comment %} </form> {% endcomment %}
