@@ -217,7 +217,6 @@ def add_usuarios_projeto(request):
         pass
 
 
-
 @login_required(redirect_field_name='login')
 def projetos (request):
     nome_projeto_filtrar = request.GET.get('nome_projeto_filtro')
@@ -273,7 +272,7 @@ def projeto_unico (request, id):
 
         username = user.username
         email = user.email
-        print(username, email)
+        # print(username, email)
 
             
     projetos = NovoProjeto.objects.all()
@@ -290,42 +289,26 @@ def projeto_unico (request, id):
     return render(request, 'projeto_unico.html', contexto)
 
 @login_required(redirect_field_name='login')
-def editar_projeto(request, id):
-    projeto = get_object_or_404(NovoProjeto, id=id)
-    status = StatusProjeto.objects.all()
-    faseprojeto = FaseProjeto.objects.all()
-    
+def updateprojeto(request, id):
     if request.method == 'POST':
-        # processar o formulário de atualização e salvar as mudanças no banco de dados
-        # redirecionar o usuário para a página de detalhes do projeto atualizado
         descricao_projeto = request.POST.get('descricao_projeto')
-        status_id = request.POST.get('statusprojeto')
-        fase_id = request.POST.get('faseprojeto')
-        prioridade = request.POST.get('prioridade')
+        status_projeto = request.POST.get('status_projeto')
+        fase_projeto = request.POST.get('fase_projeto')
+        prioridade_projeto = request.POST.get('prioridade_projeto')
 
-        projeto = NovoProjeto(
-                    projeto_id = id,
-                    descricao_projeto = descricao_projeto,
-                    status_id = status_id,
-                    fase_id  = fase_id,
-                    prioridade = prioridade,                
-                    )
-        
-        projeto.save()        
-        return render(request, f'projeto_unico/{id}.html')
-        # try:
-        #     projeto.save()
-        #     messages.add_message(request, constants.SUCCESS, 'Projeto atualizado com sucesso!')
-        #     return redirect('novo_projeto')
-        # except:
-        #     messages.add_message(request, constants.ERROR, 'Projeto não atualizado! Verifique os parametros digitados!' )
-        #     return redirect('novo_projeto')
+        nome_projeto = NovoProjeto.objects.filter(id=id)
 
-            # renderizar o formulário de atualização do projeto com os dados atuais
-    return render(request, 'editar_projeto.html', {'projeto': projeto,
-                                                   'status': status,
-                                                   'faseprojeto':faseprojeto,                                                
-                                                   
-                                                   })
+        nome_id = [nome.nome_projeto_id for nome in nome_projeto]
 
-    
+        u_projetos = NovoProjeto(
+            id = id,
+            nome_projeto_id = nome_id[0], #pega o primeiro elemento da lista
+            descricao_projeto = descricao_projeto,
+            status_id = status_projeto,
+            fase_id = fase_projeto,
+            prioridade = prioridade_projeto,
+
+        )
+        u_projetos.save()
+
+        return redirect('projetos')

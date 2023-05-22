@@ -21,13 +21,18 @@
                         <label>Status:</label>
                             <select class="form-select input-tarefa" name="status_backlog">
                                 {% for status in status_backlog %}                                
-                                    <option value={{status.id}}>{{status.status}}</option>
-                                {% endfor %}   
+                                    <option value="{{ status.id }}" {% if demanda.status_backlog_id == status.id %}selected{% endif %}>
+                                        {{ status.status }}
+                                    </option>  
+                                {% endfor %} 
+
+                                 
                             </select>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar">
                 <input type="submit" value="Salvar" class="btn btn-orange">
             </div>
             </div>

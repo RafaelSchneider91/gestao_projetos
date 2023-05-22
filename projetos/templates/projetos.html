@@ -105,45 +105,21 @@
                                 <td>
                                     {{projetos.fase}}
                                 </td>
-                                {% comment %} <td>
-                                    {{projetos.prioridade}}
-                                </td> {% endcomment %}
-                                <td>  
-                                    <a href="{% url 'editar_projeto' projetos.id %}">
-                                        <i class='bx bxs-edit' style="font-size: 25px; padding: 5px"></i>
-                                        <span class="tooltip">Editar Projeto</span>
-                                      </a>
-                                       
-                                        {% comment %} <a href="{% url 'tarefas' projetos.id %}">
-                                        <i class="bx bx-task" style="font-size: 25px;"></i>
-                                        <span class="links_name"></span>
-                                        </a>
-                                        <span class="tooltip">Tarefas</span> {% endcomment %}
-                                   
-                                      
-                                </td>
+                          
+                                <td>
+
+                                    <a href="#editprojetomodal-{{forloop.counter}}" class='bx bxs-edit' style="font-size: 25px; padding: 5px" data-toggle="modal">
+                                        <i data-toggle="tooltip" title="Edit">
+                                        
+                                        </i>
+                                    </a>
+                                        <form action="#" method="POST" > {% csrf_token %}  
+                                        </form>
+                                    </i>  
+                                  {% include "modal_editar_projeto.html" %} 
+                                </td> 
                                 
                                 
-                               {% comment %} <td> {% endcomment %}
-                                   
-                                    {% comment %}<select class="form-select">  
-                                        {% for tech in empresa.tecnologias.all %}     
-                                            <option>{{tech}}</option>
-                                        {% endfor %}            
-                                    </select>
-                                </td> {% endcomment %}
-                                {% comment %} <td class='td_vagas'>
-                                    {% if empresa.qtd_vagas > 0 %}
-                                        <img src="{% static 'empresa/img/flag_green.png'%} " width="15" height="15">
-                                        {{empresa.qtd_vagas}}
-                                    {% else %}
-                                        <img src="{% static 'empresa/img/flag_red.png'%}" width="15" height="15">
-                                        {{empresa.qtd_vagas}}
-                                    {% endif %}
-                                </td> {% endcomment %}
-                                {% comment %} <td>
-                                    <a href="{% url 'excluir_empresa' empresa.id %}" class="btn-excluir">Excluir empresa</a>
-                                </td> {% endcomment %}
                             </tr>
                         {% endfor %}
                     

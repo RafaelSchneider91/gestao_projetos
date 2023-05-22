@@ -1,0 +1,64 @@
+{% load static %}
+
+<!-- Edit Modal HTML -->
+{% for i in projeto %}
+    <form action="{% url 'updateprojeto' i.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div id="editprojetomodal-{{forloop.counter}}" class="modal fade">
+            <div class="modal-dialog modal-lg" >
+                <div class="modal-content">
+                    <form>
+                        <div class="modal-header">						
+                            <h4 class="modal-title">Editar Projeto</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">					
+                            <div class="row">         
+                                <div class="col-md">
+                                    <h1 class="titulo">{{i.nome_projeto}}</h1>
+                                </div>         
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Descrição:</label>
+                                {% comment %} <input value="{{i.descricao_projeto}}" type="text" class="form-control" required > {% endcomment %}
+                                <textarea name="descricao_projeto" class="form-control">{% if i.descricao_projeto %}{{ i.descricao_projeto }}{% endif %}</textarea>
+                            </div>
+                            <div class="form-group">
+                            <label>Status:</label>
+                                    <div class="col-md-5">    
+                                            <select class="form-control" name="status_projeto">
+                                                {% for status in status_projeto %}
+                                                    <option value="{{ status.id }}" {% if i.status_id == status.id %}selected{% endif %}>
+                                                        {{ status.status }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                    </div>
+                            </div>
+                            <label>Fase:</label>
+                            <div class="col-md-5">            
+                                    <select class="form-control" name="fase_projeto">                    
+                                         {% for fase in fase_projeto %}
+                                            <option value="{{ fase.id }}" {% if i.fase_id == fase.id %}selected{% endif %}>
+                                                {{ fase.fase }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                            <label for="numero">Prioridade:</label>
+                            <div class="col-md-3">
+                                <input value="{{i.prioridade}}" class="form-control" type="number" id="numero" name="prioridade_projeto" required>  
+                            </div>
+                            
+                            					
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancelar">
+                            <input type="submit" class="btn btn-orange" value="Salvar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endfor %}

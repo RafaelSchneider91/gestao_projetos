@@ -106,13 +106,7 @@
                                         
                                         </i>
                                     </a>
-                                     
-                                     
-                                     {% comment %} <i class='bx bxs-edit' style="font-size: 25px; padding: 5px" data-toggle="modal" data-target="#alterarstatusdemanda-{{forloop.counter}}">     {% endcomment %}
-                                        <form action="{% url 'alterastatus' parametro=demanda.id %}" method="POST" > {% csrf_token %}    
-                                        
-                                        
-                                            
+                                        <form action="{% url 'alterastatus' parametro=demanda.id %}" method="POST" > {% csrf_token %} 
                                         </form>
                                     </i>  
                                   {% include "modal_alterar_status.html" %} 
