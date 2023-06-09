@@ -12,33 +12,25 @@
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="img">
-            <img src="{% static 'fotos/Frame.png' %}" alt="" width="200px" height="200px">
+    <div class="content">
+        <div class="content-info">
+            <h1>Gestão de Projetos</h1>
+            <img src="{% static 'fotos/pana.png' %}">
         </div>
-
-        <div class="form1">
-            <form method="POST" action="{% url 'login' %}">
-                
+        <div class="content=login">
+            <form class="content-login-box"method="POST" action="{% url 'login' %}">         
                 {% csrf_token %}
-                <h2>Login</h2>
-                <div>
-                    <input type="text" name="usuario" value="{{request.POST.usuario}}" class="form-control"
-                        placeholder="Usuario">
-                </div>
-                <div>
-                    <input type="password" name="senha" class="form-control"  placeholder="Senha">
-                </div>
-                <button class="btn1" type="submit">Entrar</button>
-                <br>
-                
+                <input type="text" name="usuario" value="{{request.POST.usuario}}" class="form-control"placeholder="Usuario">
+                <input type="password" name="senha" class="form-control"  placeholder="Senha">
+                <hr>
                 {% include 'parciais/_messages.html' %}
+                <button class="btn btn-enter" type="submit">Entrar</button>
             </form>
-
         </div>
+
 
     </div>
+    
 
 </body>
 
