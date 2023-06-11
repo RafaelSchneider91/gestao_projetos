@@ -30,7 +30,8 @@
             </div>
             <hr>
 
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalata">Requisitos</button> 
+            {% comment %} <button type="button" class="btn btn-secondary">Requisitos<a href="{% url 'demandas_projeto' %}"></a></button>  {% endcomment %}
+            <a class="btn btn-secondary" href="{% url 'requisitos' iddemanda=demanda.id %}">Requisitos</a>
             {% comment %} #TODO: criar tela para cadastro de requisitos; {% endcomment %}
             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalata">Tests Cases</button> 
             {% comment %} #TODO: criar tela para cadastro dos testes; {% endcomment %}

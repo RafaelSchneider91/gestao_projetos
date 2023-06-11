@@ -1,0 +1,71 @@
+{% load static %}
+
+<!-- Modal Nova Tarefa-->
+<div class="modal fade" id="ModalNovoRequisito" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 style="font-size: 30px" class="modal-title titulo" id="exampleModalLabel">Novo Requisito</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form id="nova_tarefa" action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        {% comment %} <div>
+            <div class="modal-body">
+                <label>Projeto:</label>{% csrf_token %}
+                <select id="projeto_select" class="form-select input-tarefa" name="projeto" onchange="alteraprojeto()">
+                    {% for projeto in projetos %}
+                        <option value={{projeto.id}}>{{projeto}}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>			 {% endcomment %}
+        
+    
+        <div class="modal-body">				
+            <label>Requisito:</label>
+            {% comment %} <input type="text" name="descricao" class="form-control" placeholder="Digite uma descricao da tarefa..."> {% endcomment %}
+            <textarea name="descricao_requisito" class="form-control" placeholder="Descrever um requisito que possa ser testável..."></textarea>
+            
+        </div>
+
+        <div class="col-md">
+            <label for="checkbox">Aprovado:</label>
+            <input type="checkbox" id="checkbox" name="aprovado" value="true" >
+        </div>
+
+        {% comment %} <div class="col-md">
+            <label>Status Tarefa:</label>
+                <select name="status_tarefa" class="form-select input-tarefa">
+                    <option value="N">Não Iniciado</option>
+                    <option value="E">Em andamento</option>
+                    <option value="P">Pendente</option>
+                    <option value="C">Concluido</option>
+
+                </select>
+        </div> {% endcomment %}
+        {% comment %} <div>
+            <div class="modal-body">				
+                <label>Inicio Planejado:</label>
+                <input type="date" name="data_inicio_plan" class="form-control">
+            </div>
+        </div>
+        <div>
+            <div class="modal-body">				
+                <label>Fim Planejado:</label>
+                <input type="date" name="data_fim_plan" class="form-control">
+            </div>
+        </div> {% endcomment %}
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+            {% comment %} <button type="button" class="btn-salvar-tarefa">Salvar</button> {% endcomment %}
+            <input type="submit" value="Salvar Tarefa" class="btn btn-success">
+        </div>
+    </form>
+    
+
+</div>
+</div>

@@ -47,3 +47,31 @@ class NovaDemanda(models.Model):
 
 
 
+
+class Requisitos(models.Model):
+    demanda = models.ForeignKey(NovaDemanda, on_delete=models.CASCADE)
+    id_demanda_requisito = models.PositiveIntegerField(default=0)
+    descricao_requisito = models.TextField( blank=False, null=False)
+    aprovacao = models.BooleanField(default=False)
+    # versao = models.DecimalField() ### TODO: verificar se é necessario incluir
+
+    
+    class Meta:
+        verbose_name = 'Requisito'
+
+class PrioridadeUserStorie(models.Model):
+    prioridade = models.CharField(max_length=50) #alta-media-baixa
+
+    def __str__(self) -> str:
+        return self.prioridade 
+
+class UserStories(models.Model):
+    requisito = models.ForeignKey(Requisitos, on_delete=models.CASCADE)
+    id_storie = models.PositiveIntegerField(default=999999)
+    historia = models.TextField( blank=False, null=False)    
+    aceitacao = models.TextField( blank=False, null=False)
+    prioridade = models.ForeignKey(PrioridadeUserStorie, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'UserStorie'
+

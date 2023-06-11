@@ -145,4 +145,12 @@ def alterastatus(request, parametro):
         id_demanda.status_backlog_id = status_backlog        
         id_demanda.save()
         return redirect('demandas')
-    
+
+@login_required(redirect_field_name='login')
+def requisitos(request, iddemanda):
+    if request.method == "GET":
+        id_demanda = get_object_or_404(NovaDemanda, id=iddemanda)
+
+        content = {'demanda': id_demanda}
+
+        return render(request, 'requisitos.html', content)

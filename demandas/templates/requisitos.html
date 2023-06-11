@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static 'demandas/css/demanda_unico.css' %}" rel="stylesheet">
+{% endblock%}
+
+
+{% block 'body' %}
+
+    
+    <br>
+    <div class="container">
+        {% include "parciais/_messages.html" %}
+        
+        <h1 class="titulo">Requisitos</h1>
+
+        <h4>Total de Requisitos:</h4>
+
+        
+        <button type="button" class="btn btn-secondary bx-" data-toggle="modal" data-target="#ModalNovoRequisito">
+            Adicionar Requisito
+        </button>
+            
+        
+        
+
+        <!-- Modal Nova Requisito = templates -->
+        {% include "modal_novo_requisito.html" %}
+
+        {% comment %} #TODO: abrir modal para cadastrasto; {% endcomment %}
+
+    </div>
+{% endblock %}
