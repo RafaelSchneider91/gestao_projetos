@@ -17,7 +17,7 @@ https://dev.to/lb/how-to-create-a-kanban-trello-style-view-of-your-modeladmin-da
 Pythonando - Referencia
 https://grizzly-amaranthus-f6a.notion.site/PYLAB-2022-3e4ebfa84cf3482ca243ebd69c581782
 
-![image](https://github.com/RafaelSchneider91/gestao_projetos/assets/62551860/02b388ba-11b8-462c-87df-ce06a2b0bde7)
+![Login](https://github.com/RafaelSchneider91/gestao_projetos/assets/62551860/2b8dc8e6-1213-4f77-bc54-4f75559b7394)
 ![image](https://github.com/RafaelSchneider91/gestao_projetos/assets/62551860/a8fc43cf-1bde-494a-ae60-ff1f3f4a6f08)
 ![image](https://github.com/RafaelSchneider91/gestao_projetos/assets/62551860/f9c6d4d0-c3c0-4d96-8794-5d520c4606f1)
 ![image](https://github.com/RafaelSchneider91/gestao_projetos/assets/62551860/df35a8ef-c4ef-47b3-9648-f2ef6035bb8f)
