@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% load filtro %}
+
 {% block 'head' %}
-    <link href="{% static 'demandas/css/demanda_unico.css' %}" rel="stylesheet">
+    <link href="{% static 'demandas/css/requisitos.css' %}" rel="stylesheet">
 {% endblock%}
 
 
@@ -17,18 +19,71 @@
 
         <h4>Total de Requisitos:</h4>
 
-        
-        <button type="button" class="btn btn-secondary bx-" data-toggle="modal" data-target="#ModalNovoRequisito">
-            Adicionar Requisito
-        </button>
-            
-        
-        
-
+        <button type="button" class="btn btn-secondary bx-" data-toggle="modal" data-target="#ModalNovoRequisito">Adicionar Requisito</button>
         <!-- Modal Nova Requisito = templates -->
         {% include "modal_novo_requisito.html" %}
 
         {% comment %} #TODO: abrir modal para cadastrasto; {% endcomment %}
 
+        
+
+       
+
+
     </div>
+    <table class="tabela" cellpadding="20">
+            <tr>
+                <th>Nome Requisito</th>                
+                <th>Usuario Cadastro</th>
+                <th>Aprovado</th>
+                <th>Visualização</th>
+            </tr>
+
+
+                {% for requisito in requisitos %}   
+                    <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} >
+                        <td>
+                            <a href="#">{{requisito.nome}}</a>
+                        </td>
+                        
+                        <td>
+                            {{requisito.usuario_criacao.first_name}} {{requisito.usuario_criacao.last_name}}
+                        </td>  
+                        <td>
+                            {% if requisito.aprovacao %}
+                                <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <rect width="100" height="100" fill="url(#pattern1)"/>
+                                    <defs>
+                                    <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlink:href="#image0_4_374" transform="scale(0.01)"/>
+                                    </pattern>
+                                    <image id="image0_4_374" width="70" height="70" xlink:href="data:image/png;base64,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"/>
+                                    </defs>
+                                </svg>
+                            {% else %}
+                                <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <rect width="100" height="100" fill="url(#pattern0)"/>
+                                    <defs>
+                                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlink:href="#image0_4_373" transform="scale(0.01)"/>
+                                    </pattern>
+                                    <image id="image0_4_373" width="70" height="70" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGR0lEQVR4nO2d22/URRTHh1fvb96Q/8AY39V4oVJ2zu45a1KDrBBB2QKaaIwRg0Tf5B55MAbeqKBok51ZITEQq3jhomUlPlkFEx/kWSkXkSr8zPltWxNSaHd35jczv998k5M0bbedPZ+d38ycOXNGiKioqKioqKioqKioqKiZlYh5sB8WyGZlITSqL4Kit0DRZtC0Syr6kI2/Tr/HP9O4Nv3d/bDgOn8xqhMNDA/cAooWS41bpMZRUHQBNCVdWfpa/J5hlRrV/r5DfTdHGnPQwuGB20HjC6DoMGic6BrArIYToOjLssbn+X9GONeo3Kg+LhV9DBov2YMws0mNf4HGfaVm5bHCg+FnvNR4LGsIcD04ik5KVR3g8apwPQI0/ugaANwIjMZHRd5VGh64Syr6ABRdde10mNvj7EB/ozpf5FGgcRAUjbt2MnRseJYnGiIvqjQrt0qNH7l3LPUKpoEa7xAhq9KsPCgVnXbvTDIF5RfZqD4gQhRofEIqOufeiWTWFF3gxaUISaBxqd2FHTk1qfFyWdEzIgRJRWukxiuunQb2oVwBRauFz+JPTRFgwJQpuiqbleXC1zEDFP3t3Ek6a8MJqXGR8G021VM0NnCTis55M/viMLlU9LNrp4B7KKf7P+u/zYdH1V7XzgBPTGr8xDWMQddOAO/MUZiFA4XtOI9rB5Bfpmh8UaN6d+ZA8hGfIivGEe1MYZSalUdCCaGDI8tuB5KzPzzeXAKD9uyhJcngV8u6eq3U+EMmO4+gsezaUZCB1Q4uST6/sCk5+s+2ZPXXy7uFUrIPRNHRosBoJTtSO/bv9uSlb57rBsjxDPbCiwWj1SMUq2NJO1WneDBaPUDh2agVGBwWaOcwFRNGq2soeMlKMp5UtMq108DibGrk4sZZYUzZzt9e76yXKFppHEg7vbO4PaM1aUNn1ieVZrUzIBq/MJ/4nMMt2VoGMCaBXDaa4M1Z6K6dB4HCmDZFTxoDwkcCXDsQQobR7iUbTQIZde1ECBhGaoq+M0MjEfOkxvOuHQkhw2j3kPNGYlt8JMy1IyFwGNNQDsh7ewZSblT7XDsTcgCDjUNPvfcQjWtdOxRyACM1E4l1oOht106FPMBoA9nQMxCpaKutBr5xop5s+elli+GQTXOGsfv39UnZJow2kM0mgOy00bh1o/Vk9Oq7qTO2jb2S756hpwzf9zLvat3oqmkYU2YKSs1bGCmQPd4BmQmGKSg1r2EYAmLykXUjGL1CqXkPw9Ajy9SgzmPGiVlgtLqE4uUAbmtQNzXtrR9elnw7sXXOTttx6tUc9QyD016TC0PTUGohwTC1MExLHBlslCkotYOdbbs6h2EqAwU13me6Yb1CqQUIg63SrNzjbfi9Wyi1QGHwKStjqaVp8S8LjeQUzSMT2+fs3Pd+fS2M2ZTtLMbJUnpWGtppT2kF1jP+N3zHGBCuXGCzsaahDHkHI90L6TMGhFNYOJUlBChDZ970DobxNCAW1yi03fB6j1B8hJECUTRiFEYKhItTZtD4epdQfIWRWrOywk6ytaKLPkIZ8hgGJ6hbq3ya5XGE+hyh+AzD6nEEFi/9s3wz9Vmg+A5jEojdYppS4xEfoAyFAeOYsK1SoyqzfmP1a6CEAIMtm8pzHNtSdNIVlKFAYICmlshKUuPDLgoHrBhZ6k1satbCZlkXYo5VgOgGUHC3yFrlT8t3SkV/Ov80at8MzzopPpPl6h1CMhur8g6h7HHuBO2L4T7hRYk/jWPunUGuYZzisurCB3EByLycsoJuTNH4Yo33C5+U1kEpYJlYyftEJk/YmpRsVJcUqZCy1HilrOhp4bM4GawIUGT6HnFQhKCSoqdcXPAF2cG4zE8DEZImx5TxHMI4711p8U5mX3wJSo5gjHk3m+pUPDfPR9wL9/CaS+RF7TBLgIWXFf3hPBxiS6FdmwcahzmIKvIu3ivgurbuHU4zmlR0gvd8RNEEih7iamsePZ6Ocl3iwl29OnM2C+5zUWST/yen6hTiqtUuk/FWcq+xmUucLuwUjfBg7cUlLCGor53gvQgUbeLiX71Ek9MriTQe56puHAiE/XCT6/eXC/U3qvMnL6xcwydaU1iadrXXObg3PVPfBriBfye9p91EjaqoqKioqKioqKioqCiRX/0HyvCojl93SZMAAAAASUVORK5CYII="/>
+                                    </defs>
+                                </svg>
+                            {% endif %}
+                        </td>
+                        <td>
+                             <a href="#visualizarequisito-{{forloop.counter}}" class='bx bx-show-alt' style="font-size: 25px; padding: 5px" data-toggle="#">
+                                <i data-toggle="tooltip" title="Edit">
+                                
+                                </i>
+                            </a>
+                        </td>
+                            
+                    </tr>   
+                
+                {% endfor %}
+                    
+    </table> 
+
 {% endblock %}

@@ -50,11 +50,15 @@ class NovaDemanda(models.Model):
 
 class Requisitos(models.Model):
     demanda = models.ForeignKey(NovaDemanda, on_delete=models.CASCADE)
-    id_demanda_requisito = models.PositiveIntegerField(default=0)
+    # id_demanda_requisito = models.PositiveIntegerField(default=0)
+    nome = models.CharField(max_length=250, blank=False, null=False)
     descricao_requisito = models.TextField( blank=False, null=False)
     aprovacao = models.BooleanField(default=False)
-    # versao = models.DecimalField() ### TODO: verificar se é necessario incluir
+    usuario_criacao = models.ForeignKey(User, on_delete=models.CASCADE) # TODO: verificar forma de buscar o usuario logado no sistema;
+    # versao = models.DecimalField(max_digits=5, decimal_places=2) ### TODO: verificar se é necessario incluir
 
+    def __str__(self) -> str:
+        return self.nome
     
     class Meta:
         verbose_name = 'Requisito'
@@ -71,6 +75,7 @@ class UserStories(models.Model):
     historia = models.TextField( blank=False, null=False)    
     aceitacao = models.TextField( blank=False, null=False)
     prioridade = models.ForeignKey(PrioridadeUserStorie, on_delete=models.CASCADE)
+    
 
     class Meta:
         verbose_name = 'UserStorie'

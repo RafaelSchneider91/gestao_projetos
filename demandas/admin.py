@@ -13,7 +13,7 @@ class NovaDemandaAdmin(admin.ModelAdmin):
 admin.site.register(NovaDemanda, NovaDemandaAdmin)
 
 class RequisitoAdmin(admin.ModelAdmin):
-    list_display = ('demanda', 'id_demanda_requisito', 'descricao_requisito')
+    list_display = ('demanda', 'nome')
 
 admin.site.register(Requisitos, RequisitoAdmin)
 

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 # from .forms import formularioNovaDemanda
 from django.http import HttpResponse
-from demandas.models import NovaDemanda, Setor, StatusBacklog
+from demandas.models import NovaDemanda, Setor, StatusBacklog, Requisitos
 from projetos.models import NovoProjeto
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -151,6 +151,14 @@ def requisitos(request, iddemanda):
     if request.method == "GET":
         id_demanda = get_object_or_404(NovaDemanda, id=iddemanda)
 
-        content = {'demanda': id_demanda}
 
-        return render(request, 'requisitos.html', content)
+        print(iddemanda)
+
+        requisitos = Requisitos.objects.filter(demanda_id=iddemanda)
+
+        print(requisitos)
+        # content = {'demanda': id_demanda,
+        #            'requisitos': requisitos}
+
+        return render(request, 'requisitos.html', {'requisitos': requisitos,
+                                                   'demanda': id_demanda} )

@@ -22,7 +22,12 @@
                 </select>
             </div>
         </div>			 {% endcomment %}
-        
+        <div class="modal-body">				
+            <label>Nome:</label>
+            {% comment %} <input type="text" name="descricao" class="form-control" placeholder="Digite uma descricao da tarefa..."> {% endcomment %}
+            <input type="text" class="form-control" name="nome_requisito" placeholder="Descrever um nome breve..">
+            
+        </div>
     
         <div class="modal-body">				
             <label>Requisito:</label>
@@ -31,10 +36,10 @@
             
         </div>
 
-        <div class="col-md">
+        {% comment %} <div class="col-md">
             <label for="checkbox">Aprovado:</label>
             <input type="checkbox" id="checkbox" name="aprovado" value="true" >
-        </div>
+        </div> {% endcomment %}
 
         {% comment %} <div class="col-md">
             <label>Status Tarefa:</label>
