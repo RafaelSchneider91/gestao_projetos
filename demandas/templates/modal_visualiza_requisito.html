@@ -1,0 +1,31 @@
+{% load static %}
+
+<!-- Modal Nova Tarefa-->
+<div class="modal fade" id="ModalVisualizaRequisito" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 style="font-size: 30px" class="modal-title titulo" id="exampleModalLabel">Descrição do Requisito</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+        <div class="modal-body">				
+            <textarea class="form-control" rows="5">{{requisito.descricao_requisito}}</textarea>    
+        </div>
+    
+        {% comment %} <div class="modal-body">				
+            <label>Requisito:</label>
+            <textarea name="descricao_requisito" class="form-control" placeholder="Descrever um requisito que possa ser testável..."></textarea>
+            
+        </div> {% endcomment %}
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+        </div>
+
+    
+
+</div>
+</div>

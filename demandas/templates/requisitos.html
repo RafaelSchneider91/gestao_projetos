@@ -43,7 +43,8 @@
                 {% for requisito in requisitos %}   
                     <tr {% if not forloop.counter|is_par %} class="tabela-linha" {% endif %} >
                         <td>
-                            <a href="#">{{requisito.nome}}</a>
+                            <a href="ModalVisualizaRequisito-{{forloop.counter}}" data-toggle="modal" data-target="#ModalVisualizaRequisito">{{requisito.nome}}</a>
+                            {% include "modal_visualiza_requisito.html" %}
                         </td>
                         
                         <td>
